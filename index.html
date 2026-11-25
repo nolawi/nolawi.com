@@ -25,7 +25,7 @@
 <p class="intro">I build for the web. I’m happiest when a design system makes it easier for teams to ship and easier for people to use what they ship.</p>
 <div class="actions"><a class="button" href="resume.html">View résumé</a><a href="#experience">See my experience</a></div>
 </div>
-<div class="hero-art"><img class="portrait" src="portrait.jpg" width="300" height="300" alt="Nolawi Petros"><div class="hero-mark" aria-hidden="true"><span></span><span></span><span></span><b>Tab</b></div></div>
+<div class="hero-art"><img class="portrait" src="portrait.jpg" width="300" height="300" alt="Nolawi Petros"><div class="portrait-keys" aria-hidden="true"><kbd>Tab</kbd><kbd>↵</kbd></div></div>
 </div>
 </section>
 <section class="section wrap" id="experience" aria-labelledby="experience-title">
@@ -48,10 +48,16 @@
 <article><p class="eyebrow">SEC · Pyramid Systems</p><h3>One design system, multiple applications</h3><p>Designed and built a common UI foundation and helped engineering teams adopt it across projects.</p></article>
 <article><p class="eyebrow">National Geographic Society</p><h3>A component-based style guide</h3><p>Developed a React interface and an Atomic Design style guide for the team building nationalgeographic.org.</p></article>
 </div>
-<section class="lab" aria-labelledby="lab-title">
+<div class="playground-heading">
+<h3 id="lab-title">Accessibility playground</h3>
+<p>Two quick experiments you can try with a keyboard, mouse, or touch.</p>
+</div>
+<div class="playground">
+<section class="lab" aria-labelledby="focus-title">
 <div>
 <p class="eyebrow">Interactive accessibility demo</p>
-<h3 id="lab-title">Follow the Focus.</h3>
+<div class="focus-art" aria-hidden="true"><span></span><span></span><span></span><kbd>Tab</kbd></div>
+<h4 id="focus-title">Follow the focus.</h4>
 <p>Ever hit Tab and lose track of where you are? Open settings and press <kbd>Tab</kbd> or <kbd>Shift</kbd> + <kbd>Tab</kbd>. The readout follows you. Press <kbd>Esc</kbd> and watch where you land.</p>
 </div>
 <div class="lab-panel" id="focus-demo">
@@ -71,7 +77,8 @@
 <section class="lab contrast-lab" aria-labelledby="contrast-title">
 <div>
 <p class="eyebrow">Interactive accessibility demo</p>
-<h3 id="contrast-title">Can you read this?</h3>
+<div class="contrast-art" aria-hidden="true"><span>Aa</span><span>Aa</span><span>Aa</span></div>
+<h4 id="contrast-title">Can you read this?</h4>
 <p>Try a muted color, then turn up the contrast. The sample stays the same. The ratio tells you whether it meets the WCAG AA threshold for regular-size text.</p>
 </div>
 <div class="lab-panel">
@@ -81,6 +88,8 @@
 <p class="focus-readout"><output id="contrast-result" for="contrast-level"></output></p>
 </div>
 </section>
+</div>
+<p><a href="https://codepen.io/nolawi">More experiments on CodePen</a></p>
 </div>
 </section>
 <section class="section wrap" id="writing" aria-labelledby="writing-title">
