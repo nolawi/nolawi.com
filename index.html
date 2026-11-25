@@ -13,7 +13,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="mast wrap">
 <a class="brand" href="./"><span aria-hidden="true">np.</span> Nolawi Petros</a>
-<nav aria-label="Main"><a href="#experience">Experience</a><a href="#work">Work</a><a href="#writing">Writing</a><a href="#about">About</a></nav>
+<nav aria-label="Main"><a href="#experience">Experience</a><a href="#work">Work</a><a href="#lab-title">Playground</a><a href="#writing">Writing</a><a href="#about">About</a></nav>
 <a class="outline" href="resume.html">Résumé</a>
 </header>
 <main id="main">
@@ -22,7 +22,7 @@
 <div>
 <p class="eyebrow">Front-end engineer &amp; UI architect</p>
 <h1>Nolawi<br>Petros<span>.</span></h1>
-<p class="intro">I build accessible interfaces and design systems that teams can put to work.</p>
+<p class="intro">I build for the web. I’m happiest when a design system makes it easier for teams to ship and easier for people to use what they ship.</p>
 <div class="actions"><a class="button" href="resume.html">View résumé</a><a href="#experience">See my experience</a></div>
 </div>
 <div class="hero-art"><img class="portrait" src="portrait.jpg" width="300" height="300" alt="Nolawi Petros"><div class="hero-mark" aria-hidden="true"><span></span><span></span><span></span><b>Tab</b></div></div>
@@ -30,13 +30,14 @@
 </section>
 <section class="section wrap" id="experience" aria-labelledby="experience-title">
 <div class="section-head"><h2 id="experience-title">Experience</h2><a href="resume.html">Full résumé</a></div>
+<nav class="company-index" aria-label="Experience highlights"><a href="#abbvie">AbbVie</a><a href="#sec">U.S. SEC</a><a href="#college-board">College Board</a><a href="#amazon">Amazon</a></nav>
 <div class="timeline">
 <article><p class="date">Current</p><div><h3>Tarkik Solutions</h3><p class="role">Lead UI Developer</p></div></article>
-<article><p class="date">Joined Sep 2021</p><div><h3>AbbVie</h3><p class="role">UI Architect</p><p>Led accessibility work across Adobe Experience Manager sites. Guided a development team through UI modernization and introduced testing into the delivery process.</p></div></article>
-<article><p class="date">Jan 2019–Sep 2021</p><div><h3>U.S. Securities and Exchange Commission</h3><p class="role">UI/UX Lead · Pyramid Systems</p><p>Built a shared design system for multiple applications and coached engineering teams on UI architecture and development practices.</p></div></article>
+<article><p class="date">Joined Sep 2021</p><div><h3 id="abbvie">AbbVie</h3><p class="role">UI Architect</p><p>Led accessibility work across Adobe Experience Manager sites. Guided a development team through UI modernization and introduced testing into the delivery process.</p></div></article>
+<article><p class="date">Jan 2019–Sep 2021</p><div><h3 id="sec">U.S. Securities and Exchange Commission</h3><p class="role">UI/UX Lead · Pyramid Systems</p><p>Built a shared design system for multiple applications and coached engineering teams on UI architecture and development practices.</p></div></article>
 <article><p class="date">Aug 2017–Jan 2019</p><div><h3>U.S. Department of Veterans Affairs</h3><p class="role">Senior UI Developer · TISTA Science and Technology</p><p>Built accessible web applications and contributed to the open-source U.S. Web Design System.</p></div></article>
-<article><p class="date">Mar 2013–Dec 2014</p><div><h3>College Board</h3><p class="role">Senior User Interface Engineer</p><p>Led front-end framework development, built reusable widgets, and tested markup for accessibility and browser compatibility.</p></div></article>
-<article><p class="date">Nov 2012–Mar 2013</p><div><h3>Amazon</h3><p class="role">User Interface Engineer</p><p>Designed and developed web interfaces for iPad and desktop using Backbone, Bootstrap, and Ruby on Rails.</p></div></article>
+<article><p class="date">Mar 2013–Dec 2014</p><div><h3 id="college-board">College Board</h3><p class="role">Senior User Interface Engineer</p><p>Led front-end framework development, built reusable widgets, and tested markup for accessibility and browser compatibility.</p></div></article>
+<article><p class="date">Nov 2012–Mar 2013</p><div><h3 id="amazon">Amazon</h3><p class="role">User Interface Engineer</p><p>Designed and developed web interfaces for iPad and desktop using Backbone, Bootstrap, and Ruby on Rails.</p></div></article>
 </div>
 </section>
 <section class="work-band" id="work" aria-labelledby="work-title">
@@ -51,20 +52,33 @@
 <div>
 <p class="eyebrow">Interactive accessibility demo</p>
 <h3 id="lab-title">Follow the Focus.</h3>
-<p>Open the settings dialog. Use <kbd>Tab</kbd> or <kbd>Shift</kbd> + <kbd>Tab</kbd> to explore it, then press <kbd>Esc</kbd> to close. Watch where focus returns. The controls also work by touch.</p>
+<p>Ever hit Tab and lose track of where you are? Open settings and press <kbd>Tab</kbd> or <kbd>Shift</kbd> + <kbd>Tab</kbd>. The readout follows you. Press <kbd>Esc</kbd> and watch where you land.</p>
 </div>
 <div class="lab-panel" id="focus-demo">
 <button class="button" id="open-demo" type="button" aria-haspopup="dialog">Open settings</button>
 <p class="focus-readout">Focus <output id="focus-output" aria-live="off">outside the demo</output></p>
 <dialog id="settings-dialog" aria-labelledby="settings-title">
 <form method="dialog">
-<h4 id="settings-title">Preview settings</h4>
+<h4 id="settings-title">Preview settings</h4><ol class="focus-steps" aria-label="Focus order"><li data-step="Show outlines">Outlines</li><li data-step="Use larger type">Text size</li><li data-step="Close settings">Close</li></ol>
 <label><input type="checkbox" data-focus="Show outlines" autofocus> Show outlines</label>
 <label><input type="checkbox" data-focus="Use larger type"> Use larger type</label>
 <button type="submit" data-focus="Close settings">Close settings</button>
 <p class="focus-readout">Focus <output id="dialog-output" aria-live="off">Show outlines</output></p>
 </form>
 </dialog>
+</div>
+</section>
+<section class="lab contrast-lab" aria-labelledby="contrast-title">
+<div>
+<p class="eyebrow">Interactive accessibility demo</p>
+<h3 id="contrast-title">Can you read this?</h3>
+<p>Try a muted color, then turn up the contrast. The sample stays the same. The ratio tells you whether it meets the WCAG AA threshold for regular-size text.</p>
+</div>
+<div class="lab-panel">
+<label for="contrast-level">Text darkness</label>
+<input id="contrast-level" type="range" min="0" max="100" value="42">
+<p class="contrast-sample" id="contrast-sample">Good design is for everyone.</p>
+<p class="focus-readout"><output id="contrast-result" for="contrast-level"></output></p>
 </div>
 </section>
 </div>
@@ -77,7 +91,14 @@
 <article><time datetime="2019-03-11">Mar 2019</time><h3><a href="https://medium.com/@nolawi/where-is-your-style-guide-75956e73e19b">Where is your Style Guide?</a></h3><p>Medium · Design systems</p></article>
 </div>
 </section>
-<section id="about" class="about"><div class="wrap section"><h2>Off the clock</h2><p>I’m Nolawi Petros. I write about accessibility, UX testing, and design systems. Away from the keyboard, I like riding my bike, spending time with my dog, and looking after my log cabin.</p></div></section>
+<section id="about" class="about"><div class="wrap section"><h2>Off the clock</h2><p>I write about accessibility, UX testing, and design systems. When I shut the laptop, I’m usually outside with my dog, working on the cabin, or making something with my hands.</p>
+<ul class="hobbies" aria-label="Hobbies">
+<li><span aria-hidden="true">🚲</span>Biking</li>
+<li><span aria-hidden="true">🪵</span>Log cabin</li>
+<li><span aria-hidden="true">🛶</span>Kayaking</li>
+<li><span aria-hidden="true">🎨</span>Painting</li>
+<li><span aria-hidden="true">🐕</span>My dog</li>
+</ul></div></section>
 </main>
 <footer class="wrap footer"><a class="brand" href="./"><span aria-hidden="true">np.</span> Nolawi Petros</a><a href="https://medium.com/@nolawi">Medium</a><a href="https://github.com/nolawi">GitHub</a><a href="https://www.linkedin.com/in/nolawi/">LinkedIn</a></footer>
 </body>
