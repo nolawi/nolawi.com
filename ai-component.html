@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="description" content="A practical approach to using AI coding tools with design-system rules and manual accessibility checks.">
+<title>What I want AI to know before it writes a component | Nolawi Petros</title>
+<link rel="stylesheet" href="site.css?v=editorial-1">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast wrap">
+<a class="brand" href="./"><span aria-hidden="true">np.</span> Nolawi Petros</a>
+<nav aria-label="Main"><a href="./#experience">Experience</a><a href="./#work">Work</a><a href="writing.html">Writing</a><a href="about.html">About</a></nav>
+<a class="outline" href="resume.html">Résumé</a>
+</header>
+<main class="subpage wrap section" id="main">
+<p class="eyebrow">Writing · AI and accessibility</p>
+<h1>What I want AI to know before it writes a component.</h1>
+<p class="intro">If I ask an AI tool to “build a dialog,” it can give me something that looks right in a screenshot. The interesting part starts when I put down the mouse.</p>
+<div class="prose">
+<h2>Give it the same brief I’d give a teammate</h2>
+<p>I’d start with what the dialog is for, where it opens, and which components and tokens our team already uses. Then I’d describe the behavior in terms someone can test.</p>
+<ul>
+<li>Give the dialog a visible title and use it as the accessible name.</li>
+<li>Move focus somewhere useful when the dialog opens. That might be the heading, a first field, or the least destructive action, depending on the task.</li>
+<li>Keep Tab and Shift+Tab within the modal. Let Escape dismiss it and return focus to the opener when that still makes sense.</li>
+<li>Use the system’s focus, spacing, and contrast rules for each state.</li>
+</ul>
+<h2>Keep the rules with the component</h2>
+<p>If I have to explain the same focus behavior every time, the design system is missing something. I’d put the behavior in the component docs and write checks for the paths we expect to keep working. That gives a person or an AI tool a concrete example to build from.</p>
+<h2>Still use the keyboard</h2>
+<p>Before I’d ship, I’d tab into the dialog and back out, check what a screen reader announces, and try it with zoom and on a narrow screen. I’d also try an error state and a case where the original button disappears. Those are the moments that tell me whether the component works in the interface around it.</p>
+<p><a href="./#focus-title">Try the focus demo</a> · <a href="writing.html">Back to writing</a></p>
+</div>
+</main>
+<footer class="wrap footer"><a href="./">Portfolio home</a><a href="https://github.com/nolawi">GitHub</a><a href="https://www.linkedin.com/in/nolawi/">LinkedIn</a></footer>
+</body>
+</html>
