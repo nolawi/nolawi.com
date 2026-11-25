@@ -47,3 +47,13 @@ if (contrastLevel && contrastSample && contrastResult) {
   contrastLevel.addEventListener('input', updateContrast);
   updateContrast();
 }
+
+const penPreview = document.querySelector('[data-pen-preview]');
+penPreview?.closest('details').addEventListener('toggle', ({ currentTarget }) => {
+  if (!currentTarget.open || penPreview.firstElementChild) return;
+
+  const frame = document.createElement('iframe');
+  frame.title = 'Champs UI Multiselect CodePen preview';
+  frame.src = 'https://codepen.io/nolawi/embed/xLGzYV?default-tab=result';
+  penPreview.append(frame);
+});
