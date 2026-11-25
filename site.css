@@ -139,4 +139,4 @@ dialog.large-type { font-size: 1.25rem; }
 
 .section-icon { display: inline-block; font: .48em/1 system-ui, sans-serif; vertical-align: .18em; }
 .pen-example { margin-top: 1rem; background: #f9f3e3; }
-.pen-example pre { max-height: 12rem; overflow: auto; }
+.saved-pen { display: block; width: 100%; border: 1px solid var(--line); border-radius: .35rem; }

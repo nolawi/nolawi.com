@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 <meta name="description" content="Nolawi Petros is a front-end engineer and UI architect working on accessibility, design systems, and user interfaces. Explore his experience, projects, and writing.">
 <title>Nolawi Petros — Front-end Engineer &amp; UI Architect</title>
-<link rel="stylesheet" href="site.css?v=switchback-1">
+<link rel="stylesheet" href="site.css?v=switchback-2">
 <script src="site.js?v=switchback-1" defer></script>
 </head>
 <body>
@@ -92,66 +92,8 @@
 <section class="pen-example" aria-labelledby="switchback-title">
 <h4 id="switchback-title"><span aria-hidden="true">🧭</span> Switchback</h4>
 <p>Pick a stop on a bike-to-cabin trail and see how a control can show its state with shape, words, and color.</p>
-<p><a href="trail.html">Open Switchback on its own</a></p>
-<div class="codepen" data-prefill='{"title":"Switchback · Accessible trail picker"}' data-height="510" data-default-tab="result" data-editable="true">
-<pre data-lang="html">&lt;main&gt;
-&lt;h1&gt;Switchback&lt;/h1&gt;
-&lt;p&gt;Pick a stop on an illustrated trail. Try the arrow keys once a stop has focus. Each choice gives you an icon, a name, and a clear selected state.&lt;/p&gt;
-&lt;fieldset&gt;
-&lt;legend&gt;Choose a trail stop&lt;/legend&gt;
-&lt;div class="routes"&gt;
-&lt;label&gt;&lt;input type="radio" name="stop" value="0" checked&gt; Trailhead&lt;/label&gt;
-&lt;label&gt;&lt;input type="radio" name="stop" value="1"&gt; River bend&lt;/label&gt;
-&lt;label&gt;&lt;input type="radio" name="stop" value="2"&gt; Lookout&lt;/label&gt;
-&lt;/div&gt;
-&lt;/fieldset&gt;
-&lt;ol class="trail" aria-label="Trail map"&gt;
-&lt;li aria-current="step"&gt;&lt;span aria-hidden="true"&gt;🚲&lt;/span&gt;Trailhead&lt;/li&gt;
-&lt;li&gt;&lt;span aria-hidden="true"&gt;🛶&lt;/span&gt;River bend&lt;/li&gt;
-&lt;li&gt;&lt;span aria-hidden="true"&gt;🏡&lt;/span&gt;Lookout&lt;/li&gt;
-&lt;/ol&gt;
-&lt;output id="trail-note"&gt;Trailhead. Grab your bike and follow the gravel road.&lt;/output&gt;
-&lt;/main&gt;</pre>
-<pre data-lang="css">:root { color-scheme: light; font: 100%/1.5 system-ui, sans-serif; color: #162c25; background: #f3eee0; }
-* { box-sizing: border-box; }
-body { margin: 0; }
-main { max-width: 42rem; padding: clamp(1rem, 5vw, 2.5rem); margin: auto; }
-h1 { font: 500 clamp(2.5rem, 10vw, 4rem)/1 Georgia, serif; margin: 0; }
-fieldset { border: 0; padding: 0; margin: 1rem 0; min-inline-size: 0; }
-legend { font-weight: 750; margin-bottom: .5rem; }
-.routes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); gap: .5rem; }
-.routes label { display: flex; align-items: center; gap: .4rem; min-height: 3rem; padding: .5rem; border: 2px solid #526e61; border-radius: .4rem; cursor: pointer; }
-.routes label:has(:checked) { background: #ffe2a3; border-color: #162c25; }
-.routes label:has(:focus-visible) { outline: 3px solid #914115; outline-offset: 2px; }
-input { accent-color: #225140; }
-.trail { display: flex; align-items: center; gap: .35rem; justify-content: space-between; list-style: none; background: #16392e; color: #fff8e8; margin: 1rem 0; padding: .6rem; border-radius: .5rem; }
-.trail li { flex: 1; min-width: 0; border: 2px solid transparent; padding: .4rem .1rem; border-radius: .4rem; text-align: center; font-size: .875rem; }
-.trail span { display: block; font-size: 1.55rem; }
-.trail [aria-current="step"] { background: #ffe2a3; color: #162c25; border-color: #162c25; font-weight: 750; }
-output { display: block; min-height: 3em; }
-@media (forced-colors: active) {
-  .routes label:has(:checked), .trail [aria-current="step"] { border-color: Highlight; }
-}
-</pre>
-<pre data-lang="js">const stops = Array.from(document.querySelectorAll('.trail li'));
-const note = document.querySelector('#trail-note');
-const notes = [
-  'Trailhead. Grab your bike and follow the gravel road.',
-  'River bend. Pull the kayak up on the bank and take a break.',
-  'Lookout. Park by the cabin and enjoy the view.'
-];
-document.querySelector('fieldset').addEventListener('change', ({ target }) =&gt; {
-  if (target.name !== 'stop') return;
-  const selected = Number(target.value);
-  stops.forEach((stop, index) =&gt; {
-    if (index === selected) stop.setAttribute('aria-current', 'step');
-    else stop.removeAttribute('aria-current');
-  });
-  note.value = notes[selected];
-});
-</pre>
-</div>
-<script async src="https://public.codepenassets.com/embed/index.js"></script>
+<p><a href="https://codepen.io/nolawi/pen/LEyJxMZ">Open Switchback on CodePen</a> · <a href="trail.html">Standalone demo</a></p>
+<iframe class="saved-pen" title="Switchback · Accessible trail picker on CodePen" src="https://codepen.io/nolawi/embed/LEyJxMZ?default-tab=result" width="800" height="510" loading="lazy" allowfullscreen></iframe>
 </section>
 </div>
 </section>
