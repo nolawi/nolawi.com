@@ -8,15 +8,16 @@
 <title>Nolawi Petros — Front-end Engineer &amp; UI Architect</title>
 <link rel="stylesheet" href="themes.css?v=studio-1">
 <script src="theme.js?v=studio-1"></script>
-<link rel="stylesheet" href="site.css?v=studio-1">
+<link rel="stylesheet" href="site.css?v=workbench-1">
 <script src="site.js?v=studio-1" defer></script>
+<script type="module" src="assets/ai-workbench.min.js?v=1"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="mast wrap">
 <a class="brand" href="./"><span aria-hidden="true">np.</span> Nolawi Petros</a>
-<nav aria-label="Main"><a href="#work">Design systems</a><a href="#experience">Experience</a><a href="#lab-title">Playground</a><a href="#writing">Writing</a><a href="about.html">About</a></nav><label id="theme-picker" class="theme-picker" hidden>Theme <select><option value="studio">Studio</option><option value="slate">Slate</option></select></label>
-<a class="outline" href="resume.html">Résumé</a>
+<nav aria-label="Main"><a href="#work">Design systems</a><a href="#experience">Experience</a><a href="#lab-title">Accessibility</a><a href="#ai-work">AI work</a><a href="#writing">Writing</a><a href="about.html">About</a></nav><label id="theme-picker" class="theme-picker" hidden>Theme <select><option value="studio">Studio</option><option value="slate">Slate</option></select></label>
+
 </header>
 <main id="main">
 <section class="hero">
@@ -24,8 +25,12 @@
 <div>
 <p class="eyebrow">Front-end engineer &amp; UI architect</p>
 <h1>Nolawi<br>Petros<span>.</span></h1>
-<p class="intro">I build design systems and accessible front ends. I like figuring out how to make the good patterns easy for teams to reuse.</p>
-<div class="actions"><a class="button" href="resume.html">View résumé</a><a href="#work">See my design system work</a></div>
+<p class="intro">I build design systems and accessible front ends. I’m also exploring how to give AI coding tools better instructions before they touch a component.</p>
+<nav class="hero-paths" aria-label="Explore my work">
+<a href="#work"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 9v12"/></svg><span>Design systems</span></a>
+<a href="#lab-title"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M4 9h16m-8 0v6m0-1-4 7m4-7 4 7"/></svg><span>Accessibility</span></a>
+<a href="#ai-work"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2z"/></svg><span>AI work</span></a>
+</nav>
 </div>
 <div class="hero-art"><img class="portrait" src="portrait.jpg" width="300" height="300" alt="Nolawi Petros"><div class="portrait-keys" aria-hidden="true"><kbd>Tab</kbd><kbd>↵</kbd></div></div>
 </div>
@@ -50,15 +55,16 @@
 <div class="project-grid">
 <article><p class="eyebrow">AbbVie</p><h3>Accessible UI modernization</h3><p>Worked with developers to improve semantic markup across sites and make accessibility testing part of the delivery process.</p></article>
 <article><p class="eyebrow">SEC · Pyramid Systems</p><h3>One design system, multiple applications</h3><p>Designed and built a common UI foundation and helped engineering teams adopt it across projects.</p></article>
-<article><p class="eyebrow">National Geographic Society</p><h3>A component-based style guide</h3><p>Developed a React interface and an Atomic Design style guide for the team building nationalgeographic.org.</p></article>
+<article><p class="eyebrow">National Geographic Society · React</p><h3>NGKit</h3><p>I developed a React interface and an Atomic Design style guide for the National Geographic Society web team.</p><p><a href="https://github.com/nolawi/ngkit-assets">NGKit assets on GitHub</a></p></article>
 </div>
 </div>
 </section>
 <section class="section wrap" id="experience" aria-labelledby="experience-title">
 <div class="section-head"><h2 id="experience-title"><span class="section-icon" aria-hidden="true">▤</span> Experience</h2><a href="resume.html">Full résumé</a></div>
-<nav class="company-index" aria-label="Experience highlights"><a href="#abbvie">AbbVie</a><a href="#sec">U.S. SEC</a><a href="#college-board">College Board</a><a href="#amazon">Amazon</a></nav>
+<nav class="company-index" aria-label="Experience highlights"><a href="#ecs">ECS / CISA</a><a href="#abbvie">AbbVie</a><a href="#sec">U.S. SEC</a><a href="#college-board">College Board</a><a href="#amazon">Amazon</a></nav>
 <div class="timeline">
-<article><p class="date">Current</p><div><h3>Tarkik Solutions</h3><p class="role">Lead UI Developer</p></div></article>
+<article><p class="date">Aug 2026–present</p><div><h3>Tarkik Solutions</h3><p class="role">Lead UI Developer</p></div></article>
+<article><p class="date">2025–2026</p><div><h3 id="ecs">ECS Federal (Everforth ECS)</h3><p class="role">CISA</p><p>My federal engineering work at ECS included work with the Cybersecurity and Infrastructure Security Agency.</p></div></article>
 <article><p class="date">Joined Sep 2021</p><div><h3 id="abbvie">AbbVie</h3><p class="role">UI Architect</p><p>I helped our team make a group of AEM sites easier to use and added accessibility testing to the way we shipped updates.</p></div></article>
 <article><p class="date">Jan 2019–Sep 2021</p><div><h3 id="sec">U.S. Securities and Exchange Commission</h3><p class="role">UI/UX Lead · Pyramid Systems</p><p>I built a design system the SEC teams could share, then worked with engineers to put it to use across different apps.</p></div></article>
 <article><p class="date">Aug 2017–Jan 2019</p><div><h3>U.S. Department of Veterans Affairs</h3><p class="role">Senior UI Developer · TISTA Science and Technology</p><p>I built web apps for the VA and contributed back to the <a href="https://github.com/uswds/uswds">U.S. Web Design System</a>.</p></div></article>
@@ -68,8 +74,8 @@
 </section>
 <section class="section wrap" aria-labelledby="lab-title">
 <div class="playground-heading">
-<h2 id="lab-title"><span class="section-icon" aria-hidden="true">🧪</span> Accessibility playground</h2>
-<p>Three quick experiments you can try with a keyboard, mouse, or touch.</p>
+<h2 id="lab-title"><span class="heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M4 9h16m-8 0v6m0-1-4 7m4-7 4 7"/></svg></span> Accessibility playground</h2>
+<p>I helped bring accessibility testing into the way we shipped at AbbVie. These three experiments let you try some of the same ideas with a keyboard, mouse, or touch.</p>
 </div>
 <div class="playground">
 <section class="lab" aria-labelledby="focus-title">
@@ -114,6 +120,21 @@
 <p><a href="https://codepen.io/nolawi/pen/LEyJxMZ">Open Switchback on CodePen</a> · <a href="trail.html">Standalone demo</a></p>
 <iframe class="saved-pen" title="Switchback · Accessible trail picker on CodePen" src="https://codepen.io/nolawi/embed/LEyJxMZ?default-tab=result" width="800" height="510" loading="lazy" allowfullscreen></iframe>
 </section>
+</section>
+<section class="work-band" id="ai-work" aria-labelledby="ai-title">
+<div class="section wrap ai-layout">
+<div>
+<p class="eyebrow">AI-assisted front-end development</p>
+<h2 id="ai-title"><span class="heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2z"/></svg></span> Give AI a better brief.</h2>
+<p>I want AI coding tools to start with the same information I’d give a teammate: our design tokens, the expected keyboard behavior, and the checks we run before shipping.</p>
+<p><a href="ai-component.html">Read the approach</a> · <a href="https://github.com/nolawi/nolawi.com/blob/main/ai-workbench.js">View the Vue source</a></p>
+</div>
+<div class="system-card">
+<h3>Component brief builder</h3>
+<p>Pick a pattern and copy a starting brief. The tool runs locally and uses a small set of preset rules.</p>
+<div id="ai-workbench"><p>For a dialog, describe its accessible name, initial focus, Tab order, Escape behavior, and where focus should return.</p></div>
+</div>
+</div>
 </section>
 <section class="section wrap" id="writing" aria-labelledby="writing-title">
 <div class="section-head"><h2 id="writing-title"><span class="section-icon" aria-hidden="true">✎</span> Writing</h2><a href="writing.html">Writing archive</a></div>

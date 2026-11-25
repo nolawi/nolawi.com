@@ -185,3 +185,35 @@ dialog.large-type { font-size: 1.25rem; }
 .profile-grid a:hover { background: var(--wash); }
 .profile-grid strong { text-decoration: underline; text-underline-offset: .2em; }
 .profile-grid svg { width: 2.3rem; height: 2.3rem; margin-bottom: .25rem; }
+
+.hero-paths { display: flex; flex-wrap: wrap; gap: .6rem; }
+.hero-paths a {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  min-height: 2.75rem;
+  padding: .45rem .65rem;
+  border: 1px solid var(--dark-line);
+  border-radius: .4rem;
+  font-weight: 700;
+}
+.hero-paths a:hover { background: var(--dark-panel); }
+.hero-paths svg, .heading-icon svg { width: 1.3rem; height: 1.3rem; flex: none; }
+.hero-paths svg { color: var(--accent); }
+.heading-icon { display: inline-flex; vertical-align: .12em; }
+.heading-icon svg { width: .55em; height: .55em; }
+.ai-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: start; gap: clamp(1rem, 5vw, 3rem); }
+.brief-builder, .brief-controls { display: grid; gap: .6rem; }
+.brief-builder label { font-weight: 650; }
+.brief-builder select, .brief-builder textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: .35rem;
+  padding: .5rem;
+}
+.brief-builder textarea { font: .875rem/1.5 ui-monospace, monospace; resize: vertical; }
+.brief-builder .brief-check { font-weight: 400; margin-bottom: .25rem; }
+@media (max-width: 48rem) { .ai-layout { grid-template-columns: 1fr; } }

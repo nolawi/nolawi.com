@@ -21,6 +21,10 @@ GitHub Pages serves the root of `main`. The generated article lists are committe
 
 `themes.css` holds shared color tokens and the Slate overrides. `site.css` styles components using those tokens. To add a palette, add a token override in `themes.css`, a value in `theme.js`, and the corresponding option to the page theme controls. Test text and focus contrast in both light and dark panels. The saved CodePen and its standalone counterpart are independent demos.
 
+## Vue workbench
+
+The homepage's component brief builder is a small Vue app. The portfolio, résumé, and articles are static HTML. To change the interactive demo, edit `ai-workbench.js`, run `npm ci` and `npm run build`, and commit the refreshed `assets/ai-workbench.min.js`. GitHub Pages serves the prebuilt file.
+
 ## Launch
 
 The preview pages carry `noindex`. Keep it until the final domain is serving the reviewed site over HTTPS, then update the page metadata, add a sitemap, and verify the domain in Google Search Console.
