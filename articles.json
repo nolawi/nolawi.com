@@ -1,0 +1,26 @@
+[
+  {
+    "title": "What I want AI to know before it writes a component",
+    "url": "ai-component.html",
+    "label": "Original essay · AI and accessibility",
+    "featured": true
+  },
+  {
+    "title": "The Future of Accessibility: How AI is Redefining Inclusion",
+    "url": "https://medium.com/@nolawi/the-future-of-accessibility-how-ai-is-redefining-inclusion-86b226f2621a",
+    "label": "Medium · Members only",
+    "date": "2022-12-16"
+  },
+  {
+    "title": "Manual UX testing",
+    "url": "https://medium.com/@nolawi/manual-ux-testing-6005fd16ed3d",
+    "label": "Medium · UX testing",
+    "date": "2019-09-16"
+  },
+  {
+    "title": "Where is your Style Guide?",
+    "url": "https://medium.com/@nolawi/where-is-your-style-guide-75956e73e19b",
+    "label": "Medium · Design systems",
+    "date": "2019-03-11"
+  }
+]

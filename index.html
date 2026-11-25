@@ -6,14 +6,16 @@
 <meta name="robots" content="noindex">
 <meta name="description" content="Nolawi Petros is a front-end engineer and UI architect working on accessibility, design systems, and user interfaces. Explore his experience, projects, and writing.">
 <title>Nolawi Petros — Front-end Engineer &amp; UI Architect</title>
-<link rel="stylesheet" href="site.css?v=editorial-1">
-<script src="site.js?v=switchback-1" defer></script>
+<link rel="stylesheet" href="themes.css?v=studio-1">
+<script src="theme.js?v=studio-1"></script>
+<link rel="stylesheet" href="site.css?v=studio-1">
+<script src="site.js?v=studio-1" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="mast wrap">
 <a class="brand" href="./"><span aria-hidden="true">np.</span> Nolawi Petros</a>
-<nav aria-label="Main"><a href="#experience">Experience</a><a href="#work">Work</a><a href="#lab-title">Playground</a><a href="#writing">Writing</a><a href="about.html">About</a></nav>
+<nav aria-label="Main"><a href="#work">Design systems</a><a href="#experience">Experience</a><a href="#lab-title">Playground</a><a href="#writing">Writing</a><a href="about.html">About</a></nav><label id="theme-picker" class="theme-picker" hidden>Theme <select><option value="studio">Studio</option><option value="slate">Slate</option></select></label>
 <a class="outline" href="resume.html">Résumé</a>
 </header>
 <main id="main">
@@ -22,10 +24,34 @@
 <div>
 <p class="eyebrow">Front-end engineer &amp; UI architect</p>
 <h1>Nolawi<br>Petros<span>.</span></h1>
-<p class="intro">I build accessible interfaces and design systems. Lately I’ve been thinking about how those systems can help teams build with AI.</p>
-<div class="actions"><a class="button" href="resume.html">View résumé</a><a href="#experience">See my experience</a></div>
+<p class="intro">I build design systems and accessible front ends. I like figuring out how to make the good patterns easy for teams to reuse.</p>
+<div class="actions"><a class="button" href="resume.html">View résumé</a><a href="#work">See my design system work</a></div>
 </div>
 <div class="hero-art"><img class="portrait" src="portrait.jpg" width="300" height="300" alt="Nolawi Petros"><div class="portrait-keys" aria-hidden="true"><kbd>Tab</kbd><kbd>↵</kbd></div></div>
+</div>
+</section>
+<section class="work-band" id="work" aria-labelledby="work-title">
+<div class="section wrap">
+<div class="section-head"><h2 id="work-title">Design systems</h2></div>
+<div class="systems-grid">
+<article class="system-card">
+<div class="system-visual delano-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<p class="eyebrow">Angular · UI kit</p><h3>Delano</h3>
+<p>A shared starting point for an Angular app. I wanted engineers to have somewhere to go for layouts and styles before building a screen from scratch.</p>
+<div class="links"><a class="button" href="delano.html">Read the project story</a><a href="https://github.com/nolawi/delano">Delano on GitHub</a></div>
+</article>
+<article class="system-card">
+<div class="system-visual uswds-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<p class="eyebrow">Open source · Federal web</p><h3>U.S. Web Design System</h3>
+<p>While building web apps for Veterans Affairs at TISTA, I contributed back to USWDS, the open-source design system for federal websites.</p>
+<div class="links"><a class="button" href="https://github.com/uswds/uswds">USWDS on GitHub</a><a href="https://designsystem.digital.gov/">Browse the documentation</a></div>
+</article>
+</div>
+<div class="project-grid">
+<article><p class="eyebrow">AbbVie</p><h3>Accessible UI modernization</h3><p>Worked with developers to improve semantic markup across sites and make accessibility testing part of the delivery process.</p></article>
+<article><p class="eyebrow">SEC · Pyramid Systems</p><h3>One design system, multiple applications</h3><p>Designed and built a common UI foundation and helped engineering teams adopt it across projects.</p></article>
+<article><p class="eyebrow">National Geographic Society</p><h3>A component-based style guide</h3><p>Developed a React interface and an Atomic Design style guide for the team building nationalgeographic.org.</p></article>
+</div>
 </div>
 </section>
 <section class="section wrap" id="experience" aria-labelledby="experience-title">
@@ -35,33 +61,22 @@
 <article><p class="date">Current</p><div><h3>Tarkik Solutions</h3><p class="role">Lead UI Developer</p></div></article>
 <article><p class="date">Joined Sep 2021</p><div><h3 id="abbvie">AbbVie</h3><p class="role">UI Architect</p><p>I helped our team make a group of AEM sites easier to use and added accessibility testing to the way we shipped updates.</p></div></article>
 <article><p class="date">Jan 2019–Sep 2021</p><div><h3 id="sec">U.S. Securities and Exchange Commission</h3><p class="role">UI/UX Lead · Pyramid Systems</p><p>I built a design system the SEC teams could share, then worked with engineers to put it to use across different apps.</p></div></article>
-<article><p class="date">Aug 2017–Jan 2019</p><div><h3>U.S. Department of Veterans Affairs</h3><p class="role">Senior UI Developer · TISTA Science and Technology</p><p>I built web apps for the VA and contributed back to the U.S. Web Design System.</p></div></article>
+<article><p class="date">Aug 2017–Jan 2019</p><div><h3>U.S. Department of Veterans Affairs</h3><p class="role">Senior UI Developer · TISTA Science and Technology</p><p>I built web apps for the VA and contributed back to the <a href="https://github.com/uswds/uswds">U.S. Web Design System</a>.</p></div></article>
 <article><p class="date">Mar 2013–Dec 2014</p><div><h3 id="college-board">College Board</h3><p class="role">Senior User Interface Engineer</p><p>I led the front-end build, made widgets we could reuse, and tested that they held up across browsers and met accessibility requirements.</p></div></article>
 <article><p class="date">Nov 2012–Mar 2013</p><div><h3 id="amazon">Amazon</h3><p class="role">User Interface Engineer</p><p>I took an interface from wireframes to working screens for iPad and desktop, using Backbone, Bootstrap, and Rails.</p></div></article>
 </div>
 </section>
-<section class="work-band" id="work" aria-labelledby="work-title">
-<div class="section wrap">
-<div class="section-head"><h2 id="work-title"><span class="section-icon" aria-hidden="true">🛠</span> Selected work</h2><div class="links"><a href="https://github.com/nolawi">GitHub</a><a href="https://codepen.io/nolawi">CodePen</a><a href="https://stackoverflow.com/users/2903708/nolawi">Stack Overflow</a></div></div>
-<article class="featured-project">
-<div><p class="eyebrow">Featured design system</p><h3>Delano</h3><p>An Angular UI kit and style guide for teams building from a shared foundation.</p><a class="button" href="delano.html">Explore Delano</a></div>
-<div class="system-diagram" aria-hidden="true"><div>◈</div><div>▤</div><div>◐</div></div>
-</article>
-<div class="project-grid">
-<article><p class="eyebrow">AbbVie</p><h3>Accessible UI modernization</h3><p>Worked with developers to improve semantic markup across sites and make accessibility testing part of the delivery process.</p></article>
-<article><p class="eyebrow">SEC · Pyramid Systems</p><h3>One design system, multiple applications</h3><p>Designed and built a common UI foundation and helped engineering teams adopt it across projects.</p></article>
-<article><p class="eyebrow">National Geographic Society</p><h3>A component-based style guide</h3><p>Developed a React interface and an Atomic Design style guide for the team building nationalgeographic.org.</p></article>
-</div>
+<section class="section wrap" aria-labelledby="lab-title">
 <div class="playground-heading">
-<h3 id="lab-title"><span class="section-icon" aria-hidden="true">🧪</span> Accessibility playground</h3>
-<p>Two quick experiments you can try with a keyboard, mouse, or touch.</p>
+<h2 id="lab-title"><span class="section-icon" aria-hidden="true">🧪</span> Accessibility playground</h2>
+<p>Three quick experiments you can try with a keyboard, mouse, or touch.</p>
 </div>
 <div class="playground">
 <section class="lab" aria-labelledby="focus-title">
 <div>
 <p class="eyebrow">Interactive accessibility demo</p>
 <div class="focus-art" aria-hidden="true"><span></span><span></span><span></span><kbd>Tab</kbd></div>
-<h4 id="focus-title">Follow the focus.</h4>
+<h3 id="focus-title">Follow the focus.</h3>
 <p>Ever hit Tab and lose track of where you are? Open settings and press <kbd>Tab</kbd> or <kbd>Shift</kbd> + <kbd>Tab</kbd>. The readout follows you. Press <kbd>Esc</kbd> and watch where you land.</p>
 </div>
 <div class="lab-panel" id="focus-demo">
@@ -82,7 +97,7 @@
 <div>
 <p class="eyebrow">Interactive accessibility demo</p>
 <div class="contrast-art" aria-hidden="true"><span>Aa</span><span>Aa</span><span>Aa</span></div>
-<h4 id="contrast-title">Can you read this?</h4>
+<h3 id="contrast-title">Can you read this?</h3>
 <p>Try a muted color, then turn up the contrast. The sample stays the same. The ratio tells you whether it meets the WCAG AA threshold for regular-size text.</p>
 </div>
 <div class="lab-panel">
@@ -94,22 +109,29 @@
 </section>
 </div>
 <section class="pen-example" aria-labelledby="switchback-title">
-<h4 id="switchback-title"><span aria-hidden="true">🧭</span> Switchback</h4>
+<h3 id="switchback-title"><span aria-hidden="true">🧭</span> Switchback</h3>
 <p>Pick a stop on a bike-to-cabin trail and see how a control can show its state with shape, words, and color.</p>
 <p><a href="https://codepen.io/nolawi/pen/LEyJxMZ">Open Switchback on CodePen</a> · <a href="trail.html">Standalone demo</a></p>
 <iframe class="saved-pen" title="Switchback · Accessible trail picker on CodePen" src="https://codepen.io/nolawi/embed/LEyJxMZ?default-tab=result" width="800" height="510" loading="lazy" allowfullscreen></iframe>
 </section>
-</div>
 </section>
 <section class="section wrap" id="writing" aria-labelledby="writing-title">
 <div class="section-head"><h2 id="writing-title"><span class="section-icon" aria-hidden="true">✎</span> Writing</h2><a href="writing.html">Writing archive</a></div>
-<p class="featured-article"><a href="ai-component.html">What I want AI to know before it writes a component</a> <span>New essay · AI and accessibility</span></p>
+<!-- writing:begin -->
+<p class="featured-article"><a href="ai-component.html">What I want AI to know before it writes a component</a> <span>Original essay · AI and accessibility</span></p>
 <div class="articles">
 <article><time datetime="2022-12-16">Dec 2022</time><h3><a href="https://medium.com/@nolawi/the-future-of-accessibility-how-ai-is-redefining-inclusion-86b226f2621a">The Future of Accessibility: How AI is Redefining Inclusion</a></h3><p>Medium · Members only</p></article>
 <article><time datetime="2019-09-16">Sep 2019</time><h3><a href="https://medium.com/@nolawi/manual-ux-testing-6005fd16ed3d">Manual UX testing</a></h3><p>Medium · UX testing</p></article>
 <article><time datetime="2019-03-11">Mar 2019</time><h3><a href="https://medium.com/@nolawi/where-is-your-style-guide-75956e73e19b">Where is your Style Guide?</a></h3><p>Medium · Design systems</p></article>
 </div>
+<!-- writing:end -->
 </section>
+<section class="section wrap" aria-labelledby="profiles-title"><h2 id="profiles-title">Find me around the web</h2><ul class="profile-grid">
+<li><a href="https://github.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg><strong>GitHub</strong><span>Code and open-source projects</span></a></li>
+<li><a href="https://gitlab.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 22 9-8-3-11-3 8H9L6 3 3 14zM3 14l9 8 9-8M9 11l3 11 3-11"/></svg><strong>GitLab</strong><span>Repositories and experiments</span></a></li>
+<li><a href="https://stackoverflow.com/users/2903708/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v5h15v-5M7 17h9M8 13l9 2M10 9l8 4M13 5l7 6m-3-9 5 7"/></svg><strong>Stack Overflow</strong><span>Answers and technical discussions</span></a></li>
+<li><a href="https://codepen.io/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 7v6l-10 7-10-7V9zm0 0v7m0 6v7M2 9l10 6 10-6M2 15l10-6 10 6"/></svg><strong>CodePen</strong><span>Interactive front-end demos</span></a></li>
+</ul></section>
 <section id="about" class="about"><div class="wrap section"><h2>Off the clock</h2><p>I write about accessibility, UX testing, and design systems. When I shut the laptop, I’m usually outside with my dog, working on the cabin, or making something with my hands.</p>
 <p><a href="about.html">More about me</a></p>
 <ul class="hobbies" aria-label="Hobbies">
