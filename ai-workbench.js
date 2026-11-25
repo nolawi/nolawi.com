@@ -41,7 +41,7 @@ if (mount) {
         const pattern = patterns[selected.value];
         const requirements = pattern.requirements.map(item => `- ${item}`).join('\n');
         const checks = 'Before shipping: test keyboard-only use, check the screen reader announcement, and verify behavior at narrow widths and 200% zoom.';
-        return `Build a ${pattern.title.toLowerCase()} using our existing components and design tokens.\n\nRequired behavior:\n${requirements}${includeChecks.value ? '\n\n' + checks : ''}`;
+        return `Build this component using our existing components and design tokens: ${pattern.title}.\n\nRequired behavior:\n${requirements}${includeChecks.value ? '\n\n' + checks : ''}`;
       });
       async function copyBrief() {
         try {
