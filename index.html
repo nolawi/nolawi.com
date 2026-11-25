@@ -6,19 +6,11 @@
 <meta name="robots" content="noindex">
 <meta name="description" content="Nolawi Petros is a front-end engineer and UI architect working on accessibility, design systems, and user interfaces. Explore his experience, projects, and writing.">
 <title>Nolawi Petros — Front-end Engineer &amp; UI Architect</title>
-<link rel="stylesheet" href="themes.css?v=studio-1">
-<script src="theme.js?v=studio-1"></script>
-<link rel="stylesheet" href="site.css?v=workbench-1">
-<script src="site.js?v=studio-1" defer></script>
-<script type="module" src="assets/ai-workbench.min.js?v=2"></script>
+<script type="module" src="/src/main.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="mast wrap">
-<a class="brand" href="./"><span aria-hidden="true">np.</span> Nolawi Petros</a>
-<nav aria-label="Main"><a href="#work">Design systems</a><a href="#experience">Experience</a><a href="#lab-title">Accessibility</a><a href="#ai-work">AI work</a><a href="#writing">Writing</a><a href="about.html">About</a></nav><label id="theme-picker" class="theme-picker" hidden>Theme <select><option value="studio">Studio</option><option value="slate">Slate</option></select></label>
-
-</header>
+<!-- site-header -->
 <main id="main">
 <section class="hero">
 <div class="wrap hero-grid">
@@ -32,7 +24,7 @@
 <a href="#ai-work"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2z"/></svg><span>AI work</span></a>
 </nav>
 </div>
-<div class="hero-art"><img class="portrait" src="portrait.jpg" width="300" height="300" alt="Nolawi Petros"><div class="portrait-keys" aria-hidden="true"><kbd>Tab</kbd><kbd>↵</kbd></div></div>
+<div class="hero-art"><img class="portrait" src="/portrait.jpg" width="300" height="300" alt="Nolawi Petros"><div class="portrait-keys" aria-hidden="true"><kbd>Tab</kbd><kbd>↵</kbd></div></div>
 </div>
 </section>
 <section class="work-band" id="work" aria-labelledby="work-title">
@@ -75,8 +67,16 @@
 <section class="section wrap" aria-labelledby="lab-title">
 <div class="playground-heading">
 <h2 id="lab-title"><span class="heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M4 9h16m-8 0v6m0-1-4 7m4-7 4 7"/></svg></span> Accessibility playground</h2>
-<p>I helped bring accessibility testing into the way we shipped at AbbVie. These three experiments let you try some of the same ideas with a keyboard, mouse, or touch.</p>
+<p>I helped bring accessibility testing into the way we shipped at AbbVie. These experiments let you try some of the same ideas with a keyboard, mouse, or touch.</p>
 </div>
+<section class="display-lab system-card" aria-labelledby="display-title">
+<div>
+<h3 id="display-title">Make it easier to read.</h3>
+<p>Try a different background or bump up the text. These settings apply to the whole portfolio and follow you when you open another page.</p>
+<p>Use the dark mode switch in the header to see the same settings in a different palette.</p>
+</div>
+<div id="display-playground"><p>Your browser’s zoom controls can also make text larger.</p></div>
+</section>
 <div class="playground">
 <section class="lab" aria-labelledby="focus-title">
 <div>

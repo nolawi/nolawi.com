@@ -151,15 +151,6 @@ dialog.large-type { font-size: 1.25rem; }
   .about-layout { grid-template-columns: 1fr; gap: 1rem; }
 }
 
-.theme-picker { font-size: .875rem; }
-.theme-picker select {
-  font: inherit;
-  color: var(--ink);
-  background: var(--paper);
-  padding: .35rem;
-  border: 1px solid var(--line);
-  border-radius: .3rem;
-}
 .systems-grid, .profile-grid { display: grid; gap: 1rem; }
 .systems-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr)); margin-bottom: 2.5rem; }
 .system-card { border: 1px solid var(--line); border-radius: .65rem; background: var(--paper); padding: clamp(1rem, 3vw, 1.75rem); }
@@ -217,3 +208,34 @@ dialog.large-type { font-size: 1.25rem; }
 .brief-builder textarea { font: .875rem/1.5 ui-monospace, monospace; resize: vertical; }
 .brief-builder .brief-check { font-weight: 400; margin-bottom: .25rem; }
 @media (max-width: 48rem) { .ai-layout { grid-template-columns: 1fr; } }
+
+.theme-switch:not([hidden]) {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: .4rem;
+  padding: .4rem .55rem;
+}
+.switch-track {
+  box-sizing: content-box;
+  width: 1.8rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: .13rem;
+  background: var(--wash);
+}
+.switch-track::before { content: ""; display: block; width: .7rem; height: .7rem; border-radius: 50%; background: var(--ink); }
+.theme-switch[aria-checked="true"] .switch-track { background: var(--accent); }
+.theme-switch[aria-checked="true"] .switch-track::before { margin-left: auto; background: var(--on-accent); }
+.theme-status { width: 2.4rem; font-size: .875rem; }
+.display-lab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem; margin-bottom: 1rem; }
+.display-controls { display: grid; justify-items: start; gap: .75rem; }
+.display-options { min-inline-size: 0; padding: 0; border: 0; margin: 0; }
+.display-options legend { font-weight: 700; }
+.display-options > div { display: flex; flex-wrap: wrap; gap: .35rem .75rem; }
+.display-options label { display: flex; align-items: center; min-height: 2.75rem; gap: .25rem; }
+.display-options input { accent-color: var(--focus); }
+@media (max-width: 48rem) { .display-lab { grid-template-columns: 1fr; } }

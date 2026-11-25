@@ -25,7 +25,6 @@ if (demo && dialog && openButton && focusOutput && dialogOutput) {
     dialog.classList.toggle('large-type', dialog.querySelector('[data-focus="Use larger type"]').checked);
   });
 }
-document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
 
 const contrastLevel = document.querySelector('#contrast-level');
 const contrastSample = document.querySelector('#contrast-sample');
