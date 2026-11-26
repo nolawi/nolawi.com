@@ -1,9 +1,15 @@
 [
   {
+    "title": "Make the source part of the answer",
+    "url": "ai-checkable-answers.html",
+    "label": "Original essay · AI integration and UX",
+    "date": "2026-11-25",
+    "featured": true
+  },
+  {
     "title": "When your app gets a chat interface",
     "url": "ai-component.html",
-    "label": "Original essay · AI integration and UX",
-    "featured": true
+    "label": "Original essay · AI integration and UX"
   },
   {
     "title": "The Future of Accessibility: How AI is Redefining Inclusion",

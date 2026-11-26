@@ -23,7 +23,7 @@ export function renderHeader(home) {
   <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false">
     <span class="toolbar-icon" aria-hidden="true">◐</span><span>Dark mode</span><span class="switch-track" aria-hidden="true"></span>
   </button>
-  <label class="toolbar-select"><span class="toolbar-icon" aria-hidden="true">Aa</span> Font <select id="toolbar-font">${renderOptions(options.font)}</select></label>
+  <label class="toolbar-select toolbar-font"><span class="toolbar-icon font-sample" aria-hidden="true">Aa</span> Font <span class="select-frame"><select id="toolbar-font">${renderOptions(options.font)}</select><span class="select-chevron" aria-hidden="true"></span></span></label>
   <fieldset class="toolbar-accents"><legend>Accent</legend><div class="toolbar-swatches">${renderSwatches()}</div></fieldset>
   <div class="type-stepper" role="group" aria-label="Page text size">
     <button type="button" data-text-step="-1" aria-label="Decrease page text size">A−</button>
