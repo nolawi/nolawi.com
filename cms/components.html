@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio component catalog</title>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/components.css">
+<script type="module" src="/catalog.js"></script>
+</head>
+<body>
+<main class="wrap section">
+<a href="/">Back to publishing studio</a>
+<h1>Component catalog</h1>
+<p>Try these components with a keyboard, narrow window, and larger text.</p>
+<div class="actions">
+<label>Appearance <select data-setting="theme"><option value="light">Light</option><option value="dark">Dark</option></select></label>
+<label>Text size <select data-setting="textSize"><option value="default">100%</option><option value="largest">140%</option></select></label>
+<label>Accent <select data-setting="accent"><option value="orange">Orange</option><option value="teal">Teal</option><option value="blue">Denim</option><option value="gold">Ochre</option><option value="olive">Olive</option></select></label>
+</div>
+<section class="section" aria-labelledby="buttons-title">
+<h2 id="buttons-title">Buttons and links</h2>
+<div class="actions"><button class="button" type="button" data-open>Open a dialog</button><a class="outline" href="#card-title">Jump to card</a><a href="/">Text link</a></div>
+<dialog aria-labelledby="sample-title">
+<h3 id="sample-title">Example dialog</h3>
+<p>Close this dialog with Escape or the button below. Focus returns to the opener.</p>
+<form method="dialog"><button class="outline">Close</button></form>
+</dialog>
+</section>
+<section class="system-card" aria-labelledby="card-title">
+<h2 id="card-title">A deliberately long article title for testing how cards wrap</h2>
+<ul class="content-tags" aria-label="Article tags"><li><span>Essay</span></li><li><a href="/preview/topic-ai-integration.html">AI Integration</a></li><li><a href="/preview/topic-accessibility.html">Accessibility</a></li></ul>
+<p>Use the same component styles on short labels and longer reading lists.</p>
+</section>
+</main>
+</body>
+</html>

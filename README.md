@@ -11,6 +11,7 @@ Run `npm ci`, `npm run build`, then `npm run cms`. Open http://127.0.0.1:4175. T
 
 - Write an essay in Markdown, choose topics, and preview it. Save Draft keeps it out of generated pages and RSS.
 - Publish to Local Preview generates the article, topic pages, homepage listings, archive, RSS, and sitemap. Open Portfolio Preview to review the result.
+- Open Component Catalog to check shared buttons, links, tags, cards, and dialogs with different colors or text sizes.
 - Add a confirmed @nolawi permalink under Featured X Posts to show it in the portfolio.
 - Commit changes to `content/site.json` when ready to share. Keep private drafts on your machine because the repository is public.
 - To add topics, update the taxonomy in `content/site.json`. Existing article slugs are locked in the editor so shared links remain valid.

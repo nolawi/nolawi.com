@@ -103,7 +103,9 @@ const server = createServer(async (req, res) => {
     if (req.method === 'POST' && action) return await update(req, res, action);
     if (req.method !== 'GET') return send(res, 405, { error: 'Unsupported method.' });
 
-    const routes = { '/': 'cms/index.html', '/editor.js': 'cms/editor.js', '/editor.css': 'cms/editor.css' };
+    const routes = { '/': 'cms/index.html', '/editor.js': 'cms/editor.js', '/editor.css': 'cms/editor.css',
+      '/components': 'cms/components.html', '/catalog.js': 'cms/catalog.js',
+      '/tokens.css': 'themes.css', '/components.css': 'site.css' };
     let file = routes[url.pathname];
     if (url.pathname.startsWith('/preview/')) {
       const base = resolve(root, 'dist');
