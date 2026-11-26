@@ -73,13 +73,10 @@ export function injectPublishing(html, filename) {
   const entries = published(data);
   const home = filename === 'index.html';
   const list = home ? [...entries.filter(a => a.featured), ...entries.filter(a => !a.featured && a.path), ...entries.filter(a => !a.featured && !a.path)].slice(0, 5) : entries;
-  const activeTopics = data.topics.filter(t => entries.some(a => a.topics.includes(t.id)));
-  const topics = '<nav class="content-tags" aria-label="Writing topics">' + activeTopics.map(t =>
-    `<a href="topic-${t.id}.html">${escape(t.label)}</a>`).join('') + '</nav>';
   const social = '<ul class="social-highlights" aria-label="Selected posts">' +
     [...data.socialPosts].sort((a, b) => b.date.localeCompare(a.date)).map(post =>
       `<li><a href="${escape(post.url)}">${escape(post.title)}</a><time datetime="${post.date}">${post.date}</time></li>`).join('') + '</ul>';
-  return html.replace('<!-- writing-list -->', () => topics + renderList(list, data.topics))
+  return html.replace('<!-- writing-list -->', () => renderList(list, data.topics))
     .replace('<!-- social-posts -->', () => social)
     .replace(/<meta name="robots" content="noindex">/, () => `<meta name="robots" content="${indexable ? 'index,follow' : 'noindex'}">`)
     .replace('</head>', () => `<link rel="canonical" href="${escape(absolute(home ? '' : filename))}">

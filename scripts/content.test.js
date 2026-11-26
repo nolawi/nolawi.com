@@ -16,7 +16,8 @@ test('tags distinguish publication, access and topic', () => {
   const html = tags(article, data.topics);
   assert.match(html, /<span>Medium<\/span>/);
   assert.match(html, /<span>Members only<\/span>/);
-  assert.match(html, /href="topic-accessibility.html"/);
+  assert.match(html, /<span>Accessibility<\/span>/);
+  assert.doesNotMatch(html, /<a\s/);
 });
 
 test('invalid routes are rejected and raw HTML is escaped', () => {

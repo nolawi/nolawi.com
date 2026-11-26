@@ -49,7 +49,7 @@ export function tags(article, topics) {
   const labels = [article.format, article.publication === 'Medium' && 'Medium', article.access].filter(Boolean);
   return '<ul class="content-tags" aria-label="Article tags">' +
     labels.map(label => `<li><span>${escape(label)}</span></li>`).join('') +
-    article.topics.map(id => `<li><a href="topic-${id}.html">${escape(topics.find(topic => topic.id === id).label)}</a></li>`).join('') + '</ul>';
+    article.topics.map(id => `<li><span>${escape(topics.find(topic => topic.id === id).label)}</span></li>`).join('') + '</ul>';
 }
 export function renderList(articles, topics) {
   return '<div class="articles">' + articles.map(article =>

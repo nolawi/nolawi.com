@@ -394,5 +394,11 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
 }
 
 .content-tags { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; padding: 0; list-style: none; margin: .7rem 0 1rem; font-size: .875rem; }
-.content-tags :is(a, span) { display: inline-block; border: 1px solid var(--line); border-radius: 1rem; padding: .12em .55em; }
-.content-tags a:hover { background: var(--wash); }
+.content-tags span {
+  display: inline-block;
+  padding: .14em .55em;
+  border: 1px solid #d8cfc1;
+  border-radius: .3rem;
+  color: #29231d;
+  background: #f4eee5;
+}
