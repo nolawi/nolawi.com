@@ -5,7 +5,9 @@
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--paper); color: var(--ink); }
 a { color: var(--link-color); text-underline-offset: .25em; }
-a:hover { text-decoration-thickness: .16em; }
+a:is(:hover, :focus-visible) { text-decoration-thickness: .12em; }
+:is(.mast nav, .footer, .hero-paths, .company-index, .articles h3, .system-card h3, .pen-links, .project-grid h3) a { text-decoration: none; }
+:is(.mast nav, .footer, .hero-paths, .company-index, .articles h3, .system-card h3, .pen-links, .project-grid h3) a:is(:hover, :focus-visible) { text-decoration-line: underline; }
 button { font: inherit; cursor: pointer; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 5px; }
 .hero :focus-visible { outline-color: var(--accent); }
@@ -130,7 +132,10 @@ dialog.large-type { font-size: 1.25rem; }
 .pen-example { margin-top: 1rem; padding: 1rem 1.2rem; border: 1px solid var(--line); border-radius: .5rem; }
 
 .section-icon { display: inline-block; font: .48em/1 system-ui, sans-serif; vertical-align: .18em; }
-.pen-example { margin-top: 1rem; background: var(--embed-panel); }
+.pen-example { background: var(--embed-panel); }
+.pen-example h3 { font: 700 calc(1.2rem * var(--heading-scale))/1.25 var(--body-font); letter-spacing: normal; }
+.pen-links { display: flex; flex-wrap: wrap; gap: .4rem 1rem; margin-block: .75rem; }
+.pen-links a { font-weight: 650; }
 .saved-pen { display: block; width: 100%; border: 1px solid var(--line); border-radius: .35rem; }
 
 .about-layout {
@@ -191,7 +196,7 @@ dialog.large-type { font-size: 1.25rem; }
 .profile-grid { list-style: none; padding: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
 .profile-grid a { display: grid; gap: .3rem; height: 100%; padding: 1rem; border: 1px solid var(--line); border-radius: .5rem; text-decoration: none; }
 .profile-grid a:hover { background: var(--wash); }
-.profile-grid strong { text-decoration: underline; text-underline-offset: .2em; }
+.profile-grid a:is(:hover, :focus-visible) strong { text-decoration: underline; text-underline-offset: .2em; }
 .profile-grid svg { width: 2.3rem; height: 2.3rem; margin-bottom: .25rem; }
 
 .hero-paths { display: flex; flex-wrap: wrap; gap: .6rem; }
