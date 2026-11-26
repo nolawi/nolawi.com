@@ -10,6 +10,15 @@ const text = value => typeof value === 'string' && Boolean(value.trim());
 const date = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) &&
   Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
 
+function httpsUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && !url.username && !url.password;
+  } catch {
+    return false;
+  }
+}
+
 export function validate(data) {
   const topics = new Set();
   const ids = new Set();
@@ -34,6 +43,21 @@ export function validate(data) {
     } else if (a.publication !== 'Medium' || !/^https:\/\/medium\.com\//.test(a.url)) {
       throw new Error('External articles need a Medium URL.');
     }
+  }
+  const projects = new Set();
+  for (const project of data.projects) {
+    if (!safeId(project.id) || projects.has(project.id) || !text(project.title) ||
+        !['draft', 'published'].includes(project.status) ||
+        !['', 'delano', 'uswds'].includes(project.art) ||
+        !Array.isArray(project.links) || project.links.some(link => !text(link.label) || !httpsUrl(link.url)) ||
+        (project.body != null && typeof project.body !== 'string') ||
+        (project.status === 'published' && (!text(project.summary) || !text(project.context)))) {
+      throw new Error('Check project title, context, summary, and HTTPS links.');
+    }
+    if (project.id === 'delano' && project.status === 'published' && !text(project.body)) {
+      throw new Error('Delano needs a project story to preserve its shared URL.');
+    }
+    projects.add(project.id);
   }
   for (const post of data.socialPosts) {
     if (!/^https:\/\/x\.com\/nolawi\/status\/\d+$/.test(post.url) || !text(post.title) || !date(post.date)) {

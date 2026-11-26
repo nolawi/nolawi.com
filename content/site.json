@@ -114,5 +114,86 @@
       "title": "What counts as progress in front-end work?",
       "date": "2025-02-24"
     }
+  ],
+  "projects": [
+    {
+      "id": "delano",
+      "title": "Delano",
+      "context": "Angular · UI kit",
+      "summary": "A shared starting point for an Angular app. I wanted engineers to have somewhere to go for layouts and styles before building a screen from scratch.",
+      "featured": true,
+      "art": "delano",
+      "links": [
+        {
+          "label": "Delano on GitHub",
+          "url": "https://github.com/nolawi/delano"
+        }
+      ],
+      "body": "## Why a shared kit?\n\nWhen every screen starts from scratch, teams make the same layout and styling decisions over and over. A shared foundation gives people a place to start and makes the patterns easier to find later.\n\n## What’s in the repository\n\nThe Delano README describes an application foundation with a layout module, shared styles, and a style-guide entry point. The project uses Angular and Less, with Nebular listed among its dependencies. There’s also a documentation command that uses Compodoc.\n\n## What I’d take forward\n\nI’d document the behavior alongside the visuals. For a component like a dialog, that means writing down what receives focus on open, how to close it, and where focus returns. The portfolio playground shows that idea in a small, separate example.",
+      "status": "published"
+    },
+    {
+      "id": "uswds",
+      "title": "U.S. Web Design System",
+      "context": "Open source · Federal web",
+      "summary": "While building web apps for Veterans Affairs at TISTA, I contributed back to USWDS, the open-source design system for federal websites.",
+      "featured": true,
+      "art": "uswds",
+      "links": [
+        {
+          "label": "USWDS on GitHub",
+          "url": "https://github.com/uswds/uswds"
+        },
+        {
+          "label": "Browse the documentation",
+          "url": "https://designsystem.digital.gov/"
+        }
+      ],
+      "body": "",
+      "status": "published"
+    },
+    {
+      "id": "abbvie-ui",
+      "title": "Accessible UI modernization",
+      "context": "AbbVie",
+      "summary": "Worked with developers to improve semantic markup across sites and make accessibility testing part of the delivery process.",
+      "featured": false,
+      "art": "",
+      "links": [],
+      "body": "",
+      "status": "published"
+    },
+    {
+      "id": "sec-design-system",
+      "title": "One design system, multiple applications",
+      "context": "SEC · Pyramid Systems",
+      "summary": "Designed and built a common UI foundation and helped engineering teams adopt it across projects.",
+      "featured": false,
+      "art": "",
+      "links": [
+        {
+          "label": "Pyramid Systems on LinkedIn",
+          "url": "https://www.linkedin.com/company/pyramidsystems"
+        }
+      ],
+      "body": "",
+      "status": "published"
+    },
+    {
+      "id": "ngkit",
+      "title": "NGKit",
+      "context": "National Geographic Society · React",
+      "summary": "I developed a React interface and an Atomic Design style guide for the National Geographic Society web team.",
+      "featured": false,
+      "art": "",
+      "links": [
+        {
+          "label": "NGKit assets on GitHub",
+          "url": "https://github.com/nolawi/ngkit-assets"
+        }
+      ],
+      "body": "",
+      "status": "published"
+    }
   ]
 }

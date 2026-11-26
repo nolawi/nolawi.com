@@ -7,3 +7,6 @@ dist/
 /topic-*.html
 /public/feed.xml
 /public/sitemap.xml
+/delano.html
+/projects.html
+/project-*.html

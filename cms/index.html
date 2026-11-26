@@ -44,6 +44,28 @@
 <p role="status" id="social-status"></p>
 </form>
 </section>
+<section aria-labelledby="project-title">
+<h2 id="project-title">Projects</h2>
+<form id="project">
+<label>Choose project <select id="project-entries"><option value="">New project</option></select></label>
+<div class="fields">
+<label>Title <input name="title" required></label>
+<label>Slug <input name="id" required pattern="[a-z0-9]+(-[a-z0-9]+)*"></label>
+<label>Context <input name="context"></label>
+<label>Illustration <select name="art"><option value="">None</option><option value="delano">Delano</option><option value="uswds">USWDS</option></select></label>
+</div>
+<label>Summary <textarea name="summary" rows="3"></textarea></label>
+<label>Project story (optional Markdown) <textarea name="body" rows="8"></textarea></label>
+<label>Links (one per line, label | HTTPS URL) <textarea name="links" rows="3"></textarea></label>
+<label class="inline"><input type="checkbox" name="featured"> Feature on homepage</label>
+<div class="actions">
+<button type="submit" value="project-draft">Save draft</button>
+<button type="submit" value="project-publish">Publish to local preview</button>
+<a href="/preview/projects.html">Open projects preview</a>
+</div>
+<p role="status" id="project-status"></p>
+</form>
+</section>
 </main>
 </body>
 </html>

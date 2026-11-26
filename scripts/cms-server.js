@@ -58,6 +58,23 @@ async function update(req, res, action) {
     if (action === 'social') {
       const post = { title: input.title, url: input.url, date: input.date };
       data.socialPosts = [post, ...data.socialPosts.filter(item => item.url !== post.url)];
+    } else if (action.startsWith('project-')) {
+      if (!safeId(input.id)) throw new Error('Use a lowercase project slug with hyphens.');
+      const index = data.projects.findIndex(project => project.id === input.id);
+      const old = data.projects[index];
+      if (old?.status === 'published' && action === 'project-draft') {
+        throw new Error('This project is published. Publish an update to save your changes.');
+      }
+      if (old?.status === 'published' && old.body?.trim() && !input.body?.trim()) {
+        throw new Error('Keep a project story to preserve its published page.');
+      }
+      const project = {
+        id: input.id, title: input.title, context: input.context, summary: input.summary,
+        body: input.body, art: input.art, links: input.links, featured: Boolean(input.featured),
+        status: action === 'project-publish' ? 'published' : 'draft'
+      };
+      if (index >= 0) data.projects[index] = project;
+      else data.projects.push(project);
     } else {
       if (!safeId(input.id)) throw new Error('Use a lowercase article slug with hyphens.');
       const index = data.articles.findIndex(a => a.id === input.id);
@@ -78,7 +95,8 @@ async function update(req, res, action) {
     }
     validate(data);
     await save(data);
-    if (action !== 'draft') {
+    const draft = action === 'draft' || action === 'project-draft';
+    if (!draft) {
       try {
         await build();
       } catch (error) {
@@ -86,7 +104,7 @@ async function update(req, res, action) {
         throw error;
       }
     }
-    send(res, 200, { message: action === 'draft' ? 'Draft saved.' : 'Published to local preview.', data });
+    send(res, 200, { message: draft ? 'Draft saved.' : 'Published to local preview.', data });
   } finally {
     saving = false;
   }
@@ -99,7 +117,7 @@ const server = createServer(async (req, res) => {
   try {
     const url = new URL(req.url, origin);
     if (req.method === 'GET' && url.pathname === '/api/content') return send(res, 200, readContent());
-    const action = /^\/api\/(draft|publish|preview|social)$/.exec(url.pathname)?.[1];
+    const action = /^\/api\/(draft|publish|preview|social|project-draft|project-publish)$/.exec(url.pathname)?.[1];
     if (req.method === 'POST' && action) return await update(req, res, action);
     if (req.method !== 'GET') return send(res, 405, { error: 'Unsupported method.' });
 

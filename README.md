@@ -29,3 +29,5 @@ Run `npm run dev` for frontend development or `npm run check` for tests. GitHub 
 ## Before launch
 
 Review the preview and agree on a hosted CMS if browser editing from another device is needed. Configure Search Console after the domain cutover. On an explicitly indexable build, providing `SITE_ANALYTICS_TOKEN` enables Cloudflare Web Analytics. Preview builds omit the tracker. The existing focus, contrast, and Vue demos are included in the preview build.
+
+In the studio's Projects panel, save a draft or publish it to the local preview. Published projects appear in the archive and homepage. Featured projects get larger cards. Add a Markdown story to generate a project page. Delano keeps its existing page address. Preview updates stay local until the source changes go through the GitHub publishing workflow.
