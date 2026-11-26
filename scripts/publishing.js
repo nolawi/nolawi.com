@@ -67,7 +67,7 @@ export function generatePages(data = readContent()) {
     }).replaceAll('<', '\\u003c');
     pages.set(a.path, page(a.title, a.description,
       `<h1>${escape(a.title)}</h1>${tags(a, data.topics)}
-<p>By Nolawi Petros${a.date ? ` · <time datetime="${a.date}">${a.date}</time>` : ''}</p>
+${a.date ? `<p><time datetime="${a.date}">${a.date}</time></p>` : ''}
 <div class="prose">${renderBody(a.body)}</div>
 <script type="application/ld+json">${schema}</script>`));
   }
