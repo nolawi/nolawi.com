@@ -27,7 +27,7 @@ export function mountDisplayPlayground(element, preferences) {
           h('div', Object.entries(options[key]).map(([value, label]) => h('label', [
             h('input', {
               type: 'radio',
-              name: key,
+              name: `${element.id}-${key}`,
               value,
               checked: current.value[key] === value,
               onChange: () => preferences.update({ [key]: value })

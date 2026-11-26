@@ -20,7 +20,8 @@ GitHub Actions builds and publishes `dist/` to GitHub Pages. Article lists are c
 ## App structure
 
 - `src/header.js` renders the shared navigation and dark mode toggle at build time.
-- `src/main.js` applies preferences, handles the header toggle, and loads interactive modules when their targets exist.
+- `src/main.js` applies preferences, mounts the header toolbar, and loads interactive modules when their targets exist.
+- `src/display-toolbar.js` connects quick header controls and the full settings dialog to the same state.
 - `src/preferences.js` stores and validates display preferences. `themes.css` defines color tokens, backgrounds, and text-size steps.
 - `src/display-playground.js` and `src/records-explorer.js` are Vue components. The records explorer uses fictional data and deterministic local lookup in `src/records.js`. `site.js` contains the focus and contrast demos. The saved CodePen remains independent.
 

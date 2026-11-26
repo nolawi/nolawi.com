@@ -1,22 +1,11 @@
 import '../themes.css';
 import '../site.css';
 import { initializePreferences } from './preferences.js';
+import { mountDisplayToolbar } from './display-toolbar.js';
 
 const preferences = initializePreferences();
-const themeToggle = document.querySelector('#theme-toggle');
-
-if (themeToggle) {
-  themeToggle.hidden = false;
-  preferences.subscribe(({ theme }) => {
-    const dark = theme === 'dark';
-    themeToggle.setAttribute('aria-checked', String(dark));
-    themeToggle.querySelector('[data-theme-status]').textContent = dark ? 'Dark' : 'Light';
-  });
-  themeToggle.addEventListener('click', () => {
-    const dark = themeToggle.getAttribute('aria-checked') === 'true';
-    preferences.update({ theme: dark ? 'light' : 'dark' });
-  });
-}
+const toolbar = document.querySelector('#display-toolbar');
+if (toolbar) mountDisplayToolbar(toolbar, preferences);
 
 const playground = document.querySelector('#display-playground');
 if (playground) {

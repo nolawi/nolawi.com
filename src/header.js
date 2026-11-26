@@ -1,3 +1,5 @@
+import { options } from './preferences.js';
+
 const links = [
   ['Design systems', '#work'],
   ['Experience', '#experience'],
@@ -15,8 +17,32 @@ export function renderHeader(home) {
   return `<header class="mast wrap">
 <a class="brand" href="./"><span aria-hidden="true">n.</span> Nolawi</a>
 <nav aria-label="Main">${nav}</nav>
-<button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" hidden>
-  <span>Dark mode</span><span class="switch-track" aria-hidden="true"></span><span class="theme-status" aria-hidden="true" data-theme-status>Light</span>
-</button>
+<div class="display-toolbar" id="display-toolbar" role="group" aria-label="Quick display settings" hidden>
+  <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false">
+    <span>Dark mode</span><span class="switch-track" aria-hidden="true"></span>
+  </button>
+  <label class="toolbar-select">Font <select id="toolbar-font">${renderOptions(options.font)}</select></label>
+  <label class="toolbar-select">Accent <select id="toolbar-accent">${renderOptions(options.accent)}</select></label>
+  <div class="type-stepper" role="group" aria-label="Page text size">
+    <button type="button" data-text-step="-1" aria-label="Decrease page text size">A−</button>
+    <output id="toolbar-text-size">100%</output>
+    <button type="button" data-text-step="1" aria-label="Increase page text size">A+</button>
+  </div>
+  <button id="open-display-settings" class="display-open" type="button" aria-haspopup="dialog">Make it easier to read</button>
+</div>
+<dialog class="display-dialog" id="display-settings" aria-labelledby="display-settings-title">
+  <div class="display-dialog-head">
+    <h2 id="display-settings-title" tabindex="-1" autofocus>Make it easier to read</h2>
+    <form method="dialog"><button class="outline" type="submit">Close</button></form>
+  </div>
+  <p>These settings update the whole site as you try them.</p>
+  <div id="dialog-display-playground"><p>Use the quick controls in the header while the full settings load.</p></div>
+</dialog>
 </header>`;
+}
+
+function renderOptions(values) {
+  return Object.entries(values).map(([value, label]) =>
+    `<option value="${value}">${label}</option>`
+  ).join('');
 }

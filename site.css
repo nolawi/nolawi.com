@@ -231,3 +231,50 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
 .record-table tr:focus { outline: 2px solid var(--focus); outline-offset: 2px; }
 .record-conversation article { border-top: 1px solid var(--line); margin-top: .75rem; }
 @media (max-width: 52rem) { .ai-overview, .records-grid { grid-template-columns: 1fr; gap: .8rem; } }
+
+.display-toolbar:not([hidden]) {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .45rem .85rem;
+  padding: .5rem .65rem;
+  border: 1px solid var(--line);
+  border-radius: .65rem;
+  background: var(--wash);
+  font-size: .875rem;
+}
+.display-toolbar button, .display-toolbar select { min-height: 2.1rem; }
+.display-toolbar .theme-switch { padding: .25rem .45rem; }
+.toolbar-select { display: flex; align-items: center; gap: .35rem; }
+.toolbar-select select, .type-stepper button {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: .3rem;
+  padding: .2rem .4rem;
+}
+.type-stepper { display: flex; align-items: center; gap: .35rem; }
+.type-stepper output { min-width: 3.5rem; text-align: center; font-variant-numeric: tabular-nums; }
+.type-stepper button[aria-disabled="true"] { border-style: dashed; }
+.display-open {
+  margin-inline-start: auto;
+  padding: .25rem .6rem;
+  border: 1px solid var(--on-accent);
+  border-radius: .35rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+.display-dialog { width: min(43rem, 100% - 1.5rem); max-height: min(90dvh, 50rem); }
+.display-dialog-head { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: .65rem; }
+.display-dialog-head h2 { font-size: calc(1.5rem * var(--heading-scale)); max-width: 100%; }
+.display-dialog-head form { display: block; }
+.display-dialog .display-controls { gap: .5rem; }
+.native-note { border-top: 1px solid var(--line); margin-top: 1rem; padding-top: .65rem; }
+.native-note summary { cursor: pointer; font-weight: 750; color: var(--link-color); }
+@media (max-width: 48rem) {
+  .display-toolbar { order: 2; }
+  .display-open { margin-inline-start: 0; }
+}
