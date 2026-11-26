@@ -69,7 +69,15 @@ export function generatePages(data = readContent()) {
       `<h1>${escape(a.title)}</h1>${tags(a, data.topics)}
 ${a.date ? `<p><time datetime="${a.date}">${a.date}</time></p>` : ''}
 <div class="prose">${renderBody(a.body)}</div>
+${a.id === 'ai-component' ? '<div id="records-explorer"><p>The interactive sample needs JavaScript.</p></div>' : ''}
 <script type="application/ld+json">${schema}</script>`));
+  }
+  const oldChatPath = 'ai-checkable-answers.html';
+  if (pages.has('ai-component.html') && !pages.has(oldChatPath)) {
+    pages.set(oldChatPath, `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=ai-component.html">
+<title>When your app gets a chat interface</title></head>
+<body><p><a href="ai-component.html">Continue to the article and demo</a></p></body></html>`);
   }
   for (const t of data.topics) {
     const related = entries.filter(a => a.topics.includes(t.id));
@@ -95,13 +103,16 @@ ${a.date ? `<p><time datetime="${a.date}">${a.date}</time></p>` : ''}
   const items = entries.filter(a => a.path).map(a =>
     `<item><title>${escape(a.title)}</title><link>${escape(absolute(a.path))}</link><guid>${escape(absolute(a.path))}</guid><description>${escape(a.description)}</description>${a.date ? `<pubDate>${new Date(a.date).toUTCString()}</pubDate>` : ''}</item>`).join('');
   writeFileSync(at('public/feed.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Nolawi · Writing</title><link>${escape(absolute('writing.html'))}</link><description>Essays by Nolawi Petros</description>${items}</channel></rss>\n`);
-  const routes = ['', 'writing.html', 'about.html', 'resume.html', 'trail.html', ...pages.keys()];
+  const routes = ['', 'writing.html', 'about.html', 'resume.html', 'trail.html', ...Array.from(pages.keys()).filter(path => path !== oldChatPath || entries.some(article => article.path === oldChatPath))];
   writeFileSync(at('public/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(route => `<url><loc>${escape(absolute(route))}</loc></url>`).join('')}</urlset>\n`);
 }
 
 export function injectPublishing(html, filename) {
   const data = readContent();
   const entries = published(data);
+  if (filename === 'ai-checkable-answers.html' && /http-equiv="refresh"/.test(html)) {
+    return html.replace('</head>', `<link rel="canonical" href="${escape(absolute('ai-component.html'))}"></head>`);
+  }
   const home = filename === 'index.html';
   const list = home ? [...entries.filter(a => a.featured), ...entries.filter(a => !a.featured && a.path), ...entries.filter(a => !a.featured && !a.path)].slice(0, 5) : entries;
   const social = '<ul class="social-highlights" aria-label="Selected posts">' +

@@ -23,22 +23,6 @@
   ],
   "articles": [
     {
-      "title": "Make the source part of the answer",
-      "date": "2026-11-25",
-      "featured": true,
-      "id": "ai-checkable-answers",
-      "status": "published",
-      "format": "Essay",
-      "topics": [
-        "ai-integration",
-        "user-experience"
-      ],
-      "publication": "Nolawi",
-      "path": "ai-checkable-answers.html",
-      "description": "Nolawi on designing chat replies people can verify against application records.",
-      "body": "If I ask an app which requests are open, I want to see the rows it found. Five lines of confident prose still leave me with work to do if I can’t get to the records.\n\n## Give me somewhere to go\n\nSay I’m checking open service requests in the North region. A useful reply shows the region, the status, and the matching IDs. I can open a record and pick up the work there. If it turns out I meant South, I can change the filter without starting over.\n\nThe table and the conversation should agree about what they found. If a reply says two records matched, I should be able to open both. If there’s a limit or a filter I didn’t ask for, make it visible in the interface.\n\n## A reply can say it doesn’t know\n\nThen I ask why one of those requests is still open. The record may show a status without giving a reason. In that case I’d show the row and say the reason isn’t recorded. That’s a handoff back to the app and the people who know the work.\n\n## Try it without a mouse\n\nI’d test the whole trip by keyboard. Can I ask the question, find the new reply, open the source, and return to the conversation? Each step should be easy to find and should have a clear place for focus.\n\n[Try the Records Explorer](./#records-explorer) · [Read the first article on chat interfaces](ai-component.html)"
-    },
-    {
       "title": "When your app gets a chat interface",
       "id": "ai-component",
       "status": "published",
@@ -50,8 +34,9 @@
       ],
       "publication": "Nolawi",
       "path": "ai-component.html",
-      "description": "How to design accessible chat and connect a language model to application records through an API.",
-      "body": "I connect applications to language models. The question I keep coming back to is what happens after someone hits Send. Can they see where the answer came from? Can they get to the actual record?\n\n## Start with the question people already have\n\nImagine a person looking for open service requests in the North region. If they know the region and status, two filters make the list easy to scan. If they don’t know what the app calls those fields, a question in plain language can get them to a useful view. I’d put both in the same interface and let people move between them without losing their place.\n\n## Let the app retrieve the records\n\nI’d give the model a small read-only tool with a defined input schema, like `find_records({ region, status })`. The model can propose the lookup. The server validates the inputs, checks the signed-in user’s existing permissions, and calls the records API. The model gets just the fields needed for the answer. The same permission checks apply whether someone uses chat or opens a record from the table. [OpenAI function calling guide](https://developers.openai.com/api/docs/guides/function-calling).\n\nI’d keep coding tools such as Codex on the development side of that work. The user-facing feature comes from how the application, data API, permissions, and model fit together.\n\n## Make the answer easy to check\n\nI’d show the filters that were applied and link each claim about a record to the row or detail page it came from. If there are zero matches, say so. If the records don’t contain costs or dates, explain that. A fluent answer can sound certain even when its sources are weak, so I’d test both supported and unanswerable questions. [NIST’s Generative AI Profile](https://doi.org/10.6028/NIST.AI.600-1).\n\n## Design for the keyboard and screen reader\n\nGive the question field a visible label and a clear submit action. Keep focus in the composer when an answer arrives, and announce the new reply as a complete message. A labeled conversation log gives assistive technology a place to find new messages. Source links should be tabbable and lead somewhere useful. I’d test those paths with a keyboard, a screen reader, and a narrow viewport. [W3C guidance on status messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html) · [W3C technique for chat logs](https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA23).\n\n## Try the same records both ways\n\nThe portfolio demo uses fictional service requests and local rules. Try “Show open records in North,” open the source row, then ask what the repair will cost. The table shows what the app actually has, and the reply makes the missing information visible.\n\n[Try the Records Explorer](./#records-explorer)"
+      "description": "What happens after you hit Send? Try a small demo that puts chat and the records it finds side by side.",
+      "body": "If I ask an app which requests are open, I want to see the rows it found. I might need to open one, check what’s going on, and get back to work. A paragraph can get me started. The record is where I pick up.\n\nThat’s the part of adding chat to an app I keep thinking about. We spend a lot of time on the answer. What can someone actually do with it?\n\n## I’d keep the table\n\nSay I’m looking for open requests in North. If I know where the filters are, I’ll use them. If I’m new to the app, I might just type “Show open records in North.” Either way, I should land on the same rows. If I meant South, let me change the filter right there.\n\nIn a real app, I’d have the model ask the app for those records. The server would check the filters and the user’s permissions, then fetch the rows through the same API the table uses. The reply can show the filters it used and give me links to the records I’m allowed to open.\n\n## What if the record doesn’t say?\n\nSay I open a request and ask why it’s still open. The row might only tell us the status. I’d show what the record says and say the reason isn’t recorded. Same thing if I ask what a repair costs and there’s no cost field.\n\nI’d also try the whole thing with a keyboard. Can I submit a question, hear the reply with a screen reader, get to the source row, and find my way back? That’s the kind of test I’d run before shipping it.\n\n## Try it here\n\nAsk “Show open records in North,” open one of the rows, then ask what the repair will cost. The demo uses fictional records and runs on local rules. You can try the table filters too and see how they work alongside the conversation.",
+      "featured": true
     },
     {
       "title": "The Future of Accessibility: How AI is Redefining Inclusion",
