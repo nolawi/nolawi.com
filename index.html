@@ -80,17 +80,9 @@
 <h2 id="lab-title"><span class="heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M4 9h16m-8 0v6m0-1-4 7m4-7 4 7"/></svg></span> Accessibility playground</h2>
 <p>I helped bring accessibility testing into the way we shipped at AbbVie. These experiments let you try some of the same ideas with a keyboard, mouse, or touch.</p>
 </div>
-<section class="display-lab system-card" aria-labelledby="display-title">
-<div>
-<h3 id="display-title">Make it easier to read.</h3>
-<p>Change the accent, background, or typeface. Resize the whole page or just the headings. Your choices carry across the portfolio.</p>
-<p>The quick controls are in the header. Open <strong>Make it easier to read</strong> for the same full set of options on any page.</p>
-<details class="native-note">
-<summary>How much of this is HTML?</summary>
-<p>The disclosure you just opened is an HTML <code>&lt;details&gt;</code> element. The settings use a native dialog, selects, and sliders. CSS gives them their look. Vue keeps the display choices in sync.</p>
-</details>
-</div>
-<div id="display-playground"><p>Your browser’s zoom controls can also make text larger.</p></div>
+<section class="display-launch" id="display-title" aria-labelledby="display-launch-title">
+<div><h3 id="display-launch-title">Make it easier to read</h3><p>Try a different background, font, or text size. Your choices carry across the site.</p></div>
+<button type="button" class="button" data-open-display aria-haspopup="dialog" hidden>Open display settings</button>
 </section>
 <div class="playground">
 <section class="lab" aria-labelledby="focus-title">
@@ -164,6 +156,8 @@
 <li><a href="https://gitlab.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 22 9-8-3-11-3 8H9L6 3 3 14zM3 14l9 8 9-8M9 11l3 11 3-11"/></svg><strong>GitLab</strong><span>Repositories and experiments</span></a></li>
 <li><a href="https://stackoverflow.com/users/2903708/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v5h15v-5M7 17h9M8 13l9 2M10 9l8 4M13 5l7 6m-3-9 5 7"/></svg><strong>Stack Overflow</strong><span>Answers and technical discussions</span></a></li>
 <li><a href="https://codepen.io/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 7v6l-10 7-10-7V9zm0 0v7m0 6v7M2 9l10 6 10-6M2 15l10-6 10 6"/></svg><strong>CodePen</strong><span>Interactive front-end demos</span></a></li>
+<li><a href="https://www.linkedin.com/in/nolawi/"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7m0-10v.1M11 17v-7m0 3a3 3 0 0 1 6 0v4"/></svg><strong>LinkedIn</strong><span>Work history and connections</span></a></li>
+<li><a href="https://x.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l12 16h-4L4 4Zm16 0-7 8m-2 2-7 6"/></svg><strong>X / Twitter</strong><span>Follow @nolawi</span></a></li>
 </ul></section>
 <section id="about" class="about"><div class="wrap section"><h2>Off the clock</h2><p>I write about accessibility, UX testing, and design systems. When I shut the laptop, I’m usually outside with my dog, working on the cabin, or making something with my hands.</p>
 <p><a href="about.html">More about me</a></p>
@@ -173,7 +167,15 @@
 <li><span aria-hidden="true">🛶</span>Kayaking</li>
 <li><span aria-hidden="true">🎨</span>Painting</li>
 <li><span aria-hidden="true">🐕</span>My dog</li>
-</ul></div></section>
+</ul>
+<section class="social-feed system-card" aria-labelledby="social-title" data-social-feed>
+<h3 id="social-title">Off the clock on X</h3>
+<p><a href="https://x.com/nolawi">Open @nolawi on X</a></p>
+<button class="outline" type="button" hidden>Load X timeline</button>
+<p role="status"></p>
+<div data-feed-content></div>
+</section>
+</div></section>
 <section class="section wrap contact-card" id="contact" aria-labelledby="contact-title">
 <div><h2 id="contact-title">Contact me</h2><p>Want to talk design systems, accessibility, or working together?</p></div>
 <div class="actions"><a class="button" href="mailto:nolawi.petros@gmail.com"><span aria-hidden="true">✉</span> Email me</a><a class="outline linkedin-profile" href="https://www.linkedin.com/in/nolawi/"><span aria-hidden="true">in</span> Nolawi on LinkedIn</a></div>

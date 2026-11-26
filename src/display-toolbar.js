@@ -12,6 +12,7 @@ export function mountDisplayToolbar(toolbar, preferences) {
   const sizes = Object.keys(options.textSize);
   let current;
   let panelLoaded = false;
+  let opener = open;
 
   preferences.subscribe(settings => {
     current = settings;
@@ -38,7 +39,8 @@ export function mountDisplayToolbar(toolbar, preferences) {
     if (next) preferences.update({ textSize: next });
   }));
 
-  open.addEventListener('click', async () => {
+  async function openSettings(event) {
+    opener = event.currentTarget;
     dialog.showModal();
     if (panelLoaded) return;
     panelLoaded = true;
@@ -49,7 +51,11 @@ export function mountDisplayToolbar(toolbar, preferences) {
       panelLoaded = false;
       panel.textContent = 'The full settings could not load. Close this panel and try again.';
     }
-  });
-  dialog.addEventListener('close', () => open.focus());
+  }
+  for (const trigger of [open, ...document.querySelectorAll('[data-open-display]')]) {
+    trigger.hidden = false;
+    trigger.addEventListener('click', openSettings);
+  }
+  dialog.addEventListener('close', () => opener.focus());
   toolbar.hidden = false;
 }

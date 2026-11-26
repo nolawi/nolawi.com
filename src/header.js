@@ -36,7 +36,7 @@ export function renderHeader(home) {
 <dialog class="display-dialog" id="display-settings" aria-labelledby="display-settings-title">
   <div class="display-dialog-head">
     <h2 id="display-settings-title" tabindex="-1" autofocus>Make it easier to read</h2>
-    <form method="dialog"><button class="outline" type="submit">Close</button></form>
+    <form method="dialog"><button class="outline" type="submit" aria-label="Close display settings"><span aria-hidden="true">×</span></button></form>
   </div>
   <p>These settings update the whole site as you try them.</p>
   <div id="dialog-display-playground"><p>Use the quick controls in the header while the full settings load.</p></div>

@@ -9,13 +9,6 @@ mountPageMotion();
 const toolbar = document.querySelector('#display-toolbar');
 if (toolbar) mountDisplayToolbar(toolbar, preferences);
 
-const playground = document.querySelector('#display-playground');
-if (playground) {
-  import('./display-playground.js').then(({ mountDisplayPlayground }) => {
-    mountDisplayPlayground(playground, preferences);
-  });
-}
-
 document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
 if (document.querySelector('#focus-demo')) import('../site.js');
 
@@ -24,4 +17,9 @@ if (recordsExplorer) {
   import('./records-explorer.js').then(({ mountRecordsExplorer }) => {
     mountRecordsExplorer(recordsExplorer);
   });
+}
+
+const socialFeed = document.querySelector('[data-social-feed]');
+if (socialFeed) {
+  import('./social-feed.js').then(({ mountSocialFeed }) => mountSocialFeed(socialFeed));
 }
