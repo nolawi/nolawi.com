@@ -2,7 +2,7 @@ const links = [
   ['Design systems', '#work'],
   ['Experience', '#experience'],
   ['Accessibility', '#lab-title'],
-  ['AI work', '#ai-work'],
+  ['AI integrations', '#ai-work'],
   ['Writing', 'writing.html'],
   ['About', 'about.html']
 ];
@@ -13,7 +13,7 @@ export function renderHeader(home) {
     return `<a href="${target}">${label}</a>`;
   }).join('');
   return `<header class="mast wrap">
-<a class="brand" href="./"><span aria-hidden="true">np.</span> Nolawi Petros</a>
+<a class="brand" href="./"><span aria-hidden="true">n.</span> Nolawi</a>
 <nav aria-label="Main">${nav}</nav>
 <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false" hidden>
   <span>Dark mode</span><span class="switch-track" aria-hidden="true"></span><span class="theme-status" aria-hidden="true" data-theme-status>Light</span>

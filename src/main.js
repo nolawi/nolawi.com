@@ -27,4 +27,10 @@ if (playground) {
 
 document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
 if (document.querySelector('#focus-demo')) import('../site.js');
-if (document.querySelector('#ai-workbench')) import('../ai-workbench.js');
+
+const recordsExplorer = document.querySelector('#records-explorer');
+if (recordsExplorer) {
+  import('./records-explorer.js').then(({ mountRecordsExplorer }) => {
+    mountRecordsExplorer(recordsExplorer);
+  });
+}

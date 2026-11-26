@@ -40,5 +40,39 @@
 :root[data-background="neutral"] { --paper: #f0f0ed; }
 :root[data-theme="dark"][data-background="warm"] { --paper: #30241c; }
 :root[data-theme="dark"][data-background="neutral"] { --paper: #262729; }
-:root[data-text-size="large"] { font-size: 112.5%; }
-:root[data-text-size="larger"] { font-size: 125%; }
+:root[data-text-size="large"] { font-size: 112.5%; --text-scale: 1.125; }
+:root[data-text-size="larger"] { font-size: 125%; --text-scale: 1.25; }
+
+:root {
+  --heading-scale: 1;
+  --text-scale: 1;
+  --body-font: system-ui, sans-serif;
+  --heading-font: Georgia, serif;
+  --link-color: var(--focus);
+  --swatch-orange: #f19b4c;
+  --swatch-gold: #dfba63;
+  --swatch-teal: #6fbbb0;
+  --swatch-blue: #8cafd2;
+  --swatch-olive: #abb974;
+}
+:root[data-theme="dark"] {
+  --wash: #302c26;
+  --accent: #efb078;
+  --warm-panel: #d6bc9c;
+}
+:root[data-accent="gold"] { --accent: var(--swatch-gold); --focus: #725008; --key-shadow: #85621a; }
+:root[data-accent="teal"] { --accent: var(--swatch-teal); --focus: #075d53; --key-shadow: #296f66; }
+:root[data-accent="blue"] { --accent: var(--swatch-blue); --focus: #294f7d; --key-shadow: #4b7097; }
+:root[data-accent="olive"] { --accent: var(--swatch-olive); --focus: #47571b; --key-shadow: #626e33; }
+:root[data-theme="dark"][data-accent="gold"] { --accent: #e8c982; --focus: #e8c982; }
+:root[data-theme="dark"][data-accent="teal"] { --accent: #9bd1c7; --focus: #9bd1c7; }
+:root[data-theme="dark"][data-accent="blue"] { --accent: #a7c5e6; --focus: #a7c5e6; }
+:root[data-theme="dark"][data-accent="olive"] { --accent: #c2cf96; --focus: #c2cf96; }
+:root[data-text-size="small"] { font-size: 90%; --text-scale: .9; }
+:root[data-text-size="largest"] { font-size: 140%; --text-scale: 1.4; }
+:root[data-heading-size="small"] { --heading-scale: .85; }
+:root[data-heading-size="large"] { --heading-scale: 1.15; }
+:root[data-heading-size="larger"] { --heading-scale: 1.3; }
+:root[data-heading-size="largest"] { --heading-scale: 1.45; }
+:root[data-font="sans"] { --heading-font: system-ui, sans-serif; }
+:root[data-font="serif"] { --body-font: Georgia, serif; }

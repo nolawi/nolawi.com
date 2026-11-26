@@ -1,9 +1,12 @@
 const storageKey = 'nolawi-display';
-export const defaults = Object.freeze({ theme: 'light', textSize: 'default', background: 'default' });
+export const defaults = Object.freeze({ theme: 'light', textSize: 'default', background: 'default', accent: 'orange', headingSize: 'default', font: 'classic' });
 
 export const options = Object.freeze({
   theme: { light: 'Light', dark: 'Dark' },
-  textSize: { default: 'Default (100%)', large: 'Large (112.5%)', larger: 'Larger (125%)' },
+  textSize: { small: '90%', default: '100%', large: '112.5%', larger: '125%', largest: '140%' },
+  headingSize: { small: '85%', default: '100%', large: '115%', larger: '130%', largest: '145%' },
+  accent: { orange: 'Orange', gold: 'Ochre', teal: 'Teal', blue: 'Denim', olive: 'Olive' },
+  font: { classic: 'Editorial', sans: 'System sans', serif: 'Serif' },
   background: { default: 'Default', warm: 'Warm', neutral: 'Neutral' }
 });
 

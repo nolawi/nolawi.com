@@ -15,7 +15,7 @@ test('controls share state across pages and can reset preferences', () => {
   const preferences = initializePreferences({ root, storage });
   preferences.update({ theme: 'dark', background: 'warm' });
   preferences.update({ textSize: 'larger' });
-  assert.deepEqual(root.dataset, { theme: 'dark', background: 'warm', textSize: 'larger' });
+  assert.deepEqual(root.dataset, { ...defaults, theme: 'dark', background: 'warm', textSize: 'larger' });
   const nextPage = { dataset: {} };
   const restored = initializePreferences({ root: nextPage, storage });
   assert.deepEqual(nextPage.dataset, root.dataset);

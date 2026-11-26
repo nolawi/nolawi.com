@@ -7,6 +7,20 @@ export function mountDisplayPlayground(element, preferences) {
       const current = ref({ ...defaults });
       preferences.subscribe(value => { current.value = value; });
 
+      function scale(key, label) {
+        const values = Object.keys(options[key]);
+        return h('label', { class: 'display-scale' }, [
+          h('span', [label, h('output', options[key][current.value[key]])]),
+          h('input', {
+            type: 'range', min: 0, max: values.length - 1, step: 1,
+            value: values.indexOf(current.value[key]),
+            'aria-label': label,
+            'aria-valuetext': options[key][current.value[key]],
+            onInput: event => preferences.update({ [key]: values[event.target.valueAsNumber] })
+          })
+        ]);
+      }
+
       function radioGroup(key, title) {
         return h('fieldset', { class: 'display-options' }, [
           h('legend', title),
@@ -18,6 +32,7 @@ export function mountDisplayPlayground(element, preferences) {
               checked: current.value[key] === value,
               onChange: () => preferences.update({ [key]: value })
             }),
+            key === 'accent' ? h('span', { class: 'accent-chip', 'data-swatch': value, 'aria-hidden': 'true' }) : null,
             ' ' + label
           ])))
         ]);
@@ -25,7 +40,10 @@ export function mountDisplayPlayground(element, preferences) {
 
       return () => h('div', { class: 'display-controls' }, [
         radioGroup('background', 'Page background'),
-        radioGroup('textSize', 'Text size'),
+        radioGroup('accent', 'Accent color'),
+        scale('textSize', 'Page text size'),
+        scale('headingSize', 'Heading size'),
+        radioGroup('font', 'Typeface'),
         h('button', { type: 'button', class: 'outline', onClick: () => preferences.update(defaults) }, 'Reset display settings')
       ]);
     }
