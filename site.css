@@ -34,7 +34,7 @@ h3 { font-size: calc(clamp(1.55rem, calc(3.4vw * var(--text-scale)), 2.4rem) * v
 h4 { font-size: calc(1.8rem * var(--heading-scale)); }
 .intro { font-size: clamp(1.1rem, 2.3vw, 1.6rem); max-width: 31ch; margin: 1.4rem 0; }
 .hero-art { min-height: 18rem; position: relative; display: grid; align-items: center; justify-items: center; }
-.portrait { width: min(100%, 23rem); aspect-ratio: 1; object-fit: cover; border-radius: 48% 48% .6rem .6rem; border: 1px solid var(--accent); }
+.portrait { display: block; width: min(100%, 24rem); height: auto; }
 .portrait-keys { position: absolute; right: 4%; bottom: 3%; display: flex; gap: .4rem; transform: rotate(-9deg); }
 .portrait-keys kbd { background: var(--accent); color: var(--on-accent); border: 0; padding: .45em .65em; box-shadow: 0 4px 0 var(--key-shadow); font-size: 1.15rem; }
 .section { padding-block: clamp(3rem, 8vw, 6.2rem); }
@@ -380,10 +380,11 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
 .portrait-grid {
   position: absolute;
   z-index: -1;
-  inset: 8% -1% -3% 16%;
+  inset: 8% 0 0 12%;
   border: 1px solid var(--dark-line);
   border-radius: .5rem;
   background-image: linear-gradient(90deg, color-mix(in srgb, var(--on-dark) 16%, transparent) 1px, transparent 1px), linear-gradient(color-mix(in srgb, var(--on-dark) 16%, transparent) 1px, transparent 1px);
+  background-color: color-mix(in srgb, var(--accent) 16%, var(--navy));
   background-size: 1.45rem 1.45rem;
 }
 .hero-art { isolation: isolate; }
