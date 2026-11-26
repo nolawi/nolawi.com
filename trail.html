@@ -5,12 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Switchback · Nolawi Petros</title>
+<script>
+if (new URLSearchParams(location.search).has("embed")) document.documentElement.classList.add("embedded");
+</script>
 <style>
 :root { color-scheme: light; font: 100%/1.5 system-ui, sans-serif; color: #162c25; background: #f3eee0; }
 * { box-sizing: border-box; }
 body { margin: 0; }
 main { max-width: 42rem; padding: clamp(1rem, 5vw, 2.5rem); margin: auto; }
 h1 { font: 500 clamp(1.85rem, 5vw, 2.5rem)/1.1 Georgia, serif; margin: 0; }
+.embedded .trail-intro { display: none; }
+.embedded main { padding-block: .5rem; }
 fieldset { border: 0; padding: 0; margin: 1rem 0; min-inline-size: 0; }
 legend { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
 .routes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); gap: .5rem; }
@@ -30,8 +35,10 @@ output { display: block; min-height: 3em; }
 </head>
 <body>
 <main>
+<header class="trail-intro">
 <h1>Switchback</h1>
 <p>Pick a stop on an illustrated trail. Try the arrow keys once a stop has focus. Each choice gives you an icon, a name, and a clear selected state.</p>
+</header>
 <fieldset>
 <legend>Choose a trail stop</legend>
 <div class="routes">

@@ -407,3 +407,7 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
   color: #29231d;
   background: #f4eee5;
 }
+
+@media (min-width: 44rem) {
+  .saved-pen { height: 300px; }
+}
