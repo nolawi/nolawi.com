@@ -15,7 +15,8 @@ export function renderHeader(home) {
     const target = !home && href.startsWith('#') ? './' + href : href;
     return `<a href="${target}">${label}</a>`;
   }).join('');
-  return `<header class="mast wrap">
+  return `<div class="reading-progress" aria-hidden="true"><span></span></div>
+<header class="mast wrap" id="page-top" tabindex="-1">
 <a class="brand" href="./"><span aria-hidden="true">n.</span> Nolawi</a>
 <nav aria-label="Main">${nav}<a class="direct-linkedin" href="https://www.linkedin.com/in/nolawi/"><span aria-hidden="true">in</span> LinkedIn</a></nav>
 <div class="display-toolbar" id="display-toolbar" role="group" aria-label="Quick display settings" hidden>
@@ -40,7 +41,8 @@ export function renderHeader(home) {
   <p>These settings update the whole site as you try them.</p>
   <div id="dialog-display-playground"><p>Use the quick controls in the header while the full settings load.</p></div>
 </dialog>
-</header>`;
+</header>
+<a class="back-to-top" href="#page-top" hidden><span aria-hidden="true">↑</span> Back to top</a>`;
 }
 
 function renderOptions(values) {

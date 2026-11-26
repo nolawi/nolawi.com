@@ -2,8 +2,10 @@ import '../themes.css';
 import '../site.css';
 import { initializePreferences } from './preferences.js';
 import { mountDisplayToolbar } from './display-toolbar.js';
+import { mountPageMotion } from './page-motion.js';
 
 const preferences = initializePreferences();
+mountPageMotion();
 const toolbar = document.querySelector('#display-toolbar');
 if (toolbar) mountDisplayToolbar(toolbar, preferences);
 

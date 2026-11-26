@@ -9,9 +9,13 @@ export function mountRecordsExplorer(element) {
       const messages = ref([]);
       const filtered = computed(() => records.filter(record => !status.value || record.status === status.value));
       const examples = ['Show open records in North', 'What is SR-112?', 'How much will this cost?'];
+      const statusCounts = ['Open', 'In review', 'Closed'].map(value => ({
+        value,
+        total: records.filter(record => record.status === value).length
+      }));
 
-      function ask() {
-        const query = question.value.trim();
+      function ask(value = question.value) {
+        const query = value.trim();
         if (!query) return;
         const sources = answerQuestion(query);
         const response = sources === null
@@ -39,6 +43,11 @@ export function mountRecordsExplorer(element) {
       return () => h('div', { class: 'records-grid' }, [
         h('section', { class: 'system-card', 'aria-labelledby': 'table-heading' }, [
           h('h3', { id: 'table-heading' }, 'Browse the table'),
+          h('div', { class: 'status-buttons', role: 'group', 'aria-label': 'Filter records by status' },
+            statusCounts.map(({ value, total }) => h('button', {
+              type: 'button', class: 'outline', 'aria-pressed': status.value === value,
+              onClick: () => { status.value = status.value === value ? '' : value; }
+            }, [h('strong', String(total)), ' ' + value]))),
           h('label', { for: 'record-status' }, 'Filter by status'),
           h('select', {
             id: 'record-status',
@@ -65,8 +74,7 @@ export function mountRecordsExplorer(element) {
           h('p', 'A local simulation with preset rules and fictional data. Questions stay in this browser.'),
           h('div', { class: 'record-examples' }, examples.map(example => h('button', {
             class: 'outline', type: 'button', onClick: () => {
-              question.value = example;
-              element.querySelector('#record-question')?.focus();
+              ask(example);
             }
           }, example))),
           h('form', {
@@ -81,6 +89,14 @@ export function mountRecordsExplorer(element) {
               h('button', { class: 'button', type: 'submit' }, 'Ask')
             ])
           ]),
+          h('button', {
+            type: 'button', class: 'outline clear-chat', 'aria-disabled': !messages.value.length,
+            onClick: () => {
+              if (!messages.value.length) return;
+              messages.value = [];
+              element.querySelector('#record-question')?.focus();
+            }
+          }, 'Clear conversation'),
           h('div', { role: 'log', 'aria-label': 'Conversation', class: 'record-conversation' },
             messages.value.map((message, index) => h('article', { key: index }, [
               h('p', [h('strong', 'You: '), message.query]),
