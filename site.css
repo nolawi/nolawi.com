@@ -231,7 +231,6 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
 .hero-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); gap: .65rem; margin-top: 1rem; }
 .hero-examples a { display: grid; align-content: start; gap: .2rem; padding: .55rem .65rem; border-top: 1px solid var(--dark-line); }
 .hero-examples span { font-size: .875rem; text-decoration: none; }
-.ai-overview { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-block: 1rem; }
 .records-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 1rem; }
 .records-grid label { display: block; font-weight: 700; margin-block: .75rem .3rem; }
 .records-grid select, .record-input input {
@@ -252,7 +251,7 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
 .record-table th small { display: block; }
 .record-table tr:focus { outline: 2px solid var(--focus); outline-offset: 2px; }
 .record-conversation article { border-top: 1px solid var(--line); margin-top: .75rem; }
-@media (max-width: 52rem) { .ai-overview, .records-grid { grid-template-columns: 1fr; gap: .8rem; } }
+@media (max-width: 52rem) { .records-grid { grid-template-columns: 1fr; gap: .8rem; } }
 
 .display-toolbar:not([hidden]) {
   flex-basis: 100%;

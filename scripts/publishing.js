@@ -114,7 +114,9 @@ export function injectPublishing(html, filename) {
     return html.replace('</head>', `<link rel="canonical" href="${escape(absolute('ai-component.html'))}"></head>`);
   }
   const home = filename === 'index.html';
-  const list = home ? [...entries.filter(a => a.featured), ...entries.filter(a => !a.featured && a.path), ...entries.filter(a => !a.featured && !a.path)].slice(0, 5) : entries;
+  // The homepage already links to this essay in its AI section.
+  const homeEntries = entries.filter(article => article.id !== 'ai-component');
+  const list = home ? [...homeEntries.filter(a => a.featured), ...homeEntries.filter(a => !a.featured && a.path), ...homeEntries.filter(a => !a.featured && !a.path)].slice(0, 5) : entries;
   const social = '<ul class="social-highlights" aria-label="Selected posts">' +
     [...data.socialPosts].sort((a, b) => b.date.localeCompare(a.date)).map(post =>
       `<li><a href="${escape(post.url)}">${escape(post.title)}</a><time datetime="${post.date}">${post.date}</time></li>`).join('') + '</ul>';
