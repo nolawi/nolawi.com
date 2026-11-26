@@ -154,23 +154,40 @@ dialog.large-type { font-size: 1.25rem; }
 .systems-grid, .profile-grid { display: grid; gap: 1rem; }
 .systems-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr)); margin-bottom: 2.5rem; }
 .system-card { border: 1px solid var(--line); border-radius: .65rem; background: var(--paper); padding: clamp(1rem, 3vw, 1.75rem); }
+/* Compact component illustrations for the design-system cards. */
 .system-visual {
-  min-height: clamp(7rem, 20vw, 12rem);
+  height: 5.3rem;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: .5rem;
-  padding: clamp(.75rem, 3vw, 1.5rem);
-  margin-bottom: 1.25rem;
+  gap: .35rem;
+  padding: .45rem;
+  margin-bottom: .85rem;
   background: var(--navy);
+  border: 1px solid var(--dark-line);
   border-radius: .45rem;
 }
-.system-visual span { border: 1px solid var(--dark-line); border-radius: .3rem; }
-.system-visual span:first-child { grid-row: span 2; }
-.system-visual span:nth-child(2) { grid-column: span 2; background: var(--accent); border-color: var(--accent); }
-.uswds-visual span:first-child { background: var(--accent); border-color: var(--accent); }
-.uswds-visual span:nth-child(2) { background: var(--dark-panel); border-color: var(--dark-line); }
-.uswds-visual span:last-child { border-radius: 50%; width: 50%; justify-self: end; }
+.system-visual .diagram-content, .system-visual .diagram-sidebar { min-width: 0; display: grid; gap: .22rem; }
+.delano-visual { grid-template-columns: minmax(1.75rem, 1fr) minmax(0, 5fr); }
+.diagram-sidebar { align-content: center; padding: .25rem; background: var(--dark-panel); border-radius: .25rem; }
+.diagram-sidebar i, .diagram-lines i, .diagram-banner i { height: .16rem; border-radius: 1rem; background: var(--dark-line); }
+.diagram-sidebar i:nth-child(2) { background: var(--accent); }
+.diagram-top, .diagram-widgets, .diagram-fields, .diagram-banner { display: flex; align-items: center; gap: .25rem; }
+.diagram-top i { height: .35rem; width: .35rem; border-radius: 50%; background: var(--dark-line); }
+.diagram-top i:first-child { background: var(--accent); }
+.diagram-widgets i, .diagram-fields i { flex: 1; height: 1.25rem; border: 1px solid var(--dark-line); border-radius: .2rem; background: var(--dark-panel); }
+.diagram-widgets i:nth-child(2), .diagram-fields i:last-child { background: var(--accent); border-color: var(--accent); }
+.diagram-lines { display: grid; align-content: center; gap: .2rem; }
+.diagram-lines i:nth-child(2) { width: 65%; }
+.uswds-visual { grid-template-rows: auto minmax(0, 1fr); }
+.diagram-banner { padding: .25rem; background: var(--dark-panel); border-radius: .22rem; }
+.diagram-banner i:first-child { width: 20%; background: var(--accent); }
+.diagram-banner i:last-child { width: 30%; }
+.uswds-visual .diagram-content { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.system-card:has(.system-visual):is(:hover, :focus-within) { border-color: var(--focus); }
+.system-card:has(.system-visual):is(:hover, :focus-within) .system-visual { border-color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .system-visual i { transition: transform .18s ease; }
+  .system-card:is(:hover, :focus-within) :is(.diagram-widgets, .diagram-fields) i:nth-child(2) { transform: translateY(-.16rem); }
+}
 .profile-grid { list-style: none; padding: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
 .profile-grid a { display: grid; gap: .3rem; height: 100%; padding: 1rem; border: 1px solid var(--line); border-radius: .5rem; text-decoration: none; }
 .profile-grid a:hover { background: var(--wash); }
@@ -344,3 +361,7 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
 .target-buttons[data-layout="roomy"] button { width: 3rem; height: 3rem; }
 .target-feedback { min-height: 1.6em; margin-bottom: 0; }
 @media (max-width: 48rem) { .target-lab { grid-template-columns: 1fr; } }
+
+.social-highlights { list-style: none; padding: 0; margin: .85rem 0; }
+.social-highlights li { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .25rem .75rem; padding: .45rem 0; border-top: 1px solid var(--line); }
+.social-highlights time { white-space: nowrap; }
