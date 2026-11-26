@@ -1,9 +1,9 @@
-import { options } from './preferences.js';
+import { defaults, options } from './preferences.js';
 
 export function mountDisplayToolbar(toolbar, preferences) {
   const toggle = toolbar.querySelector('#theme-toggle');
   const font = toolbar.querySelector('#toolbar-font');
-  const accent = toolbar.querySelector('#toolbar-accent');
+  const accents = [...toolbar.querySelectorAll('[name=toolbar-accent]')];
   const sizeOutput = toolbar.querySelector('#toolbar-text-size');
   const steppers = [...toolbar.querySelectorAll('[data-text-step]')];
   const open = toolbar.querySelector('#open-display-settings');
@@ -17,7 +17,7 @@ export function mountDisplayToolbar(toolbar, preferences) {
     current = settings;
     toggle.setAttribute('aria-checked', String(settings.theme === 'dark'));
     font.value = settings.font;
-    accent.value = settings.accent;
+    accents.forEach(input => { input.checked = input.value === settings.accent; });
     sizeOutput.value = options.textSize[settings.textSize];
     steppers.forEach(button => {
       const next = sizes.indexOf(settings.textSize) + Number(button.dataset.textStep);
@@ -29,7 +29,10 @@ export function mountDisplayToolbar(toolbar, preferences) {
     preferences.update({ theme: current.theme === 'dark' ? 'light' : 'dark' });
   });
   font.addEventListener('change', () => preferences.update({ font: font.value }));
-  accent.addEventListener('change', () => preferences.update({ accent: accent.value }));
+  accents.forEach(input => input.addEventListener('change', () => {
+    if (input.checked) preferences.update({ accent: input.value });
+  }));
+  toolbar.querySelector('#quick-display-reset').addEventListener('click', () => preferences.update(defaults));
   steppers.forEach(button => button.addEventListener('click', () => {
     const next = sizes[sizes.indexOf(current.textSize) + Number(button.dataset.textStep)];
     if (next) preferences.update({ textSize: next });

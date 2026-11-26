@@ -6,7 +6,8 @@ const links = [
   ['Accessibility', '#lab-title'],
   ['AI integrations', '#ai-work'],
   ['Writing', 'writing.html'],
-  ['About', 'about.html']
+  ['About', 'about.html'],
+  ['Contact me', '#contact']
 ];
 
 export function renderHeader(home) {
@@ -16,18 +17,19 @@ export function renderHeader(home) {
   }).join('');
   return `<header class="mast wrap">
 <a class="brand" href="./"><span aria-hidden="true">n.</span> Nolawi</a>
-<nav aria-label="Main">${nav}</nav>
+<nav aria-label="Main">${nav}<a class="direct-linkedin" href="https://www.linkedin.com/in/nolawi/"><span aria-hidden="true">in</span> LinkedIn</a></nav>
 <div class="display-toolbar" id="display-toolbar" role="group" aria-label="Quick display settings" hidden>
   <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false">
-    <span>Dark mode</span><span class="switch-track" aria-hidden="true"></span>
+    <span class="toolbar-icon" aria-hidden="true">◐</span><span>Dark mode</span><span class="switch-track" aria-hidden="true"></span>
   </button>
-  <label class="toolbar-select">Font <select id="toolbar-font">${renderOptions(options.font)}</select></label>
-  <label class="toolbar-select">Accent <select id="toolbar-accent">${renderOptions(options.accent)}</select></label>
+  <label class="toolbar-select"><span class="toolbar-icon" aria-hidden="true">Aa</span> Font <select id="toolbar-font">${renderOptions(options.font)}</select></label>
+  <fieldset class="toolbar-accents"><legend>Accent</legend><div class="toolbar-swatches">${renderSwatches()}</div></fieldset>
   <div class="type-stepper" role="group" aria-label="Page text size">
     <button type="button" data-text-step="-1" aria-label="Decrease page text size">A−</button>
     <output id="toolbar-text-size">100%</output>
     <button type="button" data-text-step="1" aria-label="Increase page text size">A+</button>
   </div>
+  <button id="quick-display-reset" type="button" class="outline">Reset</button>
   <button id="open-display-settings" class="display-open" type="button" aria-haspopup="dialog">Make it easier to read</button>
 </div>
 <dialog class="display-dialog" id="display-settings" aria-labelledby="display-settings-title">
@@ -44,5 +46,11 @@ export function renderHeader(home) {
 function renderOptions(values) {
   return Object.entries(values).map(([value, label]) =>
     `<option value="${value}">${label}</option>`
+  ).join('');
+}
+
+function renderSwatches() {
+  return Object.entries(options.accent).map(([value, label]) =>
+    `<label title="${label}"><input type="radio" name="toolbar-accent" value="${value}" aria-label="${label}"><span data-swatch="${value}" aria-hidden="true"></span></label>`
   ).join('');
 }

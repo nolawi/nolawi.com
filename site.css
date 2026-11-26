@@ -278,3 +278,22 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
   .display-toolbar { order: 2; }
   .display-open { margin-inline-start: 0; }
 }
+
+.company-link span { display: inline-block; font: .6em/1 system-ui, sans-serif; vertical-align: .25em; margin-inline-start: .3em; }
+.timeline .company-link { text-decoration-thickness: 1px; }
+.direct-linkedin { display: inline-flex; align-items: center; gap: .35rem; }
+.direct-linkedin span { display: inline-grid; place-items: center; width: 1.35rem; height: 1.35rem; font-size: .8rem; font-weight: 800; background: var(--navy); color: var(--on-dark); border: 1px solid var(--dark-line); border-radius: .2rem; }
+.toolbar-icon { font-weight: 750; }
+.toolbar-accents { display: flex; align-items: center; min-width: 0; border: 0; margin: 0; padding: 0; }
+.toolbar-accents legend { float: inline-start; padding: 0; margin-inline-end: .35rem; }
+.toolbar-swatches { display: flex; gap: .15rem; }
+.toolbar-swatches label { display: grid; place-items: center; width: 1.8rem; height: 2.1rem; cursor: pointer; position: relative; }
+.toolbar-swatches input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.toolbar-swatches span { width: 1.2rem; height: 1.2rem; border: 1px solid var(--line); border-radius: 50%; }
+.toolbar-swatches input:checked + span { outline: 2px solid var(--ink); outline-offset: 2px; }
+.toolbar-swatches input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 3px; }
+.contact-card { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .75rem 1.5rem; }
+.contact-card p { margin-bottom: 0; }
+@media (forced-colors: active) {
+  .toolbar-swatches span { forced-color-adjust: none; }
+}
