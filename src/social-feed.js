@@ -44,7 +44,8 @@ function renderTimeline(host, profile) {
 
   return new Promise((resolve, reject) => {
     const observer = new MutationObserver(() => {
-      if (host.querySelector('iframe')) {
+      const frame = host.querySelector('iframe');
+      if (frame && frame.offsetHeight > 0 && getComputedStyle(frame).visibility !== 'hidden') {
         clearTimeout(timeout);
         observer.disconnect();
         resolve();
@@ -54,7 +55,7 @@ function renderTimeline(host, profile) {
       observer.disconnect();
       reject(new Error('X did not return an embed.'));
     }, 10000);
-    observer.observe(host, { childList: true, subtree: true });
+    observer.observe(host, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'height', 'width', 'hidden'] });
     window.twttr.widgets.load(host);
   });
 }
