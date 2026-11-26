@@ -23,3 +23,8 @@ const socialFeed = document.querySelector('[data-social-feed]');
 if (socialFeed) {
   import('./social-feed.js').then(({ mountSocialFeed }) => mountSocialFeed(socialFeed));
 }
+
+const targetLab = document.querySelector('[data-target-lab]');
+if (targetLab) {
+  import('./target-lab.js').then(({ mountTargetLab }) => mountTargetLab(targetLab));
+}

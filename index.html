@@ -25,7 +25,7 @@
 </nav>
 <div class="hero-examples">
 <a href="delano.html"><strong>Delano</strong><span>Angular UI kit</span></a>
-<a href="#display-title"><strong>Theme Playground</strong><span>Make this site easier to read</span></a>
+<a href="#display-title"><strong>Tap targets</strong><span>Try tight and roomy layouts</span></a>
 <a href="#records-explorer"><strong>Records Explorer</strong><span>Try chat alongside a table</span></a>
 </div>
 </div>
@@ -72,7 +72,7 @@
 <section class="section wrap" aria-labelledby="lab-title">
 <div class="playground-heading">
 <nav class="demo-index" aria-label="Jump to an accessibility demo">
-<a href="#display-title"><span aria-hidden="true">◐</span> Display</a>
+<a href="#display-title"><span aria-hidden="true">◎</span> Tap targets</a>
 <a href="#focus-title"><span aria-hidden="true">⌨</span> Keyboard focus</a>
 <a href="#contrast-title"><span aria-hidden="true">◑</span> Contrast</a>
 <a href="#switchback-title"><span aria-hidden="true">↝</span> Switchback</a>
@@ -80,9 +80,25 @@
 <h2 id="lab-title"><span class="heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M4 9h16m-8 0v6m0-1-4 7m4-7 4 7"/></svg></span> Accessibility playground</h2>
 <p>I helped bring accessibility testing into the way we shipped at AbbVie. These experiments let you try some of the same ideas with a keyboard, mouse, or touch.</p>
 </div>
-<section class="display-launch" id="display-title" aria-labelledby="display-launch-title">
-<div><h3 id="display-launch-title">Make it easier to read</h3><p>Try a different background, font, or text size. Your choices carry across the site.</p></div>
-<button type="button" class="button" data-open-display aria-haspopup="dialog" hidden>Open display settings</button>
+<section class="target-lab system-card" id="display-title" aria-labelledby="target-title" data-target-lab>
+<div>
+<p class="eyebrow">Accessibility experiment</p>
+<h3 id="target-title">Give buttons room.</h3>
+<p>Try hitting the named button in both layouts. More room makes it easier to tap the right thing, especially one-handed.</p>
+</div>
+<div class="target-panel">
+<fieldset><legend>Button layout</legend>
+<label><input type="radio" name="target-layout" value="tight" checked> Tight</label>
+<label><input type="radio" name="target-layout" value="roomy"> Roomy</label>
+</fieldset>
+<p id="target-instruction">Tap <strong>Circle</strong>.</p>
+<div class="target-buttons" role="group" aria-labelledby="target-instruction" data-layout="tight">
+<button type="button" data-shape="Square" aria-label="Square">■</button>
+<button type="button" data-shape="Circle" aria-label="Circle">●</button>
+<button type="button" data-shape="Triangle" aria-label="Triangle">▲</button>
+</div>
+<p class="target-feedback" role="status"></p>
+</div>
 </section>
 <div class="playground">
 <section class="lab" aria-labelledby="focus-title">
@@ -171,7 +187,7 @@
 <section class="social-feed system-card" aria-labelledby="social-title" data-social-feed>
 <h3 id="social-title">Off the clock on X</h3>
 <p><a href="https://x.com/nolawi">Open @nolawi on X</a></p>
-<button class="outline" type="button" hidden>Load X timeline</button>
+<button class="outline" type="button" hidden>Show recent posts</button>
 <p role="status"></p>
 <div data-feed-content></div>
 </section>

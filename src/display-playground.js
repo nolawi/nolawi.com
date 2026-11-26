@@ -43,8 +43,7 @@ export function mountDisplayPlayground(element, preferences) {
         radioGroup('accent', 'Accent color'),
         scale('textSize', 'Page text size'),
         scale('headingSize', 'Heading size'),
-        radioGroup('font', 'Typeface'),
-        h('button', { type: 'button', class: 'outline', onClick: () => preferences.update(defaults) }, 'Reset')
+        radioGroup('font', 'Typeface')
       ]);
     }
   }).mount(element);

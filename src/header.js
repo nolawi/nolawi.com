@@ -30,7 +30,6 @@ export function renderHeader(home) {
     <output id="toolbar-text-size">100%</output>
     <button type="button" data-text-step="1" aria-label="Increase page text size">A+</button>
   </div>
-  <button id="quick-display-reset" type="button" class="outline">Reset</button>
   <button id="open-display-settings" class="display-open" type="button" aria-haspopup="dialog">Make it easier to read</button>
 </div>
 <dialog class="display-dialog" id="display-settings" aria-labelledby="display-settings-title">
@@ -38,8 +37,7 @@ export function renderHeader(home) {
     <h2 id="display-settings-title" tabindex="-1" autofocus>Make it easier to read</h2>
     <form method="dialog"><button class="outline" type="submit" aria-label="Close display settings"><span aria-hidden="true">×</span></button></form>
   </div>
-  <p>These settings update the whole site as you try them.</p>
-  <div id="dialog-display-playground"><p>Use the quick controls in the header while the full settings load.</p></div>
+  <div id="dialog-display-playground"><p>Loading settings…</p></div>
 </dialog>
 </header>
 <a class="back-to-top" href="#page-top" hidden><span aria-hidden="true">↑</span> Back to top</a>`;

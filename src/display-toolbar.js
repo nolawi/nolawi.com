@@ -1,4 +1,4 @@
-import { defaults, options } from './preferences.js';
+import { options } from './preferences.js';
 
 export function mountDisplayToolbar(toolbar, preferences) {
   const toggle = toolbar.querySelector('#theme-toggle');
@@ -12,7 +12,6 @@ export function mountDisplayToolbar(toolbar, preferences) {
   const sizes = Object.keys(options.textSize);
   let current;
   let panelLoaded = false;
-  let opener = open;
 
   preferences.subscribe(settings => {
     current = settings;
@@ -33,14 +32,12 @@ export function mountDisplayToolbar(toolbar, preferences) {
   accents.forEach(input => input.addEventListener('change', () => {
     if (input.checked) preferences.update({ accent: input.value });
   }));
-  toolbar.querySelector('#quick-display-reset').addEventListener('click', () => preferences.update(defaults));
   steppers.forEach(button => button.addEventListener('click', () => {
     const next = sizes[sizes.indexOf(current.textSize) + Number(button.dataset.textStep)];
     if (next) preferences.update({ textSize: next });
   }));
 
-  async function openSettings(event) {
-    opener = event.currentTarget;
+  async function openSettings() {
     dialog.showModal();
     if (panelLoaded) return;
     panelLoaded = true;
@@ -52,10 +49,7 @@ export function mountDisplayToolbar(toolbar, preferences) {
       panel.textContent = 'The full settings could not load. Close this panel and try again.';
     }
   }
-  for (const trigger of [open, ...document.querySelectorAll('[data-open-display]')]) {
-    trigger.hidden = false;
-    trigger.addEventListener('click', openSettings);
-  }
-  dialog.addEventListener('close', () => opener.focus());
+  open.addEventListener('click', openSettings);
+  dialog.addEventListener('close', () => open.focus());
   toolbar.hidden = false;
 }
