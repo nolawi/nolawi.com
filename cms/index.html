@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nolawi · Publishing studio</title>
+<link rel="stylesheet" href="editor.css">
+<script type="module" src="editor.js"></script>
+</head>
+<body>
+<header><div><h1>Publishing studio</h1><p>Write, preview, and publish on this computer.</p></div><a href="/preview/">Open portfolio preview</a></header>
+<main>
+<section aria-labelledby="article-title">
+<h2 id="article-title">Articles</h2>
+<form id="article">
+<label>Choose article <select id="entries"><option value="">New article</option></select></label>
+<div class="fields">
+<label>Title <input name="title" required></label>
+<label>Slug <input name="id" required pattern="[a-z0-9]+(-[a-z0-9]+)*"></label>
+<label>Format <select name="format"><option>Essay</option><option>Article</option><option>Note</option></select></label>
+<label>Publish date <input type="date" name="date"></label>
+</div>
+<label>Summary <textarea name="description" rows="2"></textarea></label>
+<fieldset><legend>Topics</legend><div id="topics"></div></fieldset>
+<label>Body (Markdown) <textarea name="body" rows="12"></textarea></label>
+<label class="inline"><input type="checkbox" name="featured"> Feature on homepage</label>
+<div class="actions">
+<button type="button" id="preview">Preview draft</button>
+<button type="submit" value="draft">Save draft</button>
+<button type="submit" value="publish">Publish to local preview</button>
+</div>
+<p role="status" id="article-status"></p>
+</form>
+<iframe id="draft-preview" title="Article draft preview" sandbox hidden></iframe>
+</section>
+<section aria-labelledby="post-title">
+<h2 id="post-title">Featured X posts</h2>
+<ul id="social-posts"></ul>
+<form id="social">
+<label>Post title <input name="title" required></label>
+<label>Published X permalink <input type="url" name="url" required></label>
+<label>Post date <input type="date" name="date" required></label>
+<button>Add to local preview</button>
+<p role="status" id="social-status"></p>
+</form>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,118 @@
+{
+  "topics": [
+    {
+      "id": "ai-integration",
+      "label": "AI Integration"
+    },
+    {
+      "id": "user-experience",
+      "label": "UX"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "design-systems",
+      "label": "Design Systems"
+    },
+    {
+      "id": "ux-testing",
+      "label": "UX Testing"
+    }
+  ],
+  "articles": [
+    {
+      "title": "Make the source part of the answer",
+      "date": "2026-11-25",
+      "featured": true,
+      "id": "ai-checkable-answers",
+      "status": "published",
+      "format": "Essay",
+      "topics": [
+        "ai-integration",
+        "user-experience"
+      ],
+      "publication": "Nolawi",
+      "path": "ai-checkable-answers.html",
+      "description": "Nolawi on designing chat replies people can verify against application records.",
+      "body": "If I ask an app which requests are open, I want to see the rows it found. Five lines of confident prose still leave me with work to do if I can’t get to the records.\n\n## Give me somewhere to go\n\nSay I’m checking open service requests in the North region. A useful reply shows the region, the status, and the matching IDs. I can open a record and pick up the work there. If it turns out I meant South, I can change the filter without starting over.\n\nThe table and the conversation should agree about what they found. If a reply says two records matched, I should be able to open both. If there’s a limit or a filter I didn’t ask for, make it visible in the interface.\n\n## A reply can say it doesn’t know\n\nThen I ask why one of those requests is still open. The record may show a status without giving a reason. In that case I’d show the row and say the reason isn’t recorded. That’s a handoff back to the app and the people who know the work.\n\n## Try it without a mouse\n\nI’d test the whole trip by keyboard. Can I ask the question, find the new reply, open the source, and return to the conversation? Each step should be easy to find and should have a clear place for focus.\n\n[Try the Records Explorer](./#records-explorer) · [Read the first article on chat interfaces](ai-component.html)"
+    },
+    {
+      "title": "When your app gets a chat interface",
+      "id": "ai-component",
+      "status": "published",
+      "format": "Essay",
+      "topics": [
+        "ai-integration",
+        "accessibility",
+        "user-experience"
+      ],
+      "publication": "Nolawi",
+      "path": "ai-component.html",
+      "description": "How to design accessible chat and connect a language model to application records through an API.",
+      "body": "I connect government applications to language models. The question I keep coming back to is what happens after someone hits Send. Can they see where the answer came from? Can they get to the actual record?\n\n## Start with the question people already have\n\nImagine a person looking for open service requests in the North region. If they know the region and status, two filters make the list easy to scan. If they don’t know what the app calls those fields, a question in plain language can get them to a useful view. I’d put both in the same interface and let people move between them without losing their place.\n\n## Let the app retrieve the records\n\nI’d give the model a small read-only tool with a defined input schema, like `find_records({ region, status })`. The model can propose the lookup. The server validates the inputs, checks the signed-in user’s existing permissions, and calls the records API. The model gets just the fields needed for the answer. The same permission checks apply whether someone uses chat or opens a record from the table. [OpenAI function calling guide](https://developers.openai.com/api/docs/guides/function-calling).\n\nI’d keep coding tools such as Codex on the development side of that work. The user-facing feature comes from how the application, data API, permissions, and model fit together.\n\n## Make the answer easy to check\n\nI’d show the filters that were applied and link each claim about a record to the row or detail page it came from. If there are zero matches, say so. If the records don’t contain costs or dates, explain that. A fluent answer can sound certain even when its sources are weak, so I’d test both supported and unanswerable questions. [NIST’s Generative AI Profile](https://doi.org/10.6028/NIST.AI.600-1).\n\n## Design for the keyboard and screen reader\n\nGive the question field a visible label and a clear submit action. Keep focus in the composer when an answer arrives, and announce the new reply as a complete message. A labeled conversation log gives assistive technology a place to find new messages. Source links should be tabbable and lead somewhere useful. I’d test those paths with a keyboard, a screen reader, and a narrow viewport. [W3C guidance on status messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html) · [W3C technique for chat logs](https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA23).\n\n## Try the same records both ways\n\nThe portfolio demo uses fictional service requests and local rules. Try “Show open records in North,” open the source row, then ask what the repair will cost. The table shows what the app actually has, and the reply makes the missing information visible.\n\n[Try the Records Explorer](./#records-explorer)"
+    },
+    {
+      "title": "The Future of Accessibility: How AI is Redefining Inclusion",
+      "url": "https://medium.com/@nolawi/the-future-of-accessibility-how-ai-is-redefining-inclusion-86b226f2621a",
+      "date": "2022-12-16",
+      "id": "future-of-accessibility",
+      "status": "published",
+      "format": "Essay",
+      "topics": [
+        "ai-integration",
+        "accessibility"
+      ],
+      "publication": "Medium",
+      "access": "Members only"
+    },
+    {
+      "title": "Manual UX testing",
+      "url": "https://medium.com/@nolawi/manual-ux-testing-6005fd16ed3d",
+      "date": "2019-09-16",
+      "id": "manual-ux-testing",
+      "status": "published",
+      "format": "Article",
+      "topics": [
+        "ux-testing",
+        "user-experience"
+      ],
+      "publication": "Medium"
+    },
+    {
+      "title": "Where is your Style Guide?",
+      "url": "https://medium.com/@nolawi/where-is-your-style-guide-75956e73e19b",
+      "date": "2019-03-11",
+      "id": "style-guide",
+      "status": "published",
+      "format": "Article",
+      "topics": [
+        "design-systems"
+      ],
+      "publication": "Medium"
+    }
+  ],
+  "socialPosts": [
+    {
+      "url": "https://x.com/nolawi/status/2125757301457916200",
+      "title": "Chat replies should show the records they found",
+      "date": "2026-11-25"
+    },
+    {
+      "url": "https://x.com/nolawi/status/1978503347788210322",
+      "title": "On AI code that’s almost right",
+      "date": "2025-10-15"
+    },
+    {
+      "url": "https://x.com/nolawi/status/1896631666023784699",
+      "title": "My method for peeling garlic",
+      "date": "2025-03-03"
+    },
+    {
+      "url": "https://x.com/nolawi/status/1894038007310606664",
+      "title": "What counts as progress in front-end work?",
+      "date": "2025-02-24"
+    }
+  ]
+}

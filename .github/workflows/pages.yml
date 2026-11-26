@@ -2,7 +2,7 @@ name: Build and deploy portfolio
 
 on:
   push:
-    branches: [main]
+    branches: [main, "codex/publishing-system"]
   workflow_dispatch:
 
 permissions:
@@ -24,11 +24,22 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+        env:
+          SITE_URL: ${{ github.ref == 'refs/heads/main' && vars.SITE_URL || '' }}
+          SITE_INDEXABLE: ${{ github.ref == 'refs/heads/main' && vars.SITE_INDEXABLE || '0' }}
+          SITE_ANALYTICS_TOKEN: ${{ github.ref == 'refs/heads/main' && vars.SITE_ANALYTICS_TOKEN || '' }}
+      - if: github.ref != 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-preview
+          path: dist
+      - if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:
