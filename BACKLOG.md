@@ -15,6 +15,15 @@
 - [x] Improve the atomic design demo so it is easier to see which pieces carry forward into the filter and directory. Keep Delano and the Slides.com talk close by.
 - [x] Review the demo enhancements on phone and desktop, including keyboard use, then publish that batch.
 
+## Next demo and homepage pass
+
+- [ ] **Atomic Design first.** Make each assembly step visibly different while keeping reused parts recognizable. Show what gets added at each step, and connect the example to a real pattern in Delano.
+- [ ] **Text contrast.** Add a clearer before-and-after comparison with the ratio and regular-text pass threshold visible. Show how changing foreground and background colors affects the result.
+- [ ] **Typography.** Add a tracking control for spacing across all letters and a kerning comparison for individual letter pairs. Use the same sample to make the difference easy to see.
+- [ ] **AI demo.** Review the path from a question to the source record and make the homepage sample quicker to try.
+- [ ] **Homepage accessibility.** Review the demo disclosures, skip link, keyboard order, focus visibility, and enlarged-text layout.
+- [ ] **Header on scroll.** Try a compact header that follows readers as they scroll. Check mobile, in-page jumps, and keyboard focus so the header does not cover them.
+
 ## Standalone follow-ups
 
 - [ ] Analytics. Use the existing Cloudflare dashboard to review the homepage, Writing, and each feature page by path. Decide whether we need to measure demo interactions separately.
