@@ -35,7 +35,7 @@ export const themeSettings = {
   },
   titleFont: { default: 'classic', values: {
     classic: { label: 'Editorial', tokens: { 'heading-font': 'Georgia, serif' } },
-    sans: { label: 'System sans', tokens: { 'heading-font': 'system-ui, sans-serif' } },
+    sans: { label: 'Sans', tokens: { 'heading-font': 'system-ui, sans-serif' } },
     serif: { label: 'Serif', tokens: { 'heading-font': 'Palatino, "Palatino Linotype", serif' } }
   }},
   font: { default: 'classic', values: {

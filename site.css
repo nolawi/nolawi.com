@@ -635,10 +635,11 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
 }
 .code-activity {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .75rem;
   margin-top: 1rem;
 }
+@media (max-width: 48rem) { .code-activity { grid-template-columns: minmax(0, 1fr); } }
 .code-activity .system-card { padding: 1rem; }
 .code-activity h3 { font-size: calc(1.15rem * var(--heading-scale)); }
 .code-membership, .code-history { font-size: .875rem; }
@@ -830,10 +831,9 @@ html { scroll-padding-top: calc(var(--sticky-header-height, 4rem) + .8rem); }
 }
 .theme-drawer-heading {
   display: flex;
-  flex: 1 0 calc(100% + 2 * var(--theme-padding-inline));
   justify-content: flex-end;
   align-items: center;
-  margin: calc(-1 * var(--theme-padding-block)) calc(-1 * var(--theme-padding-inline)) 0;
+  margin-inline-end: calc(-1 * var(--theme-padding-inline));
 }
 .theme-drawer-heading .theme-tab:not([hidden]) {
   position: relative;
@@ -854,11 +854,26 @@ html { scroll-padding-top: calc(var(--sticky-header-height, 4rem) + .8rem); }
     to { clip-path: inset(0 -1rem -1.5rem); }
   }
 }
-@media (max-width: 48rem) {
-  .site-header .mast nav { width: 100%; margin: 0; font-size: .85rem; }
+@media (min-width: 64.01rem) {
+  .site-header { --theme-padding-block: 0rem; --theme-padding-inline: .85rem; }
+  .theme-bar .display-toolbar { width: 100%; padding-block-end: .18rem; }
+  .theme-drawer-heading { order: 1; margin-inline-start: auto; }
+}
+@media (max-width: 64rem) {
   .site-header { --theme-padding-block: .35rem; --theme-padding-inline: .5rem; }
-  .site-header .mast, .site-header .theme-bar { width: calc(100% - 1.5rem); }
-  .theme-bar .display-toolbar { gap: .3rem .45rem; }
+  .theme-bar .display-toolbar:not([hidden]) {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr) max-content;
+    grid-template-areas: "dark title tab" "serif accent size";
+    gap: .3rem .45rem;
+  }
+  .theme-drawer-heading { grid-area: tab; align-self: start; margin-block-start: calc(-1 * var(--theme-padding-block)); }
+  .display-toolbar #theme-toggle { grid-area: dark; }
+  .display-toolbar .font-switch { grid-area: serif; }
+  .display-toolbar .theme-select { grid-area: title; }
+  .display-toolbar .toolbar-accents { grid-area: accent; }
+  .display-toolbar .type-stepper { grid-area: size; }
+  .display-toolbar .theme-switch, .display-toolbar .theme-select { justify-self: start; }
   .display-toolbar .theme-control-caption {
     position: absolute;
     inline-size: 1px;
@@ -869,7 +884,12 @@ html { scroll-padding-top: calc(var(--sticky-header-height, 4rem) + .8rem); }
   }
   .display-toolbar button:not(.theme-tab),
   .display-toolbar .theme-select select { min-block-size: 44px; }
-  .display-toolbar .theme-switch { padding-inline: .35rem; }
+  .display-toolbar .theme-switch {
+    padding-inline: .2rem;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+  }
   .font-switch .switch-track span:last-child { font-family: Georgia, serif; }
   .display-toolbar .theme-select,
   .display-toolbar .theme-select-frame,
@@ -880,7 +900,16 @@ html { scroll-padding-top: calc(var(--sticky-header-height, 4rem) + .8rem); }
   .display-toolbar .toolbar-accents { max-inline-size: 100%; }
   .display-toolbar .type-stepper { flex-wrap: wrap; gap: .15rem; }
   .display-toolbar .type-stepper output { min-width: 2.8rem; }
-
+}
+@media (max-width: 48rem) {
+  .site-header .mast nav { width: 100%; margin: 0; font-size: .85rem; }
+  .site-header .mast, .site-header .theme-bar { width: calc(100% - 1.5rem); }
+}
+@media (max-width: 34rem) {
+  .theme-bar .display-toolbar:not([hidden]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "dark tab" "title serif" "accent accent" "size size";
+  }
 }
 @media (max-width: 380px) { .portrait-keys { inset-inline: auto .3rem; } }
 @media print { .site-header, .theme-bar { display: none; } }
@@ -973,29 +1002,26 @@ html { scroll-padding-top: calc(var(--sticky-header-height, 4rem) + .8rem); }
 .reading-more { margin-top: 1.25rem; border-top: 1px solid var(--line); }
 .reading-more summary { cursor: pointer; padding-block: .75rem; font-weight: 650; }
 
-.books-widget-compact {
-  max-width: none;
-  padding: .9rem 1rem;
+.profile-card { min-width: 0; }
+.profile-card-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .35rem .65rem;
 }
-.books-widget-compact .books-widget-header { margin-bottom: .65rem; }
-.books-widget-compact h3 { margin: 0; font-size: calc(1.2rem * var(--heading-scale)); }
-.books-widget-compact .reading-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.books-widget-compact .book-cover { width: min(100%, 3.5rem); }
-.about-widgets {
-  display: grid;
-  align-items: start;
-  gap: .8rem;
-  margin-top: 1.25rem;
+.profile-card-heading h3 { margin: 0; }
+.profile-card .reading-list {
+  margin-block-start: .65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-.about-widgets > section { min-width: 0; }
-.about-widgets .social-feed { margin: 0; max-width: none; padding: .9rem 1rem; }
-.about-widget-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem .5rem; }
-.about-widget-heading h3 { margin: 0; font-size: calc(1.2rem * var(--heading-scale)); }
-.about-widgets .social-highlights { margin: .55rem 0 0; font-size: .85rem; }
-.about-widgets .social-highlights time { font-size: .78rem; }
-@media (min-width: 48rem) {
-  .about-widgets:has(.books-widget-compact) { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
+.profile-card .book-cover { width: min(100%, 3.5rem); }
+.profile-card .social-highlights { margin: .55rem 0 0; font-size: .875rem; }
+.profile-card .social-highlights time { font: inherit; }
+@media (min-width: 65rem) {
+  .profile-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .profile-grid strong { overflow-wrap: anywhere; }
 }
-@media (max-width: 30rem) {
-  .books-widget-compact .reading-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 36rem) {
+  .profile-card .reading-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

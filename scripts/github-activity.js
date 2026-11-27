@@ -14,19 +14,20 @@ export function renderGitHubActivity() {
   })[0];
   const activeDays = activity?.levels.filter(level => level > 0).length;
   const calendar = activity ? renderCalendar(activity, activeDays) : '';
-  return `<div class="code-activity" role="group" aria-label="Code profiles">
-<section class="system-card" aria-labelledby="github-activity-title">
-<h3 id="github-activity-title"><a href="https://github.com/nolawi#js-contribution-activity">GitHub contributions</a></h3>
+  return profileCard('github-activity-title', '<a href="https://github.com/nolawi#js-contribution-activity">GitHub contributions</a>', `
 <p class="code-membership">Member since <time datetime="2012-05-16">2012</time></p>
 ${calendar}
-<p class="code-history"><a href="https://github.com/nolawi/anchor-target">anchor-target</a> <span>· 2015</span> <a href="delano.html">Delano project</a></p>
-</section>
-<section class="system-card" aria-labelledby="gitlab-activity-title">
-<h3 id="gitlab-activity-title"><a href="https://gitlab.com/nolawi">GitLab</a></h3>
+<p class="code-history"><a href="https://github.com/nolawi/anchor-target">anchor-target</a> <span>· 2015</span> <a href="delano.html">Delano project</a></p>`) +
+    profileCard('gitlab-activity-title', '<a href="https://gitlab.com/nolawi">GitLab</a>', `
 <p class="code-membership">Member since <time datetime="2017-02-14">2017</time></p>
-<p class="code-history">No recent entries are visible on the public calendar.</p>
-</section>
-</div>`;
+<p class="code-history">No recent entries are visible on the public calendar.</p>`);
+}
+
+export function profileCard(id, title, body, action = '') {
+  return `<section class="system-card profile-card" aria-labelledby="${id}">
+<header class="profile-card-heading"><h3 id="${id}">${title}</h3>${action}</header>
+${body}
+</section>`;
 }
 
 function renderCalendar(activity, activeDays) {

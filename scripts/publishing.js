@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 
 import { escape, published, readContent, renderBody, renderList, tags, validate } from './content.js';
 
 import { projectArt } from './project-art.js';
-import { renderGitHubActivity } from './github-activity.js';
+import { profileCard, renderGitHubActivity } from './github-activity.js';
 
 const codePenProfile = 'https://codepen.io/nolawi';
 const codePenResult = id => `${codePenProfile}/full/${id}`;
@@ -143,10 +143,12 @@ function renderBooksWidget(books, { compact = false } = {}) {
   const more = items.length > visibleCount
     ? `<details class="reading-more"><summary>More books</summary>${tiles(items.slice(visibleCount))}</details>`
     : '';
-  const badge = compact
-    ? '<a class="goodreads-badge" href="books.html"><span class="goodreads-mark" aria-hidden="true">g</span> More books</a>'
-    : `<a class="goodreads-badge" href="${shelfUrl}" aria-label="Open my Read shelf on Goodreads"><span class="goodreads-mark" aria-hidden="true">g</span> Goodreads <span aria-hidden="true">↗</span></a>`;
-  return `<section class="books-widget${compact ? ' books-widget-compact' : ''}" aria-labelledby="books-title">
+  const badge = `<a class="goodreads-badge" href="${shelfUrl}" aria-label="Open my Read shelf on Goodreads"><span class="goodreads-mark" aria-hidden="true">g</span> <span aria-hidden="true">↗</span></a>`;
+  if (compact) {
+    return profileCard('books-title', 'Books I’ve read', tiles(items) +
+      '<p class="code-history"><a href="books.html">More books</a></p>', badge);
+  }
+  return `<section class="books-widget" aria-labelledby="books-title">
 <header class="books-widget-header">
 <${heading} id="books-title">Books I’ve read</${heading}>
 ${badge}
@@ -236,15 +238,17 @@ export function injectPublishing(html, filename) {
     [...data.socialPosts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 2).map(post =>
       `<li><a href="${escape(post.url)}">${escape(post.title)}</a><time datetime="${post.date}">${post.date}</time></li>`).join('') + '</ul>';
   return html.replace('<!-- writing-list -->', () => renderList(list, data.topics))
-    .replace('<!-- books-widget -->', () => books.length ? renderBooksWidget(books, { compact: true }) : '')
     .replace('<!-- books-link -->', () => books.length ? '<a href="books.html">Books</a>' : '')
     .replace('<!-- records-demo -->', () => renderDemo(entries.find(article => article.id === 'ai-component').demos[0]))
     .replace('<!-- accessibility-demo -->', () => renderDemo(entries.find(article => article.id === 'accessibility').demos[0]))
     .replace('<!-- design-demo -->', () => renderDemo(entries.find(article => article.id === 'atomic-design').demos[0]))
     .replace('<!-- feature-list -->', () => renderList(entries.filter(article => article.path), data.topics, { descriptions: true }))
     .replace('<!-- medium-list -->', () => renderList(entries.filter(article => article.publication === 'Medium'), data.topics))
-    .replace('<!-- github-activity -->', () => renderGitHubActivity())
-    .replace('<!-- social-posts -->', () => social)
+    .replace('<!-- profile-cards -->', () => `<div class="code-activity">
+${renderGitHubActivity()}
+${books.length ? renderBooksWidget(books, { compact: true }) : ''}
+${profileCard('social-title', '<a href="https://x.com/nolawi">On X</a>', social)}
+</div>`)
     .replace(/<meta name="robots" content="noindex">/, () => `<meta name="robots" content="${indexable ? 'index,follow' : 'noindex'}">`)
     .replace('</head>', () => `<link rel="canonical" href="${escape(absolute(home ? '' : filename))}">
 <link rel="alternate" type="application/rss+xml" title="Nolawi · Writing" href="./feed.xml">

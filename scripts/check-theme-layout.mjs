@@ -40,13 +40,24 @@ try {
           viewportWidth: document.documentElement.clientWidth,
           pageWidth: document.documentElement.scrollWidth,
           elements: [...element.children].map(child => [child.className, child.getBoundingClientRect().left, child.getBoundingClientRect().right]),
-          right: element.getBoundingClientRect().right
+          right: element.getBoundingClientRect().right,
+          left: element.getBoundingClientRect().left,
+          logoLeft: document.querySelector(".site-header .brand").getBoundingClientRect().left
         };
       });
       const description = `${width}×${height}, ${await toolbar.locator('output').textContent()} text`;
       assert.ok(metrics.scrollWidth <= metrics.width, `${description}: Theme drawer scrolls sideways ${JSON.stringify(metrics)}`);
       assert.ok(metrics.scrollHeight <= metrics.height, `${description}: Theme drawer scrolls vertically ${JSON.stringify(metrics)}`);
       assert.ok(metrics.pageWidth <= metrics.viewportWidth, `${description}: page scrolls sideways`);
+      const tab = metrics.elements.find(([name]) => name === 'theme-drawer-heading');
+      const size = metrics.elements.find(([name]) => name === 'type-stepper');
+      if (width === 1440) {
+        assert.ok(Math.abs(metrics.left - metrics.logoLeft) <= 1, `${description}: drawer should start at the logo`);
+        const rows = await toolbar.evaluate(element => [...element.children].map(child =>
+          Math.round(child.getBoundingClientRect().top + child.getBoundingClientRect().height / 2)));
+        assert.ok(Math.max(...rows) - Math.min(...rows) <= 1, `${description}: Theme controls wrap on desktop`);
+        assert.ok(tab[1] >= size[2], `${description}: Theme tab should follow text size`);
+      }
       if (step < 3) await increase.click();
     }
 
