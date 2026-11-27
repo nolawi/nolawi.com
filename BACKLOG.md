@@ -28,7 +28,7 @@
 
 - [x] Review Cloudflare page views by path. Keep page-level tracking while the baseline grows, then reconsider demo interaction tracking if there is a concrete question to answer.
 - [x] Design tokens. Add a short walkthrough to the Design Systems post showing how type, spacing, colors, and states flow from shared tokens into real components. Use the existing theme playground as the example.
-- [ ] Share the chat interfaces update on X. Draft for review: “I’ve been tinkering with my portfolio for years. There’s always something new I want to try. This time it’s chat interfaces. I added a small demo where you can ask a question and open the record behind the answer. https://nolawi.com/ai-component.html”
+- [x] [Share the chat interfaces update on X](https://x.com/nolawi/status/2126344246739542441).
 - [x] Reillustrate the original About portrait in the homepage’s cartoon cutout style. Use the old LinkedIn photo as the likeness reference. Create a separate illustration in the homepage cutout style.
 
 ## Later
