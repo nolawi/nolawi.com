@@ -2,18 +2,30 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 
 import { escape, published, readContent, renderBody, renderList, tags, validate } from './content.js';
 
 import { projectArt } from './project-art.js';
-import { themeDemo } from './theme-demo-markup.js';
-import { atomicDesignDemo } from './atomic-design-demo.js';
-import { accessibilityDemo } from './accessibility-demo-markup.js';
-import { readingDemo } from './reading-demo-markup.js';
 import { renderGitHubActivity } from './github-activity.js';
 
-const recordsPen = 'https://codepen.io/nolawi';
-const recordsPenId = 'ogWQBPv';
-const recordsDemo = `<div class="records-pen">
-<p><a href="${recordsPen}/full/${recordsPenId}">Open Records Explorer on CodePen</a></p>
-<iframe title="Records Explorer interactive demo on CodePen" src="${recordsPen}/embed/${recordsPenId}?default-tab=result" loading="lazy" width="960" height="760"></iframe>
+function codePen(id, title, height) {
+  const profile = 'https://codepen.io/nolawi';
+  return `<div class="codepen-demo">
+<p><a href="${profile}/full/${id}">Open ${escape(title)} on CodePen</a></p>
+<iframe title="${escape(title)} interactive demo on CodePen" src="${profile}/embed/${id}?default-tab=result" loading="lazy" width="960" height="${height}"></iframe>
 </div>`;
+}
+
+const recordsDemo = codePen('ogWQBPv', 'Records Explorer', 760);
+const accessibilityPen = codePen('emWQWzZ', 'Accessibility playground', 740);
+const designPen = codePen('dPWQWXJ', 'Design systems playground', 790);
+const accessibilityPlayground = `<section class="accessibility-playground" aria-labelledby="lab-title">
+<h2 id="lab-title">Accessibility playground</h2>
+<p>Try reading settings, tap targets, keyboard focus, or the contrast checker.</p>
+${accessibilityPen}
+<section aria-labelledby="switchback-title" class="pen-example">
+<h3 id="switchback-title">Switchback</h3>
+<p>Pick a trail stop by mouse or keyboard. Look for the shape, label, and color that show which stop is selected.</p>
+${codePen('LEyJxMZ', 'Switchback', 540)}
+<p><a href="trail.html">Switchback on nolawi.com</a></p>
+</section>
+</section>`;
 
 const root = new URL('../', import.meta.url);
 const defaultSite = 'https://nolawi.github.io/nolawi.com/';
@@ -102,11 +114,10 @@ export function generatePages(data = readPublishingContent()) {
 ${a.date ? `<p><time datetime="${a.date}">${a.date}</time></p>` : ''}
 <div class="prose">${renderBody(a.body)}</div>
 ${a.id === 'ai-component' ? recordsDemo : ''}
-${a.id === 'accessibility' ? accessibilityDemo : ''}
-${a.id === 'atomic-design' ? atomicDesignDemo : ''}
+${a.id === 'accessibility' ? accessibilityPlayground : ''}
+${a.id === 'atomic-design' ? designPen : ''}
 ${closing}
-${a.id === 'atomic-design' ? `${themeDemo}
-<section aria-labelledby="design-projects-title" id="selected-projects">
+${a.id === 'atomic-design' ? `<section aria-labelledby="design-projects-title" id="selected-projects">
 <h2 id="design-projects-title">Selected projects</h2>
 ${projectCards(selectedDesignProjects)}
 <p><a href="projects.html">All projects</a></p>
@@ -160,8 +171,8 @@ export function injectPublishing(html, filename) {
       `<li><a href="${escape(post.url)}">${escape(post.title)}</a><time datetime="${post.date}">${post.date}</time></li>`).join('') + '</ul>';
   return html.replace('<!-- writing-list -->', () => renderList(list, data.topics))
     .replace('<!-- records-demo -->', () => recordsDemo)
-    .replace('<!-- reading-demo -->', () => readingDemo)
-    .replace('<!-- atomic-demo -->', () => atomicDesignDemo)
+    .replace('<!-- accessibility-demo -->', () => accessibilityPen)
+    .replace('<!-- design-demo -->', () => designPen)
     .replace('<!-- feature-list -->', () => renderList(entries.filter(article => article.path), data.topics, { descriptions: true }))
     .replace('<!-- medium-list -->', () => renderList(entries.filter(article => article.publication === 'Medium'), data.topics))
     .replace('<!-- github-activity -->', () => renderGitHubActivity())

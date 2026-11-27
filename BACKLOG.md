@@ -1,11 +1,5 @@
 # Portfolio backlog
 
-## CodePen migration
-
-- [ ] Move the accessibility demos to CodePen, including reading controls, keyboard focus, tap targets, and Switchback. Use the existing Switchback Pen and preserve its standalone URL for existing links.
-- [ ] Move the atomic design component directory and theme sandbox to CodePen. Keep the site-wide theme controls available from the portfolio header.
-- [ ] Inventory any remaining demos and reuse each Pen across homepage and feature pages. Give each embed a descriptive title and a direct link, then check keyboard navigation, mobile layout, and loading.
-
 ## Later
 
 - [ ] Give typography a standalone feature when the playground has enough material to warrant one.
