@@ -9,12 +9,13 @@ export const atomicDesignDemo = `<section class="system-card atomic-demo" id="at
 <p data-atomic-description role="status">A label, text field, and button start as separate pieces.</p>
 <div class="atomic-preview" data-atomic-preview data-stage="atoms">
   <form class="atomic-filter" role="search" aria-label="Component directory">
-    <label for="atomic-query">Find a component</label>
-    <input id="atomic-query" name="query" type="search" readonly>
-    <button class="outline" type="submit" disabled>Filter</button>
+    <label for="atomic-query"><span class="atomic-part" aria-hidden="true">1</span> Find a component</label>
+    <div class="atomic-input"><span class="atomic-part" aria-hidden="true">2</span><input id="atomic-query" name="query" type="search" readonly></div>
+    <button class="outline" type="submit" disabled><span class="atomic-part" aria-hidden="true">3</span> Filter</button>
   </form>
   <div data-atomic-results hidden>
-    <h3>Components</h3>
+    <h3>Directory results</h3>
+    <p>Try “alert” or clear the field and filter again to see all components.</p>
     <ul><li>Button</li><li>Search field</li><li>Alert</li></ul>
     <p class="demo-status" role="status"></p>
   </div>

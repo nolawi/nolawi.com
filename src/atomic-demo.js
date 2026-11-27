@@ -7,11 +7,12 @@ export function mountAtomicDemo(section) {
   const directory = preview.querySelector('[data-atomic-results]');
   const results = [...directory.querySelectorAll('li')];
   const status = preview.querySelector('[role=status]');
+  const filterButton = filter.querySelector('button');
 
   const descriptions = {
-    atoms: 'A label, text field, and button start as separate pieces.',
-    molecule: 'Those same pieces form a filter. Try it in the next step.',
-    organism: 'The filter, heading, and list make a directory you can search.'
+    atoms: '1 is the label, 2 is the text field, and 3 is the button. Follow those same pieces into the next step.',
+    molecule: 'The three numbered pieces now share a form. Together they make one filter.',
+    organism: 'The same filter now sits above directory results. Try searching for alert.'
   };
 
   stages.addEventListener('change', ({ target }) => {
@@ -20,7 +21,7 @@ export function mountAtomicDemo(section) {
     description.textContent = descriptions[target.value];
     directory.hidden = target.value !== 'organism';
     query.readOnly = directory.hidden;
-    filter.querySelector('button').disabled = query.readOnly;
+    filterButton.disabled = query.readOnly;
   });
 
   filter.addEventListener('submit', event => {
@@ -34,5 +35,6 @@ export function mountAtomicDemo(section) {
     status.textContent = `${matches.length} ${matches.length === 1 ? 'component' : 'components'} found.`;
   });
 
+  description.textContent = descriptions.atoms;
   stages.hidden = false;
 }
