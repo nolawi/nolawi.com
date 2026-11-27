@@ -8,7 +8,12 @@ import { accessibilityDemo } from './accessibility-demo-markup.js';
 import { readingDemo } from './reading-demo-markup.js';
 import { renderGitHubActivity } from './github-activity.js';
 
-const recordsDemo = '<div id="records-explorer"><p>The interactive sample needs JavaScript.</p></div>';
+const recordsPen = 'https://codepen.io/nolawi';
+const recordsPenId = 'ogWQBPv';
+const recordsDemo = `<div class="records-pen">
+<p><a href="${recordsPen}/full/${recordsPenId}">Open Records Explorer on CodePen</a></p>
+<iframe title="Records Explorer interactive demo on CodePen" src="${recordsPen}/embed/${recordsPenId}?default-tab=result" loading="lazy" width="960" height="760"></iframe>
+</div>`;
 
 const root = new URL('../', import.meta.url);
 const defaultSite = 'https://nolawi.github.io/nolawi.com/';

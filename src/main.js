@@ -13,13 +13,6 @@ if (toolbar) mountDisplayToolbar(toolbar, preferences);
 document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
 if (document.querySelector('#focus-demo')) import('../site.js');
 
-const recordsExplorer = document.querySelector('#records-explorer');
-if (recordsExplorer) {
-  import('./records-explorer.js').then(({ mountRecordsExplorer }) => {
-    mountRecordsExplorer(recordsExplorer);
-  });
-}
-
 const socialFeed = document.querySelector('[data-social-feed]');
 if (socialFeed) {
   import('./social-feed.js').then(({ mountSocialFeed }) => mountSocialFeed(socialFeed));

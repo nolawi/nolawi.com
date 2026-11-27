@@ -587,10 +587,16 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
   font-size: calc(1.15rem * var(--heading-scale));
   line-height: 1.25;
 }
-.feature-demo .records-grid { grid-template-columns: minmax(0, 1fr); }
-.feature-demo .records-grid .status-buttons,
-.feature-demo .record-examples button:not(:first-child) { display: none; }
-.feature-demo .record-table { max-block-size: 12rem; overflow: auto; }
+.records-pen { min-width: 0; }
+.records-pen p { margin-block: .5rem; }
+.records-pen iframe {
+  display: block;
+  width: 100%;
+  height: 760px;
+  border: 1px solid var(--line);
+  border-radius: .4rem;
+  background: var(--paper);
+}
 #selected-projects .project-grid { grid-template-columns: minmax(0, 1fr); }
 @media (max-width: 48rem) {
   .featured-work > article { grid-template-columns: minmax(0, 1fr); }
