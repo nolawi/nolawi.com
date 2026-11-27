@@ -20,7 +20,7 @@
 - [ ] **Atomic Design first.** Make each assembly step visibly different while keeping reused parts recognizable. Show what gets added at each step, and connect the example to a real pattern in Delano.
 - [ ] **Text contrast.** Add a clearer before-and-after comparison with the ratio and regular-text pass threshold visible. Show how changing foreground and background colors affects the result.
 - [ ] **Typography.** Add a tracking control for spacing across all letters and a kerning comparison for individual letter pairs. Use the same sample to make the difference easy to see.
-- [ ] **AI demo.** Review the path from a question to the source record and make the homepage sample quicker to try.
+- [ ] **Chat interface.** Keep one quick example on the homepage and add more paths to try in the full demo: find a record by ID, filter by region and status, see an empty result, and ask something the records cannot answer. Make the filters, source rows, and next action clear in each reply.
 - [ ] **Homepage accessibility.** Review the demo disclosures, skip link, keyboard order, focus visibility, and enlarged-text layout.
 - [ ] **Header on scroll.** Try a compact header that follows readers as they scroll. Check mobile, in-page jumps, and keyboard focus so the header does not cover them.
 
