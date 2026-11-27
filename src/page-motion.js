@@ -9,10 +9,56 @@ export function mountPageMotion() {
   const portrait = document.querySelector('[data-parallax]');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let scheduled = false;
+  const heroDot = document.querySelector('.hero-brand-dot');
+  const headerDot = header?.querySelector('.brand-dot');
+  let wasAboveHeader;
+  let dotFlight;
+
+  function updateBrandDot() {
+    if (!heroDot || !headerDot) return;
+    const from = heroDot.getBoundingClientRect();
+    const aboveHeader = from.top <= headerHeight;
+    const crossed = wasAboveHeader === false && aboveHeader;
+    wasAboveHeader = aboveHeader;
+    if (!aboveHeader || reducedMotion.matches) {
+      dotFlight?.cancel();
+      return;
+    }
+    if (!crossed || from.bottom < headerHeight - 32 || typeof heroDot.animate !== 'function') return;
+
+    const to = headerDot.getBoundingClientRect();
+    const dot = document.createElement('span');
+    dot.className = 'brand-dot-in-flight';
+    dot.setAttribute('aria-hidden', 'true');
+    Object.assign(dot.style, {
+      left: `${from.x}px`, top: `${from.y}px`, width: `${from.width}px`, height: `${from.height}px`
+    });
+    header.toggleAttribute('data-brand-handoff', true);
+    heroDot.parentElement.toggleAttribute('data-hero-dot-in-flight', true);
+    document.body.append(dot);
+
+    const x = to.x + (to.width - from.width) / 2 - from.x;
+    const y = to.y + (to.height - from.height) / 2 - from.y;
+    const flight = dot.animate([
+      { transform: 'translate(0, 0) scale(1)' },
+      { transform: `translate(${x}px, ${y}px) scale(${to.width / from.width})`, color: 'var(--on-accent)' }
+    ], { duration: 260, easing: 'cubic-bezier(.2,.75,.3,1)' });
+    dotFlight = flight;
+    const finish = () => {
+      dot.remove();
+      if (dotFlight !== flight) return;
+      dotFlight = undefined;
+      header.removeAttribute('data-brand-handoff');
+      heroDot.parentElement.removeAttribute('data-hero-dot-in-flight');
+    };
+    flight.finished.then(finish, finish);
+  }
+
 
   function render() {
     scheduled = false;
     const scroll = window.scrollY;
+    updateBrandDot();
     const atBottom = scroll > 0 && scroll + window.innerHeight >= document.documentElement.scrollHeight - 2;
     const active = atBottom ? sections.at(-1)?.[0] : sections.reduce((current, pair) => {
       const top = pair[1].getBoundingClientRect().top;
@@ -60,6 +106,13 @@ export function mountPageMotion() {
   reducedMotion.addEventListener('change', schedule);
   document.querySelector('.back-to-top')?.addEventListener('click', () => {
     document.querySelector('#page-top')?.focus();
+  });
+  document.querySelector('.footer .brand[href="#page-top"]')?.addEventListener('click', event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    if (location.hash !== '#page-top') history.pushState(null, '', '#page-top');
+    document.querySelector('#page-top')?.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
   });
   render();
 }

@@ -7,6 +7,12 @@ const links = [
   ['Contact me', '#contact']
 ];
 
+export function renderBrand({ backToTop = false } = {}) {
+  const href = backToTop ? '#page-top' : './';
+  const label = backToTop ? 'Back to top' : 'Portfolio home';
+  return `<a class="brand" href="${href}" aria-label="${label}"><span class="brand-mark" aria-hidden="true">n<span class="brand-dot"></span></span></a>`;
+}
+
 export function renderHeader(home) {
   const nav = links.map(([label, href]) => {
     const target = home && href === 'writing.html' ? '#writing' : !home && href.startsWith('#') ? './' + href : href;
@@ -15,7 +21,7 @@ export function renderHeader(home) {
   return `<div class="reading-progress" aria-hidden="true"><span></span></div>
 <div id="page-top" tabindex="-1"></div>
 <header class="site-header"><div class="mast wrap">
-<a class="brand" href="./" aria-label="Portfolio home"><span aria-hidden="true">n.</span></a>
+${renderBrand()}
 <nav aria-label="Main">${nav}<a class="direct-linkedin" href="https://www.linkedin.com/in/nolawi/"><span aria-hidden="true">in</span> LinkedIn</a></nav>
 <button class="theme-tab" id="theme-tab" type="button" aria-expanded="false" aria-controls="display-toolbar" hidden>Theme <svg class="theme-tab-icon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path class="theme-open-icon" d="m4 6 4 4 4-4"/><path class="theme-close-icon" d="m4 4 8 8m0-8-8 8"/></svg></button>
 </div>

@@ -18,7 +18,64 @@ button { font: inherit; cursor: pointer; }
 .mast nav, .links, .actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.4rem; }
 .mast nav { margin-left: auto; }
 .brand { text-decoration: none; font-weight: 750; }
-.brand span { display: inline-grid; place-items: center; width: 2rem; height: 2rem; margin-right: .35rem; border-radius: 50%; background: var(--accent); color: var(--on-accent); font: 700 1rem Georgia, serif; }
+.brand-mark {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  padding-block-start: .36rem;
+  width: 2rem;
+  height: 2rem;
+  margin-right: .35rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font: 700 1rem/1 Georgia, serif;
+}
+.brand-dot, .hero-brand-dot, .brand-dot-in-flight {
+  display: inline-block;
+  inline-size: .17em;
+  block-size: .17em;
+  flex: none;
+  border-radius: 50%;
+  background: currentColor;
+}
+.brand-dot { margin-inline-start: .07em; }
+.footer .brand { border-radius: .45rem; }
+.footer .brand:is(:hover, :focus-visible) .brand-mark { box-shadow: 0 3px 0 var(--focus); }
+@media (prefers-reduced-motion: no-preference) {
+  .footer .brand-mark, .footer .brand-dot { transition: transform .18s ease; }
+  .footer .brand:is(:hover, :focus-visible) .brand-mark { transform: translateY(-.18rem); }
+  .footer .brand:is(:hover, :focus-visible) .brand-dot { transform: translateY(-.2rem); }
+  .footer .brand:active .brand-mark { transform: translateY(0); }
+}
+.hero-name { white-space: nowrap; }
+.hero-accent {
+  display: inline-grid;
+  place-items: end center;
+  vertical-align: baseline;
+  min-inline-size: max(44px, .28em);
+  min-block-size: max(44px, .28em);
+  border: 0;
+  border-radius: .12em;
+  padding: 0 0 .015em;
+  background: transparent;
+  font: inherit;
+}
+.hero-accent:disabled { cursor: default; }
+.hero h1 .hero-brand-dot { color: var(--accent); }
+.hero-accent:is(:hover, :focus-visible) .hero-brand-dot { box-shadow: 0 0 0 .035em var(--dark-line); }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-brand-dot { transition: transform .18s ease; }
+  .hero-accent:is(:hover, :focus-visible) .hero-brand-dot { transform: scale(1.12); }
+}
+.brand-dot-in-flight {
+  position: fixed;
+  z-index: 6;
+  color: var(--accent);
+  pointer-events: none;
+}
+[data-brand-handoff] .brand-dot { opacity: 0; }
+[data-hero-dot-in-flight] .hero-brand-dot { opacity: 0; }
 .outline, .button {
   display: inline-flex;
   align-items: center;
@@ -380,6 +437,7 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
 
 .company-link span { display: inline-block; font: .6em/1 system-ui, sans-serif; vertical-align: .25em; margin-inline-start: .3em; }
 .timeline .company-link { text-decoration-thickness: 1px; }
+.company-link-primary::after { box-shadow: 0 0 0 1px var(--focus); }
 .direct-linkedin { display: inline-flex; align-items: center; gap: .35rem; }
 .direct-linkedin span { display: inline-grid; place-items: center; width: 1.35rem; height: 1.35rem; font-size: .8rem; font-weight: 800; background: var(--navy); color: var(--on-dark); border: 1px solid var(--dark-line); border-radius: .2rem; }
 .toolbar-accents { display: flex; align-items: center; min-width: 0; border: 0; margin: 0; padding: 0; }
@@ -595,6 +653,24 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
   scroll-margin-top: 1rem;
 }
 .feature-copy h3 { font-size: calc(1.5rem * var(--heading-scale)); }
+:is(.feature-copy h3, .company-link-primary)::after {
+  content: "";
+  display: inline-block;
+  inline-size: .28em;
+  block-size: .28em;
+  margin-inline-start: .35em;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+}
+.featured-work > article:is(:hover, :focus-within) { border-color: var(--accent); }
+.featured-work > article:is(:hover, :focus-within) h3::after,
+.company-link-primary:is(:hover, :focus-visible)::after { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  :is(.feature-copy h3, .company-link-primary)::after { transform: translateY(.15em); transition: opacity .18s, transform .18s; }
+  .featured-work > article:is(:hover, :focus-within) h3::after,
+  .company-link-primary:is(:hover, :focus-visible)::after { transform: translateY(0); }
+}
 .feature-copy p {
   margin-block: .45rem;
   color: var(--feature-description);
@@ -773,12 +849,13 @@ html { scroll-padding-top: calc(var(--sticky-header-height, 4rem) + .8rem); }
 .mast nav a[aria-current="location"]::after {
   content: "";
   position: absolute;
-  inset-block-start: .2rem;
-  inset-inline-end: .12rem;
-  inline-size: .3rem;
-  block-size: .3rem;
+  inset-block-start: .15rem;
+  inset-inline-end: .04rem;
+  inline-size: .45rem;
+  block-size: .45rem;
   border-radius: 50%;
-  background: var(--focus);
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--focus);
 }
 @media (forced-colors: active) {
   .mast nav a[aria-current="location"]::after { background: Highlight; forced-color-adjust: none; }
