@@ -19,7 +19,8 @@
 
 - [ ] Analytics. Use the existing Cloudflare dashboard to review the homepage, Writing, and each feature page by path. Decide whether we need to measure demo interactions separately.
 - [ ] Design tokens. Add a short walkthrough to the Design Systems post showing how type, spacing, colors, and states flow from shared tokens into real components. Use the existing theme playground as the example.
-- [ ] Share the portfolio update on X. Draft for review: “I’ve been tinkering with my portfolio for years. Every time I come back to it, there’s something I want to try or explain better. This time I added a few demos about accessibility, design systems, and chat interfaces. Still a work in progress. https://nolawi.com/”
+- [ ] Share the chat interfaces update on X. Draft for review: “I’ve been tinkering with my portfolio for years. There’s always something new I want to try. This time it’s chat interfaces. I added a small demo where you can ask a question and open the record behind the answer. https://nolawi.com/ai-component.html”
+- [ ] Reillustrate the original About portrait in the homepage’s cartoon cutout style. Use the original About photo as the likeness reference and give About its own image.
 
 ## Later
 
