@@ -75,9 +75,10 @@ export function tags(article, topics) {
     labels.map(label => `<li><span>${escape(label)}</span></li>`).join('') +
     article.topics.map(id => `<li><span>${escape(topics.find(topic => topic.id === id).label)}</span></li>`).join('') + '</ul>';
 }
-export function renderList(articles, topics) {
+export function renderList(articles, topics, { descriptions = false } = {}) {
   return '<div class="articles">' + articles.map(article =>
     `<article>${article.date ? `<time datetime="${article.date}">${article.date}</time>` : ''}
-<h3><a href="${escape(article.path || article.url)}">${escape(article.title)}</a></h3>${tags(article, topics)}</article>`).join('\n') + '</div>';
+<h3><a href="${escape(article.path || article.url)}">${escape(article.title)}</a></h3>
+${descriptions && article.description ? `<p>${escape(article.description)}</p>` : ''}${tags(article, topics)}</article>`).join('\n') + '</div>';
 }
 export const renderBody = body => markdown.render(body || '');

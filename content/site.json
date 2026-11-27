@@ -39,6 +39,20 @@
       "featured": true
     },
     {
+      "title": "How small components become a design system",
+      "id": "atomic-design",
+      "status": "published",
+      "format": "Essay",
+      "topics": [
+        "design-systems",
+        "accessibility"
+      ],
+      "publication": "Nolawi",
+      "path": "essay-atomic-design.html",
+      "description": "An atomic design walkthrough with a working component directory, my Slides.com talk, and an example from Delano.",
+      "body": "When I’m building a screen, I like to ask which parts I’ll need again on the next one. A button is an easy answer. A label and an input are easy too. The interesting part is what happens when you put them together.\n\nI gave a talk on [building a design system the atomic design way](https://slides.com/nolawipetros/deck-3). Here’s a small version you can play with.\n\n## Put the pieces together\n\nStart with a label, a field, and a button. Those are the atoms. Put them together and you have a filter with one job. That’s the molecule. Add a heading and results, and now the whole directory is an organism. A template gives that directory a place in the page. A page lets me check what happens when it has real content, including long names and zero results.\n\n[Brad Frost’s atomic design chapter](https://atomicdesign.bradfrost.com/chapter-2/) goes through all five levels.\n\n## Where this showed up in my work\n\n[Delano](delano.html) was my Angular UI kit. I wanted teams to have a place to start when they built another screen. Say two teams use the same text field. I want the label and focus behavior to feel familiar in both apps. One team can search a directory and the other can filter a table. The pieces are still doing the same jobs.\n\n## Try assembling it\n\nSwitch through the three steps below and watch the same label, field, and button change jobs as more pieces are added. At the last step, search for “alert.” Then try something that isn’t in the directory and see how it handles zero results."
+    },
+    {
       "title": "The Future of Accessibility: How AI is Redefining Inclusion",
       "url": "https://medium.com/@nolawi/the-future-of-accessibility-how-ai-is-redefining-inclusion-86b226f2621a",
       "date": "2022-12-16",

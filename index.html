@@ -34,7 +34,7 @@
 </section>
 <section class="work-band" id="work" aria-labelledby="work-title">
 <div class="section wrap">
-<div class="section-head"><h2 id="work-title">Design systems</h2></div>
+<div class="section-head"><h2 id="work-title">Design systems</h2><a href="essay-atomic-design.html">Atomic design article and demo</a></div>
 <!-- project-list -->
 </div>
 </section>
@@ -42,7 +42,7 @@
 <div class="section-head"><h2 id="experience-title"><span class="section-icon" aria-hidden="true">▤</span> Experience</h2><a href="resume.html">Full résumé</a></div>
 <nav class="company-index" aria-label="Experience highlights"><a href="#ecs">Everforth / CISA</a><a href="#abbvie">AbbVie</a><a href="#sec">U.S. SEC</a><a href="#college-board">College Board</a><a href="#amazon">Amazon</a></nav>
 <div class="timeline">
-<article><p class="date">2025–2026</p><div><h3 id="ecs"><a class="company-link" href="https://www.linkedin.com/company/everforth">Everforth<span aria-hidden="true">↗</span></a></h3><p class="role"><a class="company-link" href="https://github.com/cisagov">CISA<span aria-hidden="true">↗</span></a></p><p>My work at Everforth included supporting the Cybersecurity and Infrastructure Security Agency.</p></div></article>
+<article><p class="date">Sep 2023–2026</p><div><h3 id="ecs"><a class="company-link" href="https://www.linkedin.com/company/everforth">Everforth<span aria-hidden="true">↗</span></a></h3><p class="role">UI Developer · <a class="company-link" href="https://github.com/cisagov">CISA<span aria-hidden="true">↗</span></a></p><p>I built a React and Electron desktop interface for CISA, with SQL-backed workflows for working through large amounts of data.</p></div></article>
 <article><p class="date">Joined Sep 2021</p><div><h3 id="abbvie"><a class="company-link" href="https://www.linkedin.com/company/abbvie">AbbVie<span aria-hidden="true">↗</span></a></h3><p class="role">UI Architect</p><p>I helped our team make a group of AEM sites easier to use and added accessibility testing to the way we shipped updates.</p></div></article>
 <article><p class="date">Jan 2019–Sep 2021</p><div><h3 id="sec"><a class="company-link" href="https://github.com/sec-gov">U.S. Securities and Exchange Commission<span aria-hidden="true">↗</span></a></h3><p class="role">UI/UX Lead · <a class="company-link" href="https://www.linkedin.com/company/pyramidsystems">Pyramid Systems<span aria-hidden="true">↗</span></a></p><p>I built a design system the SEC teams could share, then worked with engineers to put it to use across different apps.</p></div></article>
 <article><p class="date">Aug 2017–Jan 2019</p><div><h3><a class="company-link" href="https://github.com/department-of-veterans-affairs">U.S. Department of Veterans Affairs<span aria-hidden="true">↗</span></a></h3><p class="role">Senior UI Developer · <a class="company-link" href="https://www.linkedin.com/company/tista-science-and-technology-corporation/">TISTA Science and Technology<span aria-hidden="true">↗</span></a></p><p>I built web apps for the VA and contributed back to the <a href="https://github.com/uswds/uswds">U.S. Web Design System</a>.</p></div></article>
@@ -53,6 +53,7 @@
 <section class="section wrap" aria-labelledby="lab-title">
 <div class="playground-heading">
 <nav class="demo-index" aria-label="Jump to an accessibility demo">
+<a href="#reading-demo"><span aria-hidden="true">Aa</span> Reading settings</a>
 <a href="#display-title"><span aria-hidden="true">◎</span> Tap targets</a>
 <a href="#focus-title"><span aria-hidden="true">⌨</span> Keyboard focus</a>
 <a href="#contrast-title"><span aria-hidden="true">◑</span> Contrast</a>
@@ -61,6 +62,24 @@
 <h2 id="lab-title"><span class="heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M4 9h16m-8 0v6m0-1-4 7m4-7 4 7"/></svg></span> Accessibility playground</h2>
 <p>I helped bring accessibility testing into the way we shipped at AbbVie. These experiments let you try some of the same ideas with a keyboard, mouse, or touch.</p>
 </div>
+<section class="system-card reading-demo" id="reading-demo" aria-labelledby="reading-demo-title">
+<div>
+<h3 id="reading-demo-title">What makes text easier to read?</h3>
+<p>Try a bigger size, a different font, or stronger contrast. The controls change the sample here.</p>
+<form class="demo-controls" data-reading-controls hidden>
+<label>Text size <select name="size"><option value="1">100%</option><option value="1.25">125%</option><option value="1.5">150%</option><option value="2">200%</option></select></label>
+<label>Font <select name="font"><option value="sans">Sans serif</option><option value="serif">Serif</option><option value="mono">Monospace</option></select></label>
+<label>Contrast <select name="contrast"><option value="standard">Standard · 13.38:1</option><option value="low">Low · 4.16:1</option><option value="high">High · 18.88:1</option></select></label>
+<button class="outline" type="reset">Reset sample</button>
+</form>
+<p class="demo-status" data-reading-status role="status"></p>
+<p class="reading-note">For regular text, WCAG AA calls for at least 4.5:1 contrast.</p>
+</div>
+<div class="reading-sample" data-reading-sample>
+<p><strong>A morning at my cabin</strong></p>
+<p>I take the dog out first. Then I grab a cup of coffee and see what needs fixing.</p>
+</div>
+</section>
 <section class="target-lab system-card" id="display-title" aria-labelledby="target-title" data-target-lab>
 <div>
 <p class="eyebrow">Accessibility experiment</p>
@@ -142,6 +161,7 @@
 <li><a href="https://stackoverflow.com/users/2903708/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v5h15v-5M7 17h9M8 13l9 2M10 9l8 4M13 5l7 6m-3-9 5 7"/></svg><strong>Stack Overflow</strong><span>Answers and technical discussions</span></a></li>
 <li><a href="https://codepen.io/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 7v6l-10 7-10-7V9zm0 0v7m0 6v7M2 9l10 6 10-6M2 15l10-6 10 6"/></svg><strong>CodePen</strong><span>Interactive front-end demos</span></a></li>
 <li><a href="https://www.linkedin.com/in/nolawi/"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7m0-10v.1M11 17v-7m0 3a3 3 0 0 1 6 0v4"/></svg><strong>LinkedIn</strong><span>Work history and connections</span></a></li>
+<li><a href="https://slides.com/nolawipetros"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v4m-4 0h8M7 13l3-3 3 2 4-4"/></svg><strong>Slides.com</strong><span>Talks and presentations</span></a></li>
 <li><a href="https://x.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l12 16h-4L4 4Zm16 0-7 8m-2 2-7 6"/></svg><strong>X / Twitter</strong><span>Follow @nolawi</span></a></li>
 </ul></section>
 <section id="about" class="about"><div class="wrap section"><h2>A little about me</h2><p>I write about accessibility, UX testing, and design systems. When I shut the laptop, I’m usually outside with my dog, working on my cabin, or making something with my hands.</p>

@@ -28,3 +28,9 @@ const targetLab = document.querySelector('[data-target-lab]');
 if (targetLab) {
   import('./target-lab.js').then(({ mountTargetLab }) => mountTargetLab(targetLab));
 }
+
+const readingDemo = document.querySelector('#reading-demo');
+if (readingDemo) import('./reading-demo.js').then(({ mountReadingDemo }) => mountReadingDemo(readingDemo));
+
+const atomicDemo = document.querySelector('#atomic-demo');
+if (atomicDemo) import('./atomic-demo.js').then(({ mountAtomicDemo }) => mountAtomicDemo(atomicDemo));

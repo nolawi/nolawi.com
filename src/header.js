@@ -30,15 +30,7 @@ export function renderHeader(home) {
     <output id="toolbar-text-size">100%</output>
     <button type="button" data-text-step="1" aria-label="Increase page text size">A+</button>
   </div>
-  <button id="open-display-settings" class="display-open" type="button" aria-haspopup="dialog">Make it easier to read</button>
 </div>
-<dialog class="display-dialog" id="display-settings" aria-labelledby="display-settings-title">
-  <div class="display-dialog-head">
-    <h2 id="display-settings-title" tabindex="-1" autofocus>Make it easier to read</h2>
-    <form method="dialog"><button class="outline" type="submit" aria-label="Close display settings"><span aria-hidden="true">×</span></button></form>
-  </div>
-  <div id="dialog-display-playground"><p>Loading settings…</p></div>
-</dialog>
 </header>
 <a class="back-to-top" href="#page-top" hidden><span aria-hidden="true">↑</span> Back to top</a>`;
 }

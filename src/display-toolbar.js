@@ -6,12 +6,8 @@ export function mountDisplayToolbar(toolbar, preferences) {
   const accents = [...toolbar.querySelectorAll('[name=toolbar-accent]')];
   const sizeOutput = toolbar.querySelector('#toolbar-text-size');
   const steppers = [...toolbar.querySelectorAll('[data-text-step]')];
-  const open = toolbar.querySelector('#open-display-settings');
-  const dialog = document.querySelector('#display-settings');
-  const panel = document.querySelector('#dialog-display-playground');
   const sizes = Object.keys(options.textSize);
   let current;
-  let panelLoaded = false;
 
   preferences.subscribe(settings => {
     current = settings;
@@ -37,19 +33,5 @@ export function mountDisplayToolbar(toolbar, preferences) {
     if (next) preferences.update({ textSize: next });
   }));
 
-  async function openSettings() {
-    dialog.showModal();
-    if (panelLoaded) return;
-    panelLoaded = true;
-    try {
-      const { mountDisplayPlayground } = await import('./display-playground.js');
-      mountDisplayPlayground(panel, preferences);
-    } catch {
-      panelLoaded = false;
-      panel.textContent = 'The full settings could not load. Close this panel and try again.';
-    }
-  }
-  open.addEventListener('click', openSettings);
-  dialog.addEventListener('close', () => open.focus());
   toolbar.hidden = false;
 }

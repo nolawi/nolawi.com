@@ -10,3 +10,5 @@ dist/
 /delano.html
 /projects.html
 /project-*.html
+/content/medium-feed.json
+/content/medium-feed.tmp

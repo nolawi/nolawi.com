@@ -4,6 +4,8 @@ on:
   push:
     branches: [main, "codex/publishing-system"]
   workflow_dispatch:
+  schedule:
+    - cron: '23 11 * * *'
 
 permissions:
   contents: read
@@ -23,6 +25,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - name: Refresh Medium articles
+        run: python3 scripts/sync-medium.py || echo "::warning::Medium feed unavailable. Building with the checked-in articles."
       - run: npm run build
         env:
           SITE_URL: ${{ github.ref == 'refs/heads/main' && vars.SITE_URL || '' }}

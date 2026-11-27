@@ -1,7 +1,8 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs';
-import { escape, published, readContent, renderBody, renderList, tags } from './content.js';
+import { escape, published, readContent, renderBody, renderList, tags, validate } from './content.js';
 
 import { projectArt } from './project-art.js';
+import { atomicDesignDemo } from './atomic-design-demo.js';
 
 const root = new URL('../', import.meta.url);
 const defaultSite = 'https://nolawi.github.io/nolawi.com/';
@@ -14,6 +15,23 @@ const analytics = analyticsToken && /^[a-zA-Z0-9_-]+$/.test(analyticsToken)
   : '';
 const absolute = path => new URL(path, siteUrl).href;
 const at = path => new URL(path, root);
+const mediumStoryId = url => url?.match(/-([0-9a-f]{12})\/?(?:[?#]|$)/)?.[1];
+
+function readPublishingContent() {
+  const data = readContent();
+  let snapshot;
+  try {
+    snapshot = readFileSync(at('content/medium-feed.json'), 'utf8');
+  } catch (error) {
+    if (error.code === 'ENOENT') return data;
+    throw error;
+  }
+  const curatedIds = new Set(data.articles.map(article => mediumStoryId(article.url)).filter(Boolean));
+  const feedArticles = JSON.parse(snapshot);
+  return validate({ ...data, articles: [...data.articles,
+    ...feedArticles.filter(article => !curatedIds.has(mediumStoryId(article.url)))] });
+}
+
 const legacy = ['ai-component.html', 'ai-checkable-answers.html', 'delano.html', 'projects.html'];
 
 function page(title, description, body) {
@@ -55,7 +73,7 @@ ${project.featured ? projectArt[project.art] || '' : ''}<p class="eyebrow">${esc
     (other ? `<div class="project-grid">${other}</div>` : '');
 }
 
-export function generatePages(data = readContent()) {
+export function generatePages(data = readPublishingContent()) {
   const entries = published(data);
   const pages = new Map();
   for (const a of entries.filter(item => item.path)) {
@@ -70,6 +88,7 @@ export function generatePages(data = readContent()) {
 ${a.date ? `<p><time datetime="${a.date}">${a.date}</time></p>` : ''}
 <div class="prose">${renderBody(a.body)}</div>
 ${a.id === 'ai-component' ? '<div id="records-explorer"><p>The interactive sample needs JavaScript.</p></div>' : ''}
+${a.id === 'atomic-design' ? atomicDesignDemo : ''}
 <script type="application/ld+json">${schema}</script>`));
   }
   const oldChatPath = 'ai-checkable-answers.html';
@@ -108,7 +127,7 @@ ${a.id === 'ai-component' ? '<div id="records-explorer"><p>The interactive sampl
 }
 
 export function injectPublishing(html, filename) {
-  const data = readContent();
+  const data = readPublishingContent();
   const entries = published(data);
   if (filename === 'ai-checkable-answers.html' && /http-equiv="refresh"/.test(html)) {
     return html.replace('</head>', `<link rel="canonical" href="${escape(absolute('ai-component.html'))}"></head>`);
@@ -121,6 +140,8 @@ export function injectPublishing(html, filename) {
     [...data.socialPosts].sort((a, b) => b.date.localeCompare(a.date)).map(post =>
       `<li><a href="${escape(post.url)}">${escape(post.title)}</a><time datetime="${post.date}">${post.date}</time></li>`).join('') + '</ul>';
   return html.replace('<!-- writing-list -->', () => renderList(list, data.topics))
+    .replace('<!-- feature-list -->', () => renderList(entries.filter(article => article.path), data.topics, { descriptions: true }))
+    .replace('<!-- medium-list -->', () => renderList(entries.filter(article => article.publication === 'Medium'), data.topics))
     .replace('<!-- social-posts -->', () => social)
     .replace('<!-- project-list -->', () => projectCards(liveProjects(data)) + '<p><a href="projects.html">All projects</a></p>')
     .replace(/<meta name="robots" content="noindex">/, () => `<meta name="robots" content="${indexable ? 'index,follow' : 'noindex'}">`)
