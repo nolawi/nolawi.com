@@ -1,10 +1,8 @@
 import { options } from './preferences.js';
 
 const links = [
-  ['Design systems', '#work'],
+  ['Work', '#work'],
   ['Experience', '#experience'],
-  ['Accessibility', '#lab-title'],
-  ['AI integrations', '#ai-work'],
   ['Writing', 'writing.html'],
   ['About', 'about.html'],
   ['Contact me', '#contact']
@@ -17,11 +15,11 @@ export function renderHeader(home) {
   }).join('');
   return `<div class="reading-progress" aria-hidden="true"><span></span></div>
 <header class="mast wrap" id="page-top" tabindex="-1">
-<a class="brand" href="./"><span aria-hidden="true">n.</span> Nolawi</a>
+<a class="brand" href="./" aria-label="Portfolio home"><span aria-hidden="true">n.</span></a>
 <nav aria-label="Main">${nav}<a class="direct-linkedin" href="https://www.linkedin.com/in/nolawi/"><span aria-hidden="true">in</span> LinkedIn</a></nav>
-<div class="display-toolbar" id="display-toolbar" role="group" aria-label="Quick display settings" hidden>
+<div class="display-toolbar" id="display-toolbar" role="group" aria-labelledby="theme-controls-title" hidden>
   <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false">
-    <span class="toolbar-icon" aria-hidden="true">◐</span><span>Dark mode</span><span class="switch-track" aria-hidden="true"></span>
+    <span>Dark mode</span><span class="switch-track" aria-hidden="true"><span>☼</span><span>☾</span></span>
   </button>
   <label class="toolbar-select toolbar-font"><span class="toolbar-icon font-sample" aria-hidden="true">Aa</span> Font <span class="select-frame"><select id="toolbar-font">${renderOptions(options.font)}</select><span class="select-chevron" aria-hidden="true"></span></span></label>
   <fieldset class="toolbar-accents"><legend>Accent</legend><div class="toolbar-swatches">${renderSwatches()}</div></fieldset>
@@ -30,6 +28,7 @@ export function renderHeader(home) {
     <output id="toolbar-text-size">100%</output>
     <button type="button" data-text-step="1" aria-label="Increase page text size">A+</button>
   </div>
+  <strong class="theme-controls-title" id="theme-controls-title">Theme</strong>
 </div>
 </header>
 <a class="back-to-top" href="#page-top" hidden><span aria-hidden="true">↑</span> Back to top</a>`;

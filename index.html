@@ -18,25 +18,58 @@
 <p class="eyebrow">Front-end engineer &amp; UI architect</p>
 <h1>Nolawi<span>.</span></h1>
 <p class="intro">I’m a coder who cares about UX. I build design systems, make interfaces easier to use, and connect applications to language models.</p>
-<nav class="hero-paths" aria-label="Explore my work">
-<a href="#work"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 9v12"/></svg><span>Design systems</span></a>
-<a href="#lab-title"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M4 9h16m-8 0v6m0-1-4 7m4-7 4 7"/></svg><span>Accessibility</span></a>
-<a href="#ai-work"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2z"/></svg><span>AI integrations</span></a>
+<div class="hero-work-links">
+<a class="button" href="#work">Explore my work</a>
+<nav aria-label="Jump to featured work">
+<a href="#ai-work">AI integrations</a>
+<a href="#lab-title">Accessibility</a>
+<a href="#design-work">Design systems</a>
 </nav>
-<div class="hero-examples">
-<a href="delano.html"><strong>Delano</strong><span>Angular UI kit</span></a>
-<a href="#display-title"><strong>Tap targets</strong><span>Try tight and roomy layouts</span></a>
-<a href="ai-component.html#records-explorer"><strong>Records Explorer</strong><span>Try chat alongside a table</span></a>
 </div>
 </div>
 <div class="hero-art" data-parallax><div class="portrait-grid" aria-hidden="true"></div><img class="portrait" src="/nolawi-illustrated.png" width="880" height="804" alt="Nolawi Petros"><div class="portrait-keys" aria-hidden="true"><kbd>Tab</kbd><kbd>↵</kbd></div></div>
 </div>
-</section>
-<section class="work-band" id="work" aria-labelledby="work-title">
-<div class="section wrap">
-<div class="section-head"><h2 id="work-title">Design systems</h2><a href="essay-atomic-design.html">Atomic design article and demo</a></div>
-<!-- project-list -->
+<section class="wrap hero-work" id="work" aria-labelledby="work-title">
+<div class="section-head"><h2 id="work-title">Featured work</h2></div>
+<div class="featured-work">
+<article class="system-card" id="ai-work" aria-labelledby="ai-feature-title">
+<div class="feature-copy">
+<h3 id="ai-feature-title">AI integrations</h3>
+<p>Ask a question in the Records Explorer and open the rows the app found.</p>
+<a href="ai-component.html">Post · Adding chat to an app</a>
 </div>
+<details class="feature-demo">
+<summary>Ask the records</summary>
+<!-- records-demo -->
+</details>
+<p class="feature-takeaway">A chat answer is more useful when it gets you to the record you can work from.</p>
+</article>
+<article class="system-card" id="lab-title" aria-labelledby="accessibility-feature-title">
+<div class="feature-copy">
+<h3 id="accessibility-feature-title">Accessibility</h3>
+<p>See how text size, typeface, and contrast change the same reading sample.</p>
+<a href="accessibility.html">Post · Accessibility in the details</a>
+</div>
+<details class="feature-demo">
+<summary>Change the reading sample</summary>
+<!-- reading-demo -->
+</details>
+<p class="feature-takeaway">Try the same paragraph at 200%. The controls and the text should still fit.</p>
+</article>
+<article class="system-card" id="design-work" aria-labelledby="design-feature-title">
+<div class="feature-copy">
+<h3 id="design-feature-title">Design systems</h3>
+<p>Put a few small pieces together to make a searchable component directory.</p>
+<a href="essay-atomic-design.html">Post · Atomic design in practice</a>
+</div>
+<details class="feature-demo">
+<summary>Assemble a component</summary>
+<!-- atomic-demo -->
+</details>
+<p class="feature-takeaway">Start with the pieces you already have. See what they can do together before adding another component.</p>
+</article>
+</div>
+</section>
 </section>
 <section class="section wrap" id="experience" aria-labelledby="experience-title">
 <div class="section-head"><h2 id="experience-title"><span class="section-icon" aria-hidden="true">▤</span> Experience</h2><a href="resume.html">Full résumé</a></div>
@@ -50,120 +83,21 @@
 <article><p class="date">Nov 2012–Mar 2013</p><div><h3 id="amazon"><a class="company-link" href="https://www.linkedin.com/company/amazon">Amazon<span aria-hidden="true">↗</span></a></h3><p class="role">User Interface Engineer</p><p>I took an interface from wireframes to working screens for iPad and desktop, using Backbone, Bootstrap, and Rails.</p></div></article>
 </div>
 </section>
-<section class="section wrap" aria-labelledby="lab-title">
-<div class="playground-heading">
-<nav class="demo-index" aria-label="Jump to an accessibility demo">
-<a href="#reading-demo"><span aria-hidden="true">Aa</span> Reading settings</a>
-<a href="#display-title"><span aria-hidden="true">◎</span> Tap targets</a>
-<a href="#focus-title"><span aria-hidden="true">⌨</span> Keyboard focus</a>
-<a href="#contrast-title"><span aria-hidden="true">◑</span> Contrast</a>
-<a href="#switchback-title"><span aria-hidden="true">↝</span> Switchback</a>
-</nav>
-<h2 id="lab-title"><span class="heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M4 9h16m-8 0v6m0-1-4 7m4-7 4 7"/></svg></span> Accessibility playground</h2>
-<p>I helped bring accessibility testing into the way we shipped at AbbVie. These experiments let you try some of the same ideas with a keyboard, mouse, or touch.</p>
-</div>
-<section class="system-card reading-demo" id="reading-demo" aria-labelledby="reading-demo-title">
-<div>
-<h3 id="reading-demo-title">What makes text easier to read?</h3>
-<p>Try a bigger size, a different font, or stronger contrast. The controls change the sample here.</p>
-<form class="demo-controls" data-reading-controls hidden>
-<label>Text size <select name="size"><option value="1">100%</option><option value="1.25">125%</option><option value="1.5">150%</option><option value="2">200%</option></select></label>
-<label>Font <select name="font"><option value="sans">Sans serif</option><option value="serif">Serif</option><option value="mono">Monospace</option></select></label>
-<label>Contrast <select name="contrast"><option value="standard">Standard · 13.38:1</option><option value="low">Low · 4.16:1</option><option value="high">High · 18.88:1</option></select></label>
-<button class="outline" type="reset">Reset sample</button>
-</form>
-<p class="demo-status" data-reading-status role="status"></p>
-<p class="reading-note">For regular text, WCAG AA calls for at least 4.5:1 contrast.</p>
-</div>
-<div class="reading-sample" data-reading-sample>
-<p><strong>A morning at my cabin</strong></p>
-<p>I take the dog out first. Then I grab a cup of coffee and see what needs fixing.</p>
-</div>
-</section>
-<section class="target-lab system-card" id="display-title" aria-labelledby="target-title" data-target-lab>
-<div>
-<p class="eyebrow">Accessibility experiment</p>
-<h3 id="target-title">Give buttons room.</h3>
-<p>Try hitting the named button in both layouts. More room makes it easier to tap the right thing, especially one-handed.</p>
-</div>
-<div class="target-panel">
-<fieldset><legend>Button layout</legend>
-<label><input type="radio" name="target-layout" value="tight" checked> Tight</label>
-<label><input type="radio" name="target-layout" value="roomy"> Roomy</label>
-</fieldset>
-<p id="target-instruction">Tap <strong>Circle</strong>.</p>
-<div class="target-buttons" role="group" aria-labelledby="target-instruction" data-layout="tight">
-<button type="button" data-shape="Square" aria-label="Square">■</button>
-<button type="button" data-shape="Circle" aria-label="Circle">●</button>
-<button type="button" data-shape="Triangle" aria-label="Triangle">▲</button>
-</div>
-<p class="target-feedback" role="status"></p>
-</div>
-</section>
-<div class="playground">
-<section class="lab" aria-labelledby="focus-title">
-<div>
-<p class="eyebrow">Interactive accessibility demo</p>
-<div class="focus-art" aria-hidden="true"><span></span><span></span><span></span><kbd>Tab</kbd></div>
-<h3 id="focus-title">Follow the focus.</h3>
-<p>Ever hit Tab and lose track of where you are? Open settings and press <kbd>Tab</kbd> or <kbd>Shift</kbd> + <kbd>Tab</kbd>. The readout follows you. Press <kbd>Esc</kbd> and watch where you land.</p>
-</div>
-<div class="lab-panel" id="focus-demo">
-<button class="button" id="open-demo" type="button" aria-haspopup="dialog">Open settings</button>
-<p class="focus-readout">Focus <output id="focus-output" aria-live="off">outside the demo</output></p>
-<dialog id="settings-dialog" aria-labelledby="settings-title">
-<form method="dialog">
-<h4 id="settings-title">Preview settings</h4><ol class="focus-steps" aria-label="Focus order"><li data-step="Show outlines">Outlines</li><li data-step="Use larger type">Text size</li><li data-step="Close settings">Close</li></ol>
-<label><input type="checkbox" data-focus="Show outlines" autofocus> Show outlines</label>
-<label><input type="checkbox" data-focus="Use larger type"> Use larger type</label>
-<button type="submit" data-focus="Close settings">Close settings</button>
-<p class="focus-readout">Focus <output id="dialog-output" aria-live="off">Show outlines</output></p>
-</form>
-</dialog>
-</div>
-</section>
-<section class="lab contrast-lab" aria-labelledby="contrast-title">
-<div>
-<p class="eyebrow">Interactive accessibility demo</p>
-<div class="contrast-art" aria-hidden="true"><span>Aa</span><span>Aa</span><span>Aa</span></div>
-<h3 id="contrast-title">Can you read this?</h3>
-<p>Try a muted color, then turn up the contrast. The sample stays the same. The ratio tells you whether it meets the WCAG AA threshold for regular-size text.</p>
-</div>
-<div class="lab-panel">
-<label for="contrast-level">Text darkness</label>
-<input id="contrast-level" type="range" min="0" max="100" value="42">
-<p class="contrast-sample" id="contrast-sample">Good design is for everyone.</p>
-<p class="focus-readout"><output id="contrast-result" for="contrast-level"></output></p>
-</div>
-</section>
-</div>
-<section class="pen-example" aria-labelledby="switchback-title">
-<h3 id="switchback-title"><span aria-hidden="true">🧭</span> Switchback</h3>
-<p>Pick a stop on a bike-to-cabin trail and see how a control can show its state with shape, words, and color.</p>
-<p class="pen-links"><a href="trail.html">Standalone demo</a><a href="https://codepen.io/nolawi/pen/LEyJxMZ">View on CodePen</a></p>
-<iframe class="saved-pen" title="Switchback trail picker" src="trail.html?embed=1" width="800" height="450" loading="lazy"></iframe>
-</section>
-</section>
-<section class="work-band" id="ai-work" aria-labelledby="ai-title">
-<div class="section wrap">
-<h2 id="ai-title">AI integrations</h2>
-<p>I built a small demo where you can ask a question and open the records the app found.</p>
-<p><a href="ai-component.html">When your app gets a chat interface</a></p>
-</div>
-</section>
 <section class="section wrap" id="writing" aria-labelledby="writing-title">
-<div class="section-head"><h2 id="writing-title"><span class="section-icon" aria-hidden="true">✎</span> Writing</h2><a href="writing.html">Writing archive</a></div>
+<div class="section-head"><h2 id="writing-title"><span class="section-icon" aria-hidden="true">✎</span> Writing on Medium</h2><a href="writing.html">All writing</a></div>
 <!-- writing-list -->
 </section>
-<section class="section wrap" aria-labelledby="profiles-title"><h2 id="profiles-title">Find me around the web</h2><ul class="profile-grid">
-<li><a href="https://github.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg><strong>GitHub</strong><span>Code and open-source projects</span></a></li>
-<li><a href="https://gitlab.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 22 9-8-3-11-3 8H9L6 3 3 14zM3 14l9 8 9-8M9 11l3 11 3-11"/></svg><strong>GitLab</strong><span>Repositories and experiments</span></a></li>
-<li><a href="https://stackoverflow.com/users/2903708/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v5h15v-5M7 17h9M8 13l9 2M10 9l8 4M13 5l7 6m-3-9 5 7"/></svg><strong>Stack Overflow</strong><span>Answers and technical discussions</span></a></li>
-<li><a href="https://codepen.io/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 7v6l-10 7-10-7V9zm0 0v7m0 6v7M2 9l10 6 10-6M2 15l10-6 10 6"/></svg><strong>CodePen</strong><span>Interactive front-end demos</span></a></li>
-<li><a href="https://www.linkedin.com/in/nolawi/"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7m0-10v.1M11 17v-7m0 3a3 3 0 0 1 6 0v4"/></svg><strong>LinkedIn</strong><span>Work history and connections</span></a></li>
-<li><a href="https://slides.com/nolawipetros"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v4m-4 0h8M7 13l3-3 3 2 4-4"/></svg><strong>Slides.com</strong><span>Talks and presentations</span></a></li>
-<li><a href="https://x.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l12 16h-4L4 4Zm16 0-7 8m-2 2-7 6"/></svg><strong>X / Twitter</strong><span>Follow @nolawi</span></a></li>
-</ul></section>
+<section class="section wrap profiles-section" aria-labelledby="profiles-title"><h2 id="profiles-title">Find me around the web</h2><ul class="profile-grid">
+<li><a href="https://github.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg><strong>GitHub</strong></a></li>
+<li><a href="https://gitlab.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 22 9-8-3-11-3 8H9L6 3 3 14zM3 14l9 8 9-8M9 11l3 11 3-11"/></svg><strong>GitLab</strong></a></li>
+<li><a href="https://stackoverflow.com/users/2903708/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v5h15v-5M7 17h9M8 13l9 2M10 9l8 4M13 5l7 6m-3-9 5 7"/></svg><strong>Stack Overflow</strong></a></li>
+<li><a href="https://codepen.io/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 7v6l-10 7-10-7V9zm0 0v7m0 6v7M2 9l10 6 10-6M2 15l10-6 10 6"/></svg><strong>CodePen</strong></a></li>
+<li><a href="https://www.linkedin.com/in/nolawi/"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7m0-10v.1M11 17v-7m0 3a3 3 0 0 1 6 0v4"/></svg><strong>LinkedIn</strong></a></li>
+<li><a href="https://slides.com/nolawipetros"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v4m-4 0h8M7 13l3-3 3 2 4-4"/></svg><strong>Slides.com</strong></a></li>
+<li><a href="https://x.com/nolawi"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l12 16h-4L4 4Zm16 0-7 8m-2 2-7 6"/></svg><strong>X / Twitter</strong></a></li>
+</ul>
+<!-- github-activity -->
+</section>
 <section id="about" class="about"><div class="wrap section"><h2>A little about me</h2><p>I write about accessibility, UX testing, and design systems. When I shut the laptop, I’m usually outside with my dog, working on my cabin, or making something with my hands.</p>
 <p><a href="about.html">More about me</a></p>
 <ul class="hobbies" aria-label="Hobbies">
@@ -183,10 +117,13 @@
 </section>
 </div></section>
 <section class="section wrap contact-card" id="contact" aria-labelledby="contact-title">
-<div><h2 id="contact-title">Contact me</h2><p>Want to talk design systems, accessibility, or working together?</p></div>
-<div class="actions"><a class="button" href="mailto:nolawi.petros@gmail.com"><span aria-hidden="true">✉</span> Email me</a><a class="outline linkedin-profile" href="https://www.linkedin.com/in/nolawi/"><span aria-hidden="true">in</span> Nolawi on LinkedIn</a></div>
+<div>
+<h2 id="contact-title">Contact me</h2>
+<p>Want to talk shop or work together?</p>
+</div>
+<a class="button" href="mailto:nolawi.petros@gmail.com"><span aria-hidden="true">✉</span> Email me</a>
 </section>
 </main>
-<footer class="wrap footer"><a class="brand" href="./"><span aria-hidden="true">n.</span> Nolawi</a><a href="https://medium.com/@nolawi">Medium</a><a href="https://github.com/nolawi">GitHub</a><a href="https://www.linkedin.com/in/nolawi/">LinkedIn</a></footer>
+<footer class="wrap footer"><a class="brand" href="./" aria-label="Portfolio home"><span aria-hidden="true">n.</span></a><a href="https://medium.com/@nolawi">Medium</a><a href="https://github.com/nolawi">GitHub</a><a href="https://www.linkedin.com/in/nolawi/">LinkedIn</a></footer>
 </body>
 </html>

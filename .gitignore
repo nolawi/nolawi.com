@@ -12,3 +12,5 @@ dist/
 /project-*.html
 /content/medium-feed.json
 /content/medium-feed.tmp
+/content/github-activity-latest.json
+/content/github-activity-latest.tmp

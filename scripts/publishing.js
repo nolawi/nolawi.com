@@ -3,6 +3,10 @@ import { escape, published, readContent, renderBody, renderList, tags, validate 
 
 import { projectArt } from './project-art.js';
 import { atomicDesignDemo } from './atomic-design-demo.js';
+import { readingDemo } from './reading-demo-markup.js';
+import { renderGitHubActivity } from './github-activity.js';
+
+const recordsDemo = '<div id="records-explorer"><p>The interactive sample needs JavaScript.</p></div>';
 
 const root = new URL('../', import.meta.url);
 const defaultSite = 'https://nolawi.github.io/nolawi.com/';
@@ -76,6 +80,8 @@ ${project.featured ? projectArt[project.art] || '' : ''}<p class="eyebrow">${esc
 export function generatePages(data = readPublishingContent()) {
   const entries = published(data);
   const pages = new Map();
+  const projects = liveProjects(data);
+  const selectedDesignProjects = projects.filter(project => ['delano', 'uswds', 'ngkit'].includes(project.id));
   for (const a of entries.filter(item => item.path)) {
     const schema = JSON.stringify({
       '@context': 'https://schema.org', '@type': 'Article', headline: a.title,
@@ -87,8 +93,13 @@ export function generatePages(data = readPublishingContent()) {
       `<h1>${escape(a.title)}</h1>${tags(a, data.topics)}
 ${a.date ? `<p><time datetime="${a.date}">${a.date}</time></p>` : ''}
 <div class="prose">${renderBody(a.body)}</div>
-${a.id === 'ai-component' ? '<div id="records-explorer"><p>The interactive sample needs JavaScript.</p></div>' : ''}
-${a.id === 'atomic-design' ? atomicDesignDemo : ''}
+${a.id === 'ai-component' ? recordsDemo : ''}
+${a.id === 'atomic-design' ? `${atomicDesignDemo}
+<section aria-labelledby="design-projects-title" id="selected-projects">
+<h2 id="design-projects-title">Selected projects</h2>
+${projectCards(selectedDesignProjects)}
+<p><a href="projects.html">All projects</a></p>
+</section>` : ''}
 <script type="application/ld+json">${schema}</script>`));
   }
   const oldChatPath = 'ai-checkable-answers.html';
@@ -103,7 +114,6 @@ ${a.id === 'atomic-design' ? atomicDesignDemo : ''}
     if (related.length) pages.set(`topic-${t.id}.html`, page(t.label, `Writing about ${t.label} by Nolawi Petros.`,
       `<h1>${escape(t.label)}</h1>${renderList(related, data.topics)}`));
   }
-  const projects = liveProjects(data);
   pages.set('projects.html', page('Selected projects', 'Design systems, open source, and accessibility projects by Nolawi Petros.',
     `<h1>Selected projects</h1>${projectCards(projects)}`));
   for (const project of projects.filter(item => item.body?.trim())) {
@@ -122,7 +132,7 @@ ${a.id === 'atomic-design' ? atomicDesignDemo : ''}
   const items = entries.filter(a => a.path).map(a =>
     `<item><title>${escape(a.title)}</title><link>${escape(absolute(a.path))}</link><guid>${escape(absolute(a.path))}</guid><description>${escape(a.description)}</description>${a.date ? `<pubDate>${new Date(a.date).toUTCString()}</pubDate>` : ''}</item>`).join('');
   writeFileSync(at('public/feed.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Nolawi · Writing</title><link>${escape(absolute('writing.html'))}</link><description>Essays by Nolawi Petros</description>${items}</channel></rss>\n`);
-  const routes = ['', 'writing.html', 'about.html', 'resume.html', 'trail.html', ...Array.from(pages.keys()).filter(path => path !== oldChatPath || entries.some(article => article.path === oldChatPath))];
+  const routes = ['', 'writing.html', 'about.html', 'resume.html', 'accessibility.html', 'trail.html', ...Array.from(pages.keys()).filter(path => path !== oldChatPath || entries.some(article => article.path === oldChatPath))];
   writeFileSync(at('public/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(route => `<url><loc>${escape(absolute(route))}</loc></url>`).join('')}</urlset>\n`);
 }
 
@@ -133,17 +143,18 @@ export function injectPublishing(html, filename) {
     return html.replace('</head>', `<link rel="canonical" href="${escape(absolute('ai-component.html'))}"></head>`);
   }
   const home = filename === 'index.html';
-  // The homepage already links to this essay in its AI section.
-  const homeEntries = entries.filter(article => article.id !== 'ai-component');
-  const list = home ? [...homeEntries.filter(a => a.featured), ...homeEntries.filter(a => !a.featured && a.path), ...homeEntries.filter(a => !a.featured && !a.path)].slice(0, 5) : entries;
+  const list = home ? entries.filter(article => article.publication === 'Medium').slice(0, 5) : entries;
   const social = '<ul class="social-highlights" aria-label="Selected posts">' +
     [...data.socialPosts].sort((a, b) => b.date.localeCompare(a.date)).map(post =>
       `<li><a href="${escape(post.url)}">${escape(post.title)}</a><time datetime="${post.date}">${post.date}</time></li>`).join('') + '</ul>';
   return html.replace('<!-- writing-list -->', () => renderList(list, data.topics))
+    .replace('<!-- records-demo -->', () => recordsDemo)
+    .replace('<!-- reading-demo -->', () => readingDemo)
+    .replace('<!-- atomic-demo -->', () => atomicDesignDemo)
     .replace('<!-- feature-list -->', () => renderList(entries.filter(article => article.path), data.topics, { descriptions: true }))
     .replace('<!-- medium-list -->', () => renderList(entries.filter(article => article.publication === 'Medium'), data.topics))
+    .replace('<!-- github-activity -->', () => renderGitHubActivity())
     .replace('<!-- social-posts -->', () => social)
-    .replace('<!-- project-list -->', () => projectCards(liveProjects(data)) + '<p><a href="projects.html">All projects</a></p>')
     .replace(/<meta name="robots" content="noindex">/, () => `<meta name="robots" content="${indexable ? 'index,follow' : 'noindex'}">`)
     .replace('</head>', () => `<link rel="canonical" href="${escape(absolute(home ? '' : filename))}">
 <link rel="alternate" type="application/rss+xml" title="Nolawi · Writing" href="./feed.xml">
