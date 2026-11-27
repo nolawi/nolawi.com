@@ -3,6 +3,7 @@ import { readFile, rename, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { renderThemeCss } from '../src/themer.js';
 import { contentFile, readContent, renderBody, safeId, validate } from './content.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -86,6 +87,7 @@ async function update(req, res, action) {
       const article = {
         id: input.id, path: old?.path || `essay-${input.id}.html`, publication: 'Nolawi',
         title: input.title, description: input.description, body: input.body,
+        afterDemo: input.afterDemo ?? old?.afterDemo,
         topics: input.topics, format: input.format, date: input.date || old?.date,
         status: action === 'publish' ? 'published' : 'draft',
         featured: Boolean(input.featured)
@@ -121,9 +123,13 @@ const server = createServer(async (req, res) => {
     if (req.method === 'POST' && action) return await update(req, res, action);
     if (req.method !== 'GET') return send(res, 405, { error: 'Unsupported method.' });
 
+    if (url.pathname === '/tokens.css') {
+      res.writeHead(200, { 'Content-Type': mime['.css'] });
+      return res.end(renderThemeCss());
+    }
     const routes = { '/': 'cms/index.html', '/editor.js': 'cms/editor.js', '/editor.css': 'cms/editor.css',
       '/components': 'cms/components.html', '/catalog.js': 'cms/catalog.js',
-      '/tokens.css': 'themes.css', '/components.css': 'site.css' };
+      '/components.css': 'site.css' };
     let file = routes[url.pathname];
     if (url.pathname.startsWith('/preview/')) {
       const base = resolve(root, 'dist');

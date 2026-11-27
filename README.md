@@ -23,7 +23,7 @@ Run `npm run dev` for frontend development or `npm run check` for tests. GitHub 
 - `src/header.js` renders the shared navigation and dark mode toggle at build time.
 - `src/main.js` applies preferences, mounts the header toolbar, and loads interactive modules when their targets exist.
 - `src/display-toolbar.js` connects quick header controls and the full settings dialog to the same state.
-- `src/preferences.js` stores and validates display preferences. `themes.css` defines color tokens, backgrounds, and text-size steps.
+- `src/preferences.js` stores and validates display preferences. `src/themer.js` defines the default theme, palettes, type and size options. The site, theme demo, and component catalog use its generated tokens.
 - `src/display-playground.js` and `src/records-explorer.js` are Vue components. The records explorer uses fictional data and deterministic local lookup in `src/records.js`. `site.js` contains the focus and contrast demos. The saved CodePen remains independent.
 
 ## Before launch

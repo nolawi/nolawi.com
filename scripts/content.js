@@ -35,6 +35,8 @@ export function validate(data) {
     ids.add(a.id);
     if (a.publication === 'Nolawi') {
       const allowed = ['ai-component.html', 'ai-checkable-answers.html', `essay-${a.id}.html`];
+      if (a.id === 'accessibility') allowed.push('accessibility.html');
+      if (a.afterDemo != null && typeof a.afterDemo !== 'string') throw new Error('The demo closing must be text.');
       if (!allowed.includes(a.path) || paths.has(a.path)) throw new Error('Invalid or duplicate article path.');
       paths.add(a.path);
       if (a.status === 'published' && (!text(a.body) || !text(a.description) || !a.topics.length)) {

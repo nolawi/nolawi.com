@@ -1,4 +1,3 @@
-import '../themes.css';
 import '../site.css';
 import { initializePreferences } from './preferences.js';
 import { mountDisplayToolbar } from './display-toolbar.js';
@@ -34,3 +33,6 @@ if (readingDemo) import('./reading-demo.js').then(({ mountReadingDemo }) => moun
 
 const atomicDemo = document.querySelector('#atomic-demo');
 if (atomicDemo) import('./atomic-demo.js').then(({ mountAtomicDemo }) => mountAtomicDemo(atomicDemo));
+
+const themeDemo = document.querySelector('#theme-demo');
+if (themeDemo) import('./theme-demo.js').then(({ mountThemeDemo }) => mountThemeDemo(themeDemo));

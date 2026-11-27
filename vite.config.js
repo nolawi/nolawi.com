@@ -2,6 +2,7 @@ import { readdirSync } from 'node:fs';
 import { basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
+import { renderThemeCss } from './src/themer.js';
 import { renderHeader } from './src/header.js';
 
 import { generatePages, injectPublishing } from './scripts/publishing.js';
@@ -15,7 +16,10 @@ export default defineConfig({
     name: 'portfolio-header',
     transformIndexHtml(html, { filename }) {
       const page = basename(filename);
-      return injectPublishing(html, page).replace('<!-- site-header -->', renderHeader(page === 'index.html'));
+      return {
+        html: injectPublishing(html, page).replace('<!-- site-header -->', renderHeader(page === 'index.html')),
+        tags: [{ tag: 'style', children: renderThemeCss(), injectTo: 'head' }]
+      };
     }
   }],
   build: {

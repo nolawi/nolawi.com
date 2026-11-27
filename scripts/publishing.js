@@ -2,7 +2,9 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 
 import { escape, published, readContent, renderBody, renderList, tags, validate } from './content.js';
 
 import { projectArt } from './project-art.js';
+import { themeDemo } from './theme-demo-markup.js';
 import { atomicDesignDemo } from './atomic-design-demo.js';
+import { accessibilityDemo } from './accessibility-demo-markup.js';
 import { readingDemo } from './reading-demo-markup.js';
 import { renderGitHubActivity } from './github-activity.js';
 
@@ -36,7 +38,7 @@ function readPublishingContent() {
     ...feedArticles.filter(article => !curatedIds.has(mediumStoryId(article.url)))] });
 }
 
-const legacy = ['ai-component.html', 'ai-checkable-answers.html', 'delano.html', 'projects.html'];
+const legacy = ['accessibility.html', 'ai-component.html', 'ai-checkable-answers.html', 'delano.html', 'projects.html'];
 
 function page(title, description, body) {
   return `<!doctype html>
@@ -53,7 +55,7 @@ function page(title, description, body) {
 <a class="skip" href="#main">Skip to content</a>
 <!-- site-header -->
 <main id="main" class="subpage wrap section">${body}</main>
-<footer class="wrap footer"><a href="./">Portfolio home</a><a href="writing.html">Writing</a></footer>
+<footer class="wrap footer"><a href="./">Portfolio home</a><a href="writing.html">Writing</a><a href="about.html">About</a></footer>
 </body></html>`;
 }
 
@@ -83,6 +85,7 @@ export function generatePages(data = readPublishingContent()) {
   const projects = liveProjects(data);
   const selectedDesignProjects = projects.filter(project => ['delano', 'uswds', 'ngkit'].includes(project.id));
   for (const a of entries.filter(item => item.path)) {
+    const closing = a.afterDemo?.trim() ? `<div class="prose post-close">${renderBody(a.afterDemo)}</div>` : '';
     const schema = JSON.stringify({
       '@context': 'https://schema.org', '@type': 'Article', headline: a.title,
       description: a.description, datePublished: a.date,
@@ -94,7 +97,10 @@ export function generatePages(data = readPublishingContent()) {
 ${a.date ? `<p><time datetime="${a.date}">${a.date}</time></p>` : ''}
 <div class="prose">${renderBody(a.body)}</div>
 ${a.id === 'ai-component' ? recordsDemo : ''}
-${a.id === 'atomic-design' ? `${atomicDesignDemo}
+${a.id === 'accessibility' ? accessibilityDemo : ''}
+${a.id === 'atomic-design' ? atomicDesignDemo : ''}
+${closing}
+${a.id === 'atomic-design' ? `${themeDemo}
 <section aria-labelledby="design-projects-title" id="selected-projects">
 <h2 id="design-projects-title">Selected projects</h2>
 ${projectCards(selectedDesignProjects)}
@@ -132,7 +138,7 @@ ${projectCards(selectedDesignProjects)}
   const items = entries.filter(a => a.path).map(a =>
     `<item><title>${escape(a.title)}</title><link>${escape(absolute(a.path))}</link><guid>${escape(absolute(a.path))}</guid><description>${escape(a.description)}</description>${a.date ? `<pubDate>${new Date(a.date).toUTCString()}</pubDate>` : ''}</item>`).join('');
   writeFileSync(at('public/feed.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Nolawi · Writing</title><link>${escape(absolute('writing.html'))}</link><description>Essays by Nolawi Petros</description>${items}</channel></rss>\n`);
-  const routes = ['', 'writing.html', 'about.html', 'resume.html', 'accessibility.html', 'trail.html', ...Array.from(pages.keys()).filter(path => path !== oldChatPath || entries.some(article => article.path === oldChatPath))];
+  const routes = ['', 'writing.html', 'about.html', 'resume.html', 'trail.html', ...Array.from(pages.keys()).filter(path => path !== oldChatPath || entries.some(article => article.path === oldChatPath))];
   writeFileSync(at('public/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(route => `<url><loc>${escape(absolute(route))}</loc></url>`).join('')}</urlset>\n`);
 }
 

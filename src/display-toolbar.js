@@ -1,7 +1,8 @@
-import { options } from './preferences.js';
+import { options } from './themer.js';
 
 export function mountDisplayToolbar(toolbar, preferences) {
   const toggle = toolbar.querySelector('#theme-toggle');
+  const titleFont = toolbar.querySelector('#toolbar-title-font');
   const font = toolbar.querySelector('#toolbar-font');
   const accents = [...toolbar.querySelectorAll('[name=toolbar-accent]')];
   const sizeOutput = toolbar.querySelector('#toolbar-text-size');
@@ -12,7 +13,8 @@ export function mountDisplayToolbar(toolbar, preferences) {
   preferences.subscribe(settings => {
     current = settings;
     toggle.setAttribute('aria-checked', String(settings.theme === 'dark'));
-    font.value = settings.font;
+    titleFont.value = settings.titleFont;
+    font.setAttribute('aria-checked', String(settings.font === 'serif'));
     accents.forEach(input => { input.checked = input.value === settings.accent; });
     sizeOutput.value = options.textSize[settings.textSize];
     steppers.forEach(button => {
@@ -24,7 +26,10 @@ export function mountDisplayToolbar(toolbar, preferences) {
   toggle.addEventListener('click', () => {
     preferences.update({ theme: current.theme === 'dark' ? 'light' : 'dark' });
   });
-  font.addEventListener('change', () => preferences.update({ font: font.value }));
+  titleFont.addEventListener('change', () => preferences.update({ titleFont: titleFont.value }));
+  font.addEventListener('click', () => {
+    preferences.update({ font: current.font === 'serif' ? 'classic' : 'serif' });
+  });
   accents.forEach(input => input.addEventListener('change', () => {
     if (input.checked) preferences.update({ accent: input.value });
   }));

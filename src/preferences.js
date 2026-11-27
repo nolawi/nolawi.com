@@ -1,16 +1,10 @@
-const storageKey = 'nolawi-display';
-export const defaults = Object.freeze({ theme: 'light', textSize: 'default', background: 'default', accent: 'orange', headingSize: 'default', font: 'classic' });
+import { defaults, options } from './themer.js';
+export { defaults, options } from './themer.js';
 
-export const options = Object.freeze({
-  theme: { light: 'Light', dark: 'Dark' },
-  textSize: { small: '90%', default: '100%', large: '112.5%', larger: '125%', largest: '140%' },
-  headingSize: { small: '85%', default: '100%', large: '115%', larger: '130%', largest: '145%' },
-  accent: { orange: 'Orange', gold: 'Ochre', teal: 'Teal', blue: 'Denim', olive: 'Olive' },
-  font: { classic: 'Editorial', sans: 'System sans', serif: 'Serif' },
-  background: { default: 'Default', warm: 'Warm', neutral: 'Neutral' }
-});
+const storageKey = 'nolawi-display';
 
 export function normalizePreferences(value) {
+  if (value?.font === 'sans') value = { ...value, font: 'classic', titleFont: value.titleFont ?? 'sans' };
   return Object.fromEntries(Object.entries(defaults).map(([key, fallback]) => [
     key, Object.hasOwn(options[key], value?.[key]) ? value[key] : fallback
   ]));

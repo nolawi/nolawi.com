@@ -4,24 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<meta name="description" content="Try Nolawi Petros’s accessibility demos for reading settings, keyboard focus, contrast, and tap targets.">
-<title>Accessibility | Nolawi Petros</title>
+<meta name="description" content="Try reading settings, keyboard focus, contrast, and tap targets while making a page easier to use.">
+<title>Accessibility in the details | Nolawi Petros</title>
 <script type="module" src="/src/main.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <!-- site-header -->
-<main id="main">
-<article class="subpage wrap accessibility-intro" aria-labelledby="accessibility-article-title">
-<h1 id="accessibility-article-title">Accessibility in the details</h1>
-<div class="prose">
-<p class="intro">I like to start by trying to do something on the page. Read a paragraph, fill out a form, or get to a button without a mouse. That’s usually where I find the things we missed.</p>
+<main id="main" class="subpage wrap section"><h1>Accessibility in the details</h1><ul class="content-tags" aria-label="Article tags"><li><span>Essay</span></li><li><span>Accessibility</span></li></ul>
+
+<div class="prose"><p>I like to start by trying to do something on the page. Read a paragraph, fill out a form, or get to a button without a mouse. That’s usually where I find the things we missed.</p>
 <h2>Start with one task</h2>
-<p>At AbbVie, I helped work accessibility testing into how we shipped. One way I’d test a change is to follow the same path a visitor would. Can I tell where keyboard focus is? Can I read the page when the text gets bigger? Can I tap the button I meant to tap?</p>
+<p>At AbbVie, I helped make accessibility testing part of how we shipped. I like to pick a task and try it a few ways. Tab through it. Make the text bigger. Try it on a phone with one hand. A button that looks fine on my laptop can be surprisingly hard to hit when I’m holding a phone.</p>
 <p>Try changing the reading sample below. Then try the keyboard and tap-target demos. Each one keeps the task small so you can see what a single design change does.</p>
 </div>
-</article>
-<section class="section wrap" aria-labelledby="lab-title">
+
+<section class="accessibility-playground" aria-labelledby="lab-title">
 <div class="playground-heading">
 <nav class="demo-index" aria-label="Jump to an accessibility demo">
 <a href="#reading-demo"><span aria-hidden="true">Aa</span> Reading settings</a>
@@ -97,7 +95,10 @@
 <iframe class="saved-pen" title="Switchback trail picker" src="trail.html?embed=1" width="800" height="450" loading="lazy"></iframe>
 </section>
 </section>
-</main>
-<footer class="wrap footer"><a href="./#work">Featured work</a><a href="writing.html">Writing</a></footer>
-</body>
-</html>
+
+<div class="prose post-close"><p>When something gets in the way, I try to fix it where it starts. If the shared button is too small to tap, I’d fix the button in the design system and try the same task again. That way, the next team using it gets the improvement too.</p>
+</div>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Accessibility in the details","description":"Try reading settings, keyboard focus, contrast, and tap targets while making a page easier to use.","author":{"@type":"Person","name":"Nolawi Petros","url":"https://nolawi.github.io/nolawi.com/about.html"},"mainEntityOfPage":"https://nolawi.github.io/nolawi.com/accessibility.html"}</script></main>
+<footer class="wrap footer"><a href="./">Portfolio home</a><a href="writing.html">Writing</a><a href="about.html">About</a></footer>
+</body></html>

@@ -1,10 +1,9 @@
-import { options } from './preferences.js';
+import { options, renderThemeOptions } from './themer.js';
 
 const links = [
   ['Work', '#work'],
   ['Experience', '#experience'],
   ['Writing', 'writing.html'],
-  ['About', 'about.html'],
   ['Contact me', '#contact']
 ];
 
@@ -21,7 +20,12 @@ export function renderHeader(home) {
   <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false">
     <span>Dark mode</span><span class="switch-track" aria-hidden="true"><span>☼</span><span>☾</span></span>
   </button>
-  <label class="toolbar-select toolbar-font"><span class="toolbar-icon font-sample" aria-hidden="true">Aa</span> Font <span class="select-frame"><select id="toolbar-font">${renderOptions(options.font)}</select><span class="select-chevron" aria-hidden="true"></span></span></label>
+  <label class="theme-select">Title font
+    <span class="theme-select-frame"><select id="toolbar-title-font">${renderThemeOptions('titleFont')}</select><span aria-hidden="true">⌄</span></span>
+  </label>
+  <button class="theme-switch font-switch" id="toolbar-font" type="button" role="switch" aria-checked="false">
+    <span>Serif body</span><span class="switch-track" aria-hidden="true"><span>Aa</span><span>Aa</span></span>
+  </button>
   <fieldset class="toolbar-accents"><legend>Accent</legend><div class="toolbar-swatches">${renderSwatches()}</div></fieldset>
   <div class="type-stepper" role="group" aria-label="Page text size">
     <button type="button" data-text-step="-1" aria-label="Decrease page text size">A−</button>
@@ -32,12 +36,6 @@ export function renderHeader(home) {
 </div>
 </header>
 <a class="back-to-top" href="#page-top" hidden><span aria-hidden="true">↑</span> Back to top</a>`;
-}
-
-function renderOptions(values) {
-  return Object.entries(values).map(([value, label]) =>
-    `<option value="${value}">${label}</option>`
-  ).join('');
 }
 
 function renderSwatches() {

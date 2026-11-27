@@ -12,12 +12,32 @@ export function renderGitHubActivity() {
     }
     return [];
   })[0];
-  if (!activity) return '';
+  const activeDays = activity?.levels.filter(level => level > 0).length;
+  const calendar = activity ? renderCalendar(activity, activeDays) : '';
+  return `<div class="code-activity" role="group" aria-label="Code profiles">
+<section class="system-card" aria-labelledby="github-activity-title">
+<h3 id="github-activity-title"><a href="https://github.com/nolawi#js-contribution-activity">GitHub contributions</a></h3>
+<p class="code-membership">Member since <time datetime="2012-05-16">2012</time></p>
+${calendar}
+<p class="code-history"><a href="https://github.com/nolawi/anchor-target">anchor-target</a> <span>· 2015</span> <a href="delano.html">Delano project</a></p>
+</section>
+<section class="system-card" aria-labelledby="gitlab-activity-title">
+<h3 id="gitlab-activity-title"><a href="https://gitlab.com/nolawi">GitLab</a></h3>
+<p class="code-membership">Member since <time datetime="2017-02-14">2017</time></p>
+<p class="code-history">No recent entries are visible on the public calendar.</p>
+</section>
+</div>`;
+}
 
-  const activeDays = activity.levels.filter(level => level > 0).length;
+function renderCalendar(activity, activeDays) {
+  const through = new Date(activity.through + 'T00:00:00Z');
+  const endLabel = new Intl.DateTimeFormat('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'
+  }).format(through);
   return `<figure class="github-activity">
-<figcaption><a href="https://github.com/nolawi#js-contribution-activity">GitHub contributions</a>
-<span>${activeDays} active days in 13 weeks · through <time datetime="${activity.through}">${activity.through}</time></span></figcaption>
+<figcaption><strong>${activeDays} active days</strong> in the last 13 weeks
+<span>Through <time datetime="${activity.through}">${endLabel}</time></span></figcaption>
 <div class="github-calendar" aria-hidden="true">${activity.levels.map(level => `<span data-level="${level}"></span>`).join('')}</div>
+<p class="github-legend" aria-hidden="true">Less <span data-level="0"></span><span data-level="1"></span><span data-level="2"></span><span data-level="3"></span><span data-level="4"></span> More</p>
 </figure>`;
 }

@@ -42,7 +42,7 @@ function openArticle(id) {
   entries.value = id;
   const article = data.articles.find(entry => entry.id === id);
   articleForm.elements.id.readOnly = Boolean(article);
-  for (const key of ['title', 'id', 'format', 'date', 'description', 'body']) {
+  for (const key of ['title', 'id', 'format', 'date', 'description', 'body', 'afterDemo']) {
     if (article?.[key]) articleForm.elements[key].value = article[key];
   }
   articleForm.elements.featured.checked = Boolean(article?.featured);
@@ -58,7 +58,8 @@ articleForm.elements.title.addEventListener('input', event => {
 });
 document.querySelector('#preview').addEventListener('click', async () => {
   try {
-    const { html } = await request('preview', { body: articleForm.elements.body.value });
+    const { body, afterDemo } = articleForm.elements;
+    const { html } = await request('preview', { body: [body.value, afterDemo.value].filter(Boolean).join('\n\n') });
     preview.srcdoc = '<!doctype html><html lang="en"><meta charset="utf-8"><style>body { font: 1rem/1.6 system-ui; padding: 1rem; }</style><body>' + html;
     preview.hidden = false;
     articleStatus.textContent = 'Draft preview ready.';
