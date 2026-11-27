@@ -9,7 +9,10 @@ export function mountRecordsExplorer(element) {
       const question = ref('');
       const messages = ref([]);
       const selectedSource = ref(null);
-      const filtered = computed(() => records.filter(record => !status.value || record.status === status.value));
+      const matchedIds = ref(null);
+      let sourceTrigger;
+      const filtered = computed(() => records.filter(record =>
+        (!matchedIds.value || matchedIds.value.includes(record.id)) && (!status.value || record.status === status.value)));
       const examples = ['Show open records in North', 'What is SR-112?', 'How much will this cost?'];
       const statusCounts = ['Open', 'In review', 'Closed'].map(value => ({
         value,
@@ -20,6 +23,7 @@ export function mountRecordsExplorer(element) {
         const query = value.trim();
         if (!query) return;
         selectedSource.value = null;
+        matchedIds.value = null;
         const sources = answerQuestion(query);
         const response = sources === null
           ? 'I can only look up sample records by ID, region, or status. This question needs information or a comparison the demo does not support.'
@@ -32,12 +36,14 @@ export function mountRecordsExplorer(element) {
         question.value = '';
       }
 
-      function sourceLink(record) {
+      function sourceLink(record, sources) {
         return h('a', {
           href: '#record-' + record.id,
           onClick: async event => {
             event.preventDefault();
             status.value = '';
+            sourceTrigger = event.currentTarget;
+            matchedIds.value = sources.map(source => source.id);
             selectedSource.value = record.id;
             await nextTick();
             const row = element.querySelector('#record-' + record.id);
@@ -59,7 +65,19 @@ export function mountRecordsExplorer(element) {
             value: status.value,
             onChange: event => { status.value = event.target.value; }
           }, ['', 'Open', 'In review', 'Closed'].map(value => h('option', { value }, value || 'All statuses'))),
-          h('p', { role: 'status' }, `${filtered.value.length} records shown`),
+          h('p', { role: 'status' }, matchedIds.value
+            ? `${filtered.value.length} matching records shown.`
+            : `${filtered.value.length} records shown.`),
+          selectedSource.value ? h('div', { class: 'links record-source-actions' }, [
+            h('button', { class: 'outline', type: 'button', onClick: () => sourceTrigger?.focus() }, 'Back to answer'),
+            !compact ? h('button', { class: 'outline', type: 'button', onClick: async () => {
+              matchedIds.value = null;
+              selectedSource.value = null;
+              status.value = '';
+              await nextTick();
+              element.querySelector('#record-status')?.focus();
+            } }, 'Show all records') : null
+          ]) : null,
           h('div', { class: 'record-table' }, [
             h('table', [
               h('caption', 'Fictional service requests'),
@@ -102,6 +120,7 @@ export function mountRecordsExplorer(element) {
               if (!messages.value.length) return;
               messages.value = [];
               selectedSource.value = null;
+              matchedIds.value = null;
               element.querySelector('#record-question')?.focus();
             }
           }, 'Clear conversation'),
@@ -109,7 +128,7 @@ export function mountRecordsExplorer(element) {
             messages.value.map((message, index) => h('article', { key: index }, [
               h('p', [h('strong', 'You: '), message.query]),
               h('p', message.response),
-              message.sources?.length ? h('ul', message.sources.map(record => h('li', [sourceLink(record)]))) : null
+              message.sources?.length ? h('ul', message.sources.map(record => h('li', [sourceLink(record, message.sources)]))) : null
             ])))
         ]);
 

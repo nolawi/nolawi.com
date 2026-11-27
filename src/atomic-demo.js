@@ -15,14 +15,30 @@ export function mountAtomicDemo(section) {
     organism: 'The same filter now sits above directory results. Try searching for alert.'
   };
 
-  stages.addEventListener('change', ({ target }) => {
-    if (target.name !== 'stage') return;
-    preview.dataset.stage = target.value;
-    description.textContent = descriptions[target.value];
-    directory.hidden = target.value !== 'organism';
+  const steps = [...stages.querySelectorAll('input[name=stage]')];
+  const navigation = section.querySelector('[data-atomic-navigation]');
+  const next = navigation.querySelector('[data-atomic-next]');
+  const count = navigation.querySelector('[data-stage-count]');
+  let stageIndex = 0;
+
+  function showStage(index) {
+    stageIndex = index;
+    const step = steps[index];
+    step.checked = true;
+    preview.dataset.stage = step.value;
+    description.textContent = descriptions[step.value];
+    directory.hidden = step.value !== 'organism';
     query.readOnly = directory.hidden;
     filterButton.disabled = query.readOnly;
+    count.value = `Step ${index + 1} of ${steps.length}`;
+    next.textContent = index === steps.length - 1 ? 'Back to atoms' : 'Next step';
+  }
+
+  stages.addEventListener('change', ({ target }) => {
+    const index = steps.indexOf(target);
+    if (index >= 0) showStage(index);
   });
+  next.addEventListener('click', () => showStage((stageIndex + 1) % steps.length));
 
   filter.addEventListener('submit', event => {
     event.preventDefault();
@@ -35,6 +51,6 @@ export function mountAtomicDemo(section) {
     status.textContent = `${matches.length} ${matches.length === 1 ? 'component' : 'components'} found.`;
   });
 
-  description.textContent = descriptions.atoms;
-  stages.hidden = false;
+  showStage(steps.findIndex(step => step.checked));
+  stages.hidden = navigation.hidden = false;
 }

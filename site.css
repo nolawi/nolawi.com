@@ -690,3 +690,9 @@ h1, h2, h3, h4 { overflow-wrap: anywhere; }
   background: var(--accent);
   font: 700 .75rem/1 system-ui, sans-serif;
 }
+
+.record-source-actions { margin-bottom: .65rem; gap: .45rem; }
+.record-source-actions button { padding: .3rem .55rem; }
+.reading-examples h4 span { font-weight: 400; }
+.atomic-step-controls:not([hidden]) { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .8rem; margin-top: .65rem; }
+.atomic-step-controls output { font-size: .875rem; }

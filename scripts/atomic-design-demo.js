@@ -6,6 +6,10 @@ export const atomicDesignDemo = `<section class="system-card atomic-demo" id="at
   <label><input type="radio" name="stage" value="molecule"> Molecule</label>
   <label><input type="radio" name="stage" value="organism"> Organism</label>
 </fieldset>
+<div class="atomic-step-controls" data-atomic-navigation hidden>
+<output data-stage-count>Step 1 of 3</output>
+<button class="outline" type="button" data-atomic-next>Next step</button>
+</div>
 <p data-atomic-description role="status">A label, text field, and button start as separate pieces.</p>
 <div class="atomic-preview" data-atomic-preview data-stage="atoms">
   <form class="atomic-filter" role="search" aria-label="Component directory">
