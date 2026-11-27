@@ -7,15 +7,17 @@ interface Props {
   title: string;
   description: string;
   path: string;
+  date?: string;
 }
 
-const { title, description, path } = Astro.props;
+const { title, description, path, date } = Astro.props;
 const { canonical, authorUrl, robots, analytics } = pageMetadata(path);
 const structuredData = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: title,
   description,
+  datePublished: date,
   author: { '@type': 'Person', name: 'Nolawi Petros', url: authorUrl },
   mainEntityOfPage: canonical
 }).replaceAll('<', '\\u003c');

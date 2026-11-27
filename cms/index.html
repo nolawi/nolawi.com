@@ -23,6 +23,17 @@
 <label>Summary <textarea name="description" rows="2"></textarea></label>
 <fieldset><legend>Topics</legend><div id="topics"></div></fieldset>
 <label>Body (Markdown) <textarea name="body" rows="12"></textarea></label>
+<div id="codepen-fields"></div>
+<template id="codepen-template">
+<fieldset>
+<legend>CodePen demo</legend>
+<div class="fields">
+<label>Pen ID <input name="penId" required pattern="[A-Za-z0-9]+"></label>
+<label>Demo title <input name="penTitle" required></label>
+<label>Height (px) <input type="number" name="penHeight" min="1" required></label>
+</div>
+</fieldset>
+</template>
 <label>Closing (Markdown, optional) <textarea name="afterDemo" rows="3"></textarea></label>
 <label class="inline"><input type="checkbox" name="featured"> Feature on homepage</label>
 <div class="actions">
@@ -32,7 +43,7 @@
 </div>
 <p role="status" id="article-status"></p>
 </form>
-<iframe id="draft-preview" title="Article draft preview" sandbox hidden></iframe>
+<iframe id="draft-preview" title="Article draft preview" sandbox="allow-popups" hidden></iframe>
 </section>
 <section aria-labelledby="post-title">
 <h2 id="post-title">Featured X posts</h2>

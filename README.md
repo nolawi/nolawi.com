@@ -34,15 +34,25 @@ In the studio's Projects panel, save a draft or publish it to the local preview.
 
 ## Astro publishing prototype
 
-The AI chat feature has a local Astro preview at its existing `/ai-component.html` route. The preview reads the [Markdown entry](prototype/content/ai-component.md), validates its frontmatter at build time, and renders it with a reusable layout. The production editor and publish workflow still use `content/site.json` for the live feature, listings, RSS, and sitemap. For the prototype, edit the Markdown entry and rebuild the preview.
+The [AI chat feature](prototype/content/ai-component.md), [Accessibility feature](prototype/content/accessibility.md), and [Design Systems feature](prototype/content/atomic-design.md) each use one Markdown entry for their page, CodePen settings, Writing listing, topic pages, and RSS. The local studio can edit each entry and its CodePen IDs, titles, and embed heights. Save Draft creates an ignored local draft. Preview Draft shows the copy and direct links to the selected Pens. Publish to Local Preview updates the Markdown and rebuilds the portfolio. Commit the Markdown file when the content is ready to share.
 
-Use Node 22.23.4 or newer and run these commands from the repository root.
+Use Node 22.23.4 or newer and run the following from the repository root on the Astro branch.
 
 ```sh
 npm ci
 npm --prefix prototype ci
-node scripts/build-astro-preview.mjs
-npm run preview -- --outDir dist-astro --host 127.0.0.1 --port 4193
+node scripts/build-astro-preview.mjs --cms
+npm run cms
 ```
 
-Open `http://127.0.0.1:4193/ai-component.html`. The build overlays one Astro page and its assets on a separate copy of the site. It uses the existing theme tokens, header controls, CodePen embed renderer, and metadata settings. The local preview stays out of search indexing and omits analytics by default.
+Open `http://127.0.0.1:4175/` for the studio and `http://127.0.0.1:4175/preview/ai-component.html` for the rendered feature. For a standalone preview, run `node scripts/build-astro-preview.mjs` and then `npm run preview -- --outDir dist-astro --host 127.0.0.1 --port 4193`.
+
+Astro renders the three features in the preview. The existing Vite generator also reads the Markdown for the current GitHub Pages build. Medium still syncs from its own feed. The Astro branch gives us a place to review the publishing workflow before merging it.
+
+## Goodreads Books page
+
+The Pages workflow refreshes Nolawi’s Goodreads Read shelf during its existing build and schedule. It tries Goodreads RSS, then uses the public shelf widget when RSS is unavailable. Run `python3 scripts/sync-goodreads.py` and rebuild to refresh the local preview. The generated snapshot contains titles, authors, and Goodreads links and is ignored by Git. An indexable build includes the Books page only when the sync supplies entries. Set `GOODREADS_USER_ID` to override the default profile for a different installation.
+
+## Theme layout check
+
+Run `npx playwright-core install chromium` once, then `npm run check:theme-layout`. Set `CHROME_BIN` to use an installed Chrome or Chromium executable. The check builds the site in a temporary directory and verifies wrapping at phone, landscape, tablet, and desktop sizes through 140% text.

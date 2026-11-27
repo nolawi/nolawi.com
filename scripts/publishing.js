@@ -4,28 +4,33 @@ import { escape, published, readContent, renderBody, renderList, tags, validate 
 import { projectArt } from './project-art.js';
 import { renderGitHubActivity } from './github-activity.js';
 
+const codePenProfile = 'https://codepen.io/nolawi';
+const codePenResult = id => `${codePenProfile}/full/${id}`;
+
 export function codePen(id, title, height) {
-  const profile = 'https://codepen.io/nolawi';
   return `<div class="codepen-demo">
-<p><a href="${profile}/full/${id}">Open ${escape(title)} on CodePen</a></p>
-<iframe title="${escape(title)} interactive demo on CodePen" src="${profile}/embed/${id}?default-tab=result" loading="lazy" width="960" height="${height}"></iframe>
+<p><a href="${codePenResult(id)}">Open ${escape(title)} on CodePen</a></p>
+<iframe title="${escape(title)} interactive demo on CodePen" src="${codePenProfile}/embed/${id}?default-tab=result" loading="lazy" width="960" height="${height}"></iframe>
 </div>`;
 }
 
-const recordsDemo = codePen('ogWQBPv', 'Records Explorer', 760);
-const accessibilityPen = codePen('emWQWzZ', 'Accessibility playground', 740);
-const designPen = codePen('dPWQWXJ', 'Design systems playground', 790);
-const accessibilityPlayground = `<section class="accessibility-playground" aria-labelledby="lab-title">
+const renderDemo = ({ id, title, height }) => codePen(id, title, height);
+function accessibilityPlayground([playground, switchback]) {
+  return `<section class="accessibility-playground" aria-labelledby="lab-title">
 <h2 id="lab-title">Accessibility playground</h2>
 <p>Try reading settings, tap targets, keyboard focus, or the contrast checker.</p>
-${accessibilityPen}
+${renderDemo(playground)}
 <section aria-labelledby="switchback-title" class="pen-example">
 <h3 id="switchback-title">Switchback</h3>
 <p>Pick a trail stop by mouse or keyboard. Look for the shape, label, and color that show which stop is selected.</p>
-${codePen('LEyJxMZ', 'Switchback', 540)}
-<p><a href="trail.html">Switchback on nolawi.com</a></p>
+${renderDemo(switchback)}
 </section>
 </section>`;
+}
+
+export function renderFeatureDemos(id, demos) {
+  return id === 'accessibility' ? accessibilityPlayground(demos) : demos.map(renderDemo).join('\n');
+}
 
 const root = new URL('../', import.meta.url);
 const defaultSite = 'https://nolawi.github.io/nolawi.com/';
@@ -64,7 +69,7 @@ function readPublishingContent() {
     ...feedArticles.filter(article => !curatedIds.has(mediumStoryId(article.url)))] });
 }
 
-const legacy = ['accessibility.html', 'ai-component.html', 'ai-checkable-answers.html', 'delano.html', 'projects.html'];
+const legacy = ['accessibility.html', 'ai-component.html', 'ai-checkable-answers.html', 'delano.html', 'projects.html', 'trail.html', 'books.html'];
 
 function page(title, description, body) {
   return `<!doctype html>
@@ -105,11 +110,55 @@ ${project.featured ? projectArt[project.art] || '' : ''}<p class="eyebrow">${esc
     (other ? `<div class="project-grid">${other}</div>` : '');
 }
 
+export function renderDesignProjects(data) {
+  const selectedDesignProjects = liveProjects(data).filter(project => ['delano', 'uswds', 'ngkit'].includes(project.id));
+  return `<section aria-labelledby="design-projects-title" id="selected-projects">
+<h2 id="design-projects-title">Selected projects</h2>
+${projectCards(selectedDesignProjects)}
+<p><a href="projects.html">All projects</a></p>
+</section>`;
+}
+
+function readGoodreadsBooks() {
+  try {
+    return JSON.parse(readFileSync(at('content/goodreads-feed.json'), 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  }
+}
+
+function renderBooksWidget(books, { compact = false } = {}) {
+  const shelfUrl = 'https://www.goodreads.com/review/list/22731505-nolawi-petros?shelf=read';
+  const visibleCount = compact ? 4 : 12;
+  const items = compact ? books.slice(0, visibleCount) : books;
+  const heading = compact ? 'h3' : 'h1';
+  const tiles = entries => `<ul class="reading-list">${entries.map(book => {
+    const title = escape(book.title);
+    const cover = book.cover
+      ? `<img src="${escape(book.cover)}" alt="" loading="lazy" referrerpolicy="no-referrer">`
+      : '<span class="book-cover-placeholder" aria-hidden="true">📖</span>';
+    return `<li><a href="${escape(book.url)}"><span class="book-cover">${cover}</span><strong>${title}</strong></a><span class="book-author">${escape(book.author)}</span></li>`;
+  }).join('')}</ul>`;
+  const more = items.length > visibleCount
+    ? `<details class="reading-more"><summary>More books</summary>${tiles(items.slice(visibleCount))}</details>`
+    : '';
+  const badge = compact
+    ? '<a class="goodreads-badge" href="books.html"><span class="goodreads-mark" aria-hidden="true">g</span> More books</a>'
+    : `<a class="goodreads-badge" href="${shelfUrl}" aria-label="Open my Read shelf on Goodreads"><span class="goodreads-mark" aria-hidden="true">g</span> Goodreads <span aria-hidden="true">↗</span></a>`;
+  return `<section class="books-widget${compact ? ' books-widget-compact' : ''}" aria-labelledby="books-title">
+<header class="books-widget-header">
+<${heading} id="books-title">Books I’ve read</${heading}>
+${badge}
+</header>
+${items.length ? tiles(items.slice(0, visibleCount)) + more : '<p>The Goodreads Read shelf is unavailable.</p>'}
+</section>`;
+}
+
 export function generatePages(data = readPublishingContent()) {
   const entries = published(data);
   const pages = new Map();
   const projects = liveProjects(data);
-  const selectedDesignProjects = projects.filter(project => ['delano', 'uswds', 'ngkit'].includes(project.id));
   for (const a of entries.filter(item => item.path)) {
     const closing = a.afterDemo?.trim() ? `<div class="prose post-close">${renderBody(a.afterDemo)}</div>` : '';
     const schema = JSON.stringify({
@@ -122,15 +171,9 @@ export function generatePages(data = readPublishingContent()) {
       `<h1>${escape(a.title)}</h1>${tags(a, data.topics)}
 ${a.date ? `<p><time datetime="${a.date}">${a.date}</time></p>` : ''}
 <div class="prose">${renderBody(a.body)}</div>
-${a.id === 'ai-component' ? recordsDemo : ''}
-${a.id === 'accessibility' ? accessibilityPlayground : ''}
-${a.id === 'atomic-design' ? designPen : ''}
+${a.demos ? renderFeatureDemos(a.id, a.demos) : ''}
 ${closing}
-${a.id === 'atomic-design' ? `<section aria-labelledby="design-projects-title" id="selected-projects">
-<h2 id="design-projects-title">Selected projects</h2>
-${projectCards(selectedDesignProjects)}
-<p><a href="projects.html">All projects</a></p>
-</section>` : ''}
+${a.id === 'atomic-design' ? renderDesignProjects(data) : ''}
 <script type="application/ld+json">${schema}</script>`));
   }
   const oldChatPath = 'ai-checkable-answers.html';
@@ -140,10 +183,22 @@ ${projectCards(selectedDesignProjects)}
 <title>When your app gets a chat interface</title></head>
 <body><p><a href="ai-component.html">Continue to the article and demo</a></p></body></html>`);
   }
+  const switchback = entries.find(article => article.id === 'accessibility')?.demos[1];
+  if (switchback) {
+    const url = escape(codePenResult(switchback.id));
+    pages.set('trail.html', `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=${url}"><title>Switchback on CodePen</title></head>
+<body><p><a href="${url}">Open Switchback on CodePen</a></p></body></html>`);
+  }
   for (const t of data.topics) {
     const related = entries.filter(a => a.topics.includes(t.id));
     if (related.length) pages.set(`topic-${t.id}.html`, page(t.label, `Writing about ${t.label} by Nolawi Petros.`,
       `<h1>${escape(t.label)}</h1>${renderList(related, data.topics)}`));
+  }
+  const books = readGoodreadsBooks();
+  if (books.length || !indexable) {
+    pages.set('books.html', page('Books I’ve read', 'Books from my Goodreads Read shelf.', renderBooksWidget(books)));
   }
   pages.set('projects.html', page('Selected projects', 'Design systems, open source, and accessibility projects by Nolawi Petros.',
     `<h1>Selected projects</h1>${projectCards(projects)}`));
@@ -163,25 +218,29 @@ ${projectCards(selectedDesignProjects)}
   const items = entries.filter(a => a.path).map(a =>
     `<item><title>${escape(a.title)}</title><link>${escape(absolute(a.path))}</link><guid>${escape(absolute(a.path))}</guid><description>${escape(a.description)}</description>${a.date ? `<pubDate>${new Date(a.date).toUTCString()}</pubDate>` : ''}</item>`).join('');
   writeFileSync(at('public/feed.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel><title>Nolawi · Writing</title><link>${escape(absolute('writing.html'))}</link><description>Essays by Nolawi Petros</description>${items}</channel></rss>\n`);
-  const routes = ['', 'writing.html', 'about.html', 'resume.html', 'trail.html', ...Array.from(pages.keys()).filter(path => path !== oldChatPath || entries.some(article => article.path === oldChatPath))];
+  const routes = ['', 'writing.html', 'about.html', 'resume.html', ...Array.from(pages.keys()).filter(path => path !== 'trail.html' && (path !== 'books.html' || books.length > 0) && (path !== oldChatPath || entries.some(article => article.path === oldChatPath)))];
   writeFileSync(at('public/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(route => `<url><loc>${escape(absolute(route))}</loc></url>`).join('')}</urlset>\n`);
 }
 
 export function injectPublishing(html, filename) {
+  if (filename === 'trail.html') return html;
   const data = readPublishingContent();
   const entries = published(data);
   if (filename === 'ai-checkable-answers.html' && /http-equiv="refresh"/.test(html)) {
     return html.replace('</head>', `<link rel="canonical" href="${escape(absolute('ai-component.html'))}"></head>`);
   }
   const home = filename === 'index.html';
+  const books = home ? readGoodreadsBooks() : [];
   const list = home ? entries.filter(article => article.publication === 'Medium').slice(0, 5) : entries;
   const social = '<ul class="social-highlights" aria-label="Selected posts">' +
-    [...data.socialPosts].sort((a, b) => b.date.localeCompare(a.date)).map(post =>
+    [...data.socialPosts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 2).map(post =>
       `<li><a href="${escape(post.url)}">${escape(post.title)}</a><time datetime="${post.date}">${post.date}</time></li>`).join('') + '</ul>';
   return html.replace('<!-- writing-list -->', () => renderList(list, data.topics))
-    .replace('<!-- records-demo -->', () => recordsDemo)
-    .replace('<!-- accessibility-demo -->', () => accessibilityPen)
-    .replace('<!-- design-demo -->', () => designPen)
+    .replace('<!-- books-widget -->', () => books.length ? renderBooksWidget(books, { compact: true }) : '')
+    .replace('<!-- books-link -->', () => books.length ? '<a href="books.html">Books</a>' : '')
+    .replace('<!-- records-demo -->', () => renderDemo(entries.find(article => article.id === 'ai-component').demos[0]))
+    .replace('<!-- accessibility-demo -->', () => renderDemo(entries.find(article => article.id === 'accessibility').demos[0]))
+    .replace('<!-- design-demo -->', () => renderDemo(entries.find(article => article.id === 'atomic-design').demos[0]))
     .replace('<!-- feature-list -->', () => renderList(entries.filter(article => article.path), data.topics, { descriptions: true }))
     .replace('<!-- medium-list -->', () => renderList(entries.filter(article => article.publication === 'Medium'), data.topics))
     .replace('<!-- github-activity -->', () => renderGitHubActivity())

@@ -6,7 +6,13 @@ test('drafts stay out of published listings and the chat essay appears once', ()
   const data = readContent();
   data.articles.push({ ...data.articles[0], status: 'draft' });
   assert.ok(published(data).every(article => article.status === 'published'));
-  assert.ok(published(data).some(article => article.path === 'ai-component.html'));
+  const chat = published(data).filter(article => article.path === 'ai-component.html');
+  assert.equal(chat.length, 1);
+  assert.match(chat[0].demos[0].id, /^[A-Za-z0-9]+$/);
+  assert.ok(chat[0].body.trim());
+  const accessibility = published(data).find(article => article.path === 'accessibility.html');
+  assert.equal(accessibility.demos.length, 2);
+  assert.equal(published(data).find(article => article.id === 'atomic-design').path, 'essay-atomic-design.html');
   assert.ok(!published(data).some(article => article.path === 'ai-checkable-answers.html'));
 });
 

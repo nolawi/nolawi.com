@@ -20,3 +20,13 @@ dist/
 /prototype/.astro/
 /prototype/dist/
 /dist-astro/
+
+/prototype/content/*.draft.json
+/.astro-preview-*/
+/prototype/content/*.pending
+/content/site.json.pending
+/trail.html
+/books.html
+/content/books.preview.json
+/content/goodreads-feed.json
+/content/goodreads-feed.tmp

@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import MarkdownIt from 'markdown-it';
+import { markdownFeatures, readFeature } from './markdown-feature.js';
 
 export const contentFile = new URL('../content/site.json', import.meta.url);
 export const safeId = value => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
@@ -68,7 +69,11 @@ export function validate(data) {
   }
   return data;
 }
-export const readContent = () => validate(JSON.parse(readFileSync(contentFile, 'utf8')));
+export function readContent() {
+  const data = JSON.parse(readFileSync(contentFile, 'utf8'));
+  data.articles.unshift(...Object.keys(markdownFeatures).map(readFeature));
+  return validate(data);
+}
 export const published = data => data.articles.filter(a => a.status === 'published')
   .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 export function tags(article, topics) {

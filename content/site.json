@@ -23,52 +23,6 @@
   ],
   "articles": [
     {
-      "title": "When your app gets a chat interface",
-      "id": "ai-component",
-      "status": "published",
-      "format": "Essay",
-      "topics": [
-        "ai-integration",
-        "accessibility",
-        "user-experience"
-      ],
-      "publication": "Nolawi",
-      "path": "ai-component.html",
-      "description": "Try a Records Explorer that lets chat and filters work on the same table, with a confirmation step before changes.",
-      "body": "If I ask an app which requests are open, I want to see the rows it found. I might need to open one, check what’s going on, and get back to work. The reply gets me oriented. Then I need somewhere to go.\n\nThat’s the part of adding chat to an app I keep thinking about. We spend a lot of time on the answer. What can someone actually do with it?\n\n## I’d keep the table\n\nSay I’m looking for open requests in North. If I know where the filters are, I’ll use them. If I’m new to the app, I might just type “Show open records in North.” Either way, I should land on the same rows. If I meant South, let me change the filter right there.\n\nIn a real app, I’d have the model ask the app for those records. The server would check the filters and the user’s permissions, then fetch the rows through the same API the table uses. The reply can show its work in plain language. “I looked in North for open requests. Here are the two I found.” Then give me both links.\n\n## What if the record doesn’t say?\n\nSay I open a request and ask why it’s still open. The row might only tell us the status. I’d show what the record says and say the reason isn’t recorded. Same thing if I ask what a repair costs and there’s no cost field.\n\nI’d also try the whole thing with a keyboard. Can I submit a question, hear the reply with a screen reader, get to the source row, and find my way back? That’s the kind of test I’d run before shipping it.\n\n## Show me the change first\n\nIf I ask to move record 104 to Under review, I want to see the record number, its current status, and the proposed change before I confirm. Cancel should leave the record where it was. If I do confirm, show the saved status on the record. With the Open filter still on, that row should drop out of the results.\n\n## Try it here\n\nSet Region to North and Status to Open. Clear the filters and ask “Show me all open records in the North region.” Both ways land on records 101 and 104. Then open 104 and try requesting a status change. Cancel once, then try again and confirm. The demo uses fictional records and scripted responses, and changes reset on reload.",
-      "featured": true,
-      "afterDemo": "If the chat gets me to the right row faster, I’ll use it. If I’m comparing several rows, I’ll probably go back to the table. I want the app to let me do both without making me start over.\n\n[Where Does Chat Belong in the Interface?](https://medium.com/@nolawi/where-does-chat-belong-in-the-interface-47c22c1e0ce3) on Medium goes deeper into when I’d reach for chat and when I’d click."
-    },
-    {
-      "id": "accessibility",
-      "title": "Accessibility in the details",
-      "status": "published",
-      "format": "Essay",
-      "topics": [
-        "accessibility"
-      ],
-      "publication": "Nolawi",
-      "path": "accessibility.html",
-      "description": "Try reading settings, keyboard focus, contrast, and tap targets while making a page easier to use.",
-      "body": "I like to start by trying to do something on the page. Read a paragraph, fill out a form, or get to a button without a mouse. That’s usually where I find the things we missed.\n\n## Start with one task\n\nAt AbbVie, I helped make accessibility testing part of how we shipped. I like to pick a task and try it a few ways. Tab through it. Make the text bigger. Try it on a phone with one hand. A button that looks fine on my laptop can be surprisingly hard to hit when I’m holding a phone.\n\nTry changing the reading sample below. Then try the keyboard and tap-target demos. Each one keeps the task small so you can see what a single design change does.",
-      "afterDemo": "When something gets in the way, I try to fix it where it starts. If the shared button is too small to tap, I’d fix the button in the design system and try the same task again. That way, the next team using it gets the improvement too."
-    },
-    {
-      "title": "How small components become a design system",
-      "id": "atomic-design",
-      "status": "published",
-      "format": "Essay",
-      "topics": [
-        "design-systems",
-        "accessibility"
-      ],
-      "publication": "Nolawi",
-      "path": "essay-atomic-design.html",
-      "description": "An atomic design walkthrough with a working component directory, my Slides.com talk, and an example from Delano.",
-      "body": "When I’m building a screen, I like to ask which parts I’ll need again on the next one. A button is an easy answer. Then I notice I’m using the same label, input, and button together in a few places. That’s where I start asking whether the whole group should be reusable.\n\nI gave a talk on [building a design system the atomic design way](https://slides.com/nolawipetros/deck-3). Here’s a small version you can play with.\n\n## Put the pieces together\n\nStart with a label, a field, and a button. Those are the atoms. Put them together and you have a filter with one job. That’s the molecule. Add a heading and results, and now the whole directory is an organism. A template gives that directory a place in the page. A page lets me check what happens when it has real content, including long names and zero results.\n\n[Brad Frost’s atomic design chapter](https://atomicdesign.bradfrost.com/chapter-2/) goes through all five levels.\n\n## Where this showed up in my work\n\n[Delano](delano.html) was my Angular UI kit. I wanted teams to have a place to start when they built another screen. Say two teams use the same text field. I want the label and focus behavior to feel familiar in both apps. One team can search a directory and the other can filter a table. The pieces are still doing the same jobs.\n\n## Try assembling it\n\nStart with the separate pieces, then watch the same controls become part of a working directory. At the last step, search for “alert.” Then try something that isn’t in the directory and see how it handles zero results.",
-      "afterDemo": "I’d reuse the filter if another screen needed the same job done. If that screen needs a different layout, I can still reuse the field and button. That’s the part I like about atomic design. I can choose how much of the pattern to carry forward."
-    },
-    {
       "id": "where-chat-belongs",
       "title": "Where Does Chat Belong in the Interface?",
       "status": "published",

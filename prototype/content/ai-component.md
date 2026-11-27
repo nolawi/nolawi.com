@@ -3,7 +3,8 @@ title: "When your app gets a chat interface"
 description: "Try a Records Explorer that lets chat and filters work on the same table, with a confirmation step before changes."
 format: "Essay"
 topics: ["ai-integration","accessibility","user-experience"]
-demo: {"id":"ogWQBPv","title":"Records Explorer","height":760}
+featured: true
+demos: [{"id":"ogWQBPv","title":"Records Explorer","height":760}]
 afterDemo: "If the chat gets me to the right row faster, I’ll use it. If I’m comparing several rows, I’ll probably go back to the table. I want the app to let me do both without making me start over.\n\n[Where Does Chat Belong in the Interface?](https://medium.com/@nolawi/where-does-chat-belong-in-the-interface-47c22c1e0ce3) on Medium goes deeper into when I’d reach for chat and when I’d click."
 ---
 

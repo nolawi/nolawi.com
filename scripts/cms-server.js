@@ -1,10 +1,12 @@
 import { createServer } from 'node:http';
-import { readFile, rename, writeFile } from 'node:fs/promises';
+import { readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderThemeCss } from '../src/themer.js';
-import { contentFile, readContent, renderBody, safeId, validate } from './content.js';
+import { contentFile, readContent, escape, renderBody, safeId, validate } from './content.js';
+
+import { markdownFeatures, isMarkdownFeature, featureFile, featureDraftFile, serializeFeature, validateDemos } from './markdown-feature.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const port = Number(process.env.CMS_PORT || 4175);
@@ -28,15 +30,68 @@ async function body(req) {
   return JSON.parse(raw);
 }
 
-async function save(data) {
-  const pending = new URL('site.json.pending', contentFile);
-  await writeFile(pending, JSON.stringify(data, null, 2) + '\n');
-  await rename(pending, contentFile);
+async function writeAtomic(file, content) {
+  const pending = new URL(file.href + '.pending');
+  await writeFile(pending, content);
+  await rename(pending, file);
+}
+
+function save(data) {
+  const articles = data.articles.filter(article => !isMarkdownFeature(article.id));
+  return writeAtomic(contentFile, JSON.stringify({ ...data, articles }, null, 2) + '\n');
+}
+
+async function editorContent(data = readContent()) {
+  data.featureDrafts = {};
+  for (const id of Object.keys(markdownFeatures)) {
+    try {
+      data.featureDrafts[id] = JSON.parse(await readFile(featureDraftFile(id), 'utf8'));
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+    }
+  }
+  return data;
+}
+
+function submittedDemos(input) {
+  if (!Array.isArray(input.demos)) return [];
+  return input.demos.map(demo => ({ id: demo?.id, title: demo?.title, height: Number(demo?.height) }));
+}
+
+function featureUpdate(input, old) {
+  return {
+    ...old, title: input.title, description: input.description, body: input.body,
+    afterDemo: input.afterDemo ?? '', topics: input.topics, format: input.format,
+    date: input.date || undefined, featured: Boolean(input.featured),
+    demos: submittedDemos(input)
+  };
+}
+
+async function saveFeature(data, index, article, draft) {
+  data.articles[index] = article;
+  validate(data);
+  const markdown = serializeFeature(article);
+  const file = featureFile(article.id);
+  const draftFile = featureDraftFile(article.id);
+  if (draft) {
+    await writeAtomic(draftFile, JSON.stringify(article, null, 2) + '\n');
+    return editorContent();
+  }
+  const original = await readFile(file);
+  await writeAtomic(file, markdown);
+  try {
+    await build();
+  } catch (error) {
+    await writeAtomic(file, original);
+    throw error;
+  }
+  await rm(draftFile, { force: true });
+  return editorContent(data);
 }
 
 function build() {
   return new Promise((resolveBuild, reject) => {
-    const proc = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'build'], {
+    const proc = spawn(process.execPath, ['scripts/build-astro-preview.mjs', '--cms'], {
       cwd: root, stdio: 'inherit', env: { ...process.env, SITE_INDEXABLE: '0' }
     });
     proc.on('error', reject);
@@ -49,7 +104,14 @@ async function update(req, res, action) {
     return send(res, 403, { error: 'Open the editor using its local address.' });
   }
   const input = await body(req);
-  if (action === 'preview') return send(res, 200, { html: renderBody(input.body) });
+  if (action === 'preview') {
+    const demos = isMarkdownFeature(input.id) ? submittedDemos(input) : [];
+    if (isMarkdownFeature(input.id)) validateDemos(input.id, demos);
+    const links = demos.map(demo =>
+      `<p><a href="https://codepen.io/nolawi/full/${demo.id}" target="_blank" rel="noopener">Open ${escape(demo.title)} on CodePen</a></p>`
+    ).join('');
+    return send(res, 200, { html: renderBody(input.body) + links + renderBody(input.afterDemo) });
+  }
   if (saving) return send(res, 409, { error: 'Another save is running. Try again shortly.' });
 
   saving = true;
@@ -80,6 +142,11 @@ async function update(req, res, action) {
       if (!safeId(input.id)) throw new Error('Use a lowercase article slug with hyphens.');
       const index = data.articles.findIndex(a => a.id === input.id);
       const old = data.articles[index];
+      if (old && isMarkdownFeature(old.id)) {
+        const draft = action === 'draft';
+        const result = await saveFeature(data, index, featureUpdate(input, old), draft);
+        return send(res, 200, { message: draft ? 'Private draft saved.' : 'Published to local preview.', data: result });
+      }
       if (old && old.publication !== 'Nolawi') throw new Error('This slug belongs to an external article.');
       if (old?.status === 'published' && action === 'draft') {
         throw new Error('This article is already published. Preview edits here before publishing an update.');
@@ -106,7 +173,7 @@ async function update(req, res, action) {
         throw error;
       }
     }
-    send(res, 200, { message: draft ? 'Draft saved.' : 'Published to local preview.', data });
+    send(res, 200, { message: draft ? 'Draft saved.' : 'Published to local preview.', data: await editorContent(data) });
   } finally {
     saving = false;
   }
@@ -118,7 +185,7 @@ const server = createServer(async (req, res) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   try {
     const url = new URL(req.url, origin);
-    if (req.method === 'GET' && url.pathname === '/api/content') return send(res, 200, readContent());
+    if (req.method === 'GET' && url.pathname === '/api/content') return send(res, 200, await editorContent());
     const action = /^\/api\/(draft|publish|preview|social|project-draft|project-publish)$/.exec(url.pathname)?.[1];
     if (req.method === 'POST' && action) return await update(req, res, action);
     if (req.method !== 'GET') return send(res, 405, { error: 'Unsupported method.' });

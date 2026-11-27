@@ -38,5 +38,36 @@ export function mountDisplayToolbar(toolbar, preferences) {
     if (next) preferences.update({ textSize: next });
   }));
 
-  toolbar.hidden = false;
+  const panel = toolbar.closest('.theme-bar');
+  const tab = toolbar.closest('.site-header').querySelector('#theme-tab');
+  const drawerHeading = toolbar.querySelector('.theme-drawer-heading');
+  const tabHome = tab.parentElement;
+
+  function setOpen(open) {
+    const restoreFocus = toolbar.contains(document.activeElement) || document.activeElement === tab;
+    if (open) {
+      toolbar.hidden = panel.hidden = false;
+      drawerHeading.prepend(tab);
+    } else {
+      tabHome.append(tab);
+      toolbar.hidden = panel.hidden = true;
+    }
+    tab.setAttribute('aria-expanded', String(open));
+    if (restoreFocus) tab.focus();
+  }
+
+  tab.hidden = false;
+  tab.addEventListener('click', () => setOpen(panel.hidden));
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || panel.hidden ||
+        !(tab === document.activeElement || panel.contains(document.activeElement))) return;
+    event.preventDefault();
+    setOpen(false);
+  });
+  document.addEventListener('focusin', ({ target }) => {
+    if (!panel.hidden && target !== tab && !panel.contains(target)) setOpen(false);
+  });
+  document.addEventListener('click', ({ target }) => {
+    if (!panel.hidden && !tab.contains(target) && !panel.contains(target)) setOpen(false);
+  });
 }

@@ -4,6 +4,7 @@ const entries = document.querySelector('#entries');
 const topics = document.querySelector('#topics');
 const preview = document.querySelector('#draft-preview');
 const articleStatus = document.querySelector('#article-status');
+const demoFields = document.querySelector('#codepen-fields');
 let data;
 
 async function request(action, payload) {
@@ -40,15 +41,36 @@ function render() {
 function openArticle(id) {
   articleForm.reset();
   entries.value = id;
-  const article = data.articles.find(entry => entry.id === id);
+  const published = data.articles.find(entry => entry.id === id);
+  const article = data.featureDrafts?.[id] ?? published;
+  const template = document.querySelector('#codepen-template');
+  demoFields.replaceChildren(...(article?.demos ?? []).map((demo, index, demos) => {
+    const fieldset = template.content.firstElementChild.cloneNode(true);
+    if (demos.length > 1) fieldset.querySelector('legend').textContent = `CodePen demo ${index + 1}`;
+    fieldset.querySelector('[name=penId]').value = demo.id;
+    fieldset.querySelector('[name=penTitle]').value = demo.title;
+    fieldset.querySelector('[name=penHeight]').value = demo.height;
+    return fieldset;
+  }));
   articleForm.elements.id.readOnly = Boolean(article);
   for (const key of ['title', 'id', 'format', 'date', 'description', 'body', 'afterDemo']) {
     if (article?.[key]) articleForm.elements[key].value = article[key];
   }
   articleForm.elements.featured.checked = Boolean(article?.featured);
   for (const input of topics.querySelectorAll('input')) input.checked = article?.topics.includes(input.value) ?? false;
-  articleForm.querySelector('[value=draft]').disabled = article?.status === 'published';
+  articleForm.querySelector('[value=draft]').disabled = published?.status === 'published' && !published.demos;
   preview.hidden = true;
+}
+
+function articlePayload() {
+  const fields = new FormData(articleForm);
+  const { penId, penTitle, penHeight, ...article } = Object.fromEntries(fields);
+  const demos = [...demoFields.querySelectorAll('fieldset')].map(fieldset => ({
+    id: fieldset.querySelector('[name=penId]').value,
+    title: fieldset.querySelector('[name=penTitle]').value,
+    height: fieldset.querySelector('[name=penHeight]').value
+  }));
+  return { ...article, topics: fields.getAll('topics'), featured: fields.has('featured'), demos };
 }
 
 entries.addEventListener('change', () => openArticle(entries.value));
@@ -58,8 +80,7 @@ articleForm.elements.title.addEventListener('input', event => {
 });
 document.querySelector('#preview').addEventListener('click', async () => {
   try {
-    const { body, afterDemo } = articleForm.elements;
-    const { html } = await request('preview', { body: [body.value, afterDemo.value].filter(Boolean).join('\n\n') });
+    const { html } = await request('preview', articlePayload());
     preview.srcdoc = '<!doctype html><html lang="en"><meta charset="utf-8"><style>body { font: 1rem/1.6 system-ui; padding: 1rem; }</style><body>' + html;
     preview.hidden = false;
     articleStatus.textContent = 'Draft preview ready.';
@@ -70,8 +91,7 @@ document.querySelector('#preview').addEventListener('click', async () => {
 
 articleForm.addEventListener('submit', async event => {
   event.preventDefault();
-  const fields = new FormData(articleForm);
-  const payload = { ...Object.fromEntries(fields), topics: fields.getAll('topics'), featured: fields.has('featured') };
+  const payload = articlePayload();
   const button = event.submitter;
   button.disabled = true;
   articleStatus.textContent = 'Saving…';
@@ -84,7 +104,7 @@ articleForm.addEventListener('submit', async event => {
   } catch (error) {
     articleStatus.textContent = error.message;
   } finally {
-    button.disabled = button.value === 'draft' && data.articles.some(a => a.id === entries.value && a.status === 'published');
+    button.disabled = button.value === 'draft' && data.articles.some(a => a.id === entries.value && a.status === 'published' && !a.demos);
   }
 });
 

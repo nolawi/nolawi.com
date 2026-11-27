@@ -11,7 +11,3 @@ const toolbar = document.querySelector('#display-toolbar');
 if (toolbar) mountDisplayToolbar(toolbar, preferences);
 
 document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
-const socialFeed = document.querySelector('[data-social-feed]');
-if (socialFeed) {
-  import('./social-feed.js').then(({ mountSocialFeed }) => mountSocialFeed(socialFeed));
-}
