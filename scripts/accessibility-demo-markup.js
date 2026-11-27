@@ -46,7 +46,7 @@ export const accessibilityDemo = `<section class="accessibility-playground" aria
 <h4 id="settings-title">Preview settings</h4><ol class="focus-steps" aria-label="Focus order"><li data-step="Show outlines">Outlines</li><li data-step="Use larger type">Text size</li><li data-step="Close settings">Close</li></ol>
 <label><input type="checkbox" data-focus="Show outlines" autofocus> Show outlines</label>
 <label><input type="checkbox" data-focus="Use larger type"> Use larger type</label>
-<button type="submit" data-focus="Close settings">Close settings</button>
+<button class="outline" type="submit" data-focus="Close settings">Close settings</button>
 <p class="focus-readout">Focus <output id="dialog-output" aria-live="off">Show outlines</output></p>
 </form>
 </dialog>

@@ -11,7 +11,7 @@ const port = Number(process.env.CMS_PORT || 4175);
 const host = `127.0.0.1:${port}`;
 const origin = `http://${host}`;
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
-  '.xml': 'application/xml', '.jpg': 'image/jpeg', '.png': 'image/png' };
+  '.xml': 'application/xml', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png' };
 let saving = false;
 
 function send(res, status, data) {
