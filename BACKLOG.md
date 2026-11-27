@@ -15,6 +15,12 @@
 - [ ] Improve the atomic design demo so it is easier to see which pieces carry forward into the filter and directory. Keep Delano and the Slides.com talk close by.
 - [ ] Review the demo enhancements on phone and desktop, including keyboard use, then publish that batch.
 
+## Standalone follow-ups
+
+- [ ] Analytics. Use the existing Cloudflare dashboard to review the homepage, Writing, and each feature page by path. Decide whether we need to measure demo interactions separately.
+- [ ] Design tokens. Add a short walkthrough to the Design Systems post showing how type, spacing, colors, and states flow from shared tokens into real components. Use the existing theme playground as the example.
+- [ ] Share the portfolio update on X. Draft for review: “I’ve been updating my portfolio. I wanted a place where I could show how I think about accessibility, design systems, and adding chat to an app. There are a few small demos you can try right on the homepage. https://nolawi.com/”
+
 ## Later
 
 - [ ] Write about biking and being a bike messenger as a separate writing project. Medium is the likely home.
