@@ -16,3 +16,7 @@ dist/
 /content/github-activity-latest.tmp
 /accessibility.html
 /public/favicon.svg
+
+/prototype/.astro/
+/prototype/dist/
+/dist-astro/

@@ -31,3 +31,18 @@ Run `npm run dev` for frontend development or `npm run check` for tests. GitHub 
 Review the preview and agree on a hosted CMS if browser editing from another device is needed. Configure Search Console after the domain cutover. On an explicitly indexable build, providing `SITE_ANALYTICS_TOKEN` enables Cloudflare Web Analytics. Preview builds omit the tracker. The existing focus, contrast, and Vue demos are included in the preview build.
 
 In the studio's Projects panel, save a draft or publish it to the local preview. Published projects appear in the archive and homepage. Featured projects get larger cards. Add a Markdown story to generate a project page. Delano keeps its existing page address. Preview updates stay local until the source changes go through the GitHub publishing workflow.
+
+## Astro publishing prototype
+
+The AI chat feature has a local Astro preview at its existing `/ai-component.html` route. The preview reads the [Markdown entry](prototype/content/ai-component.md), validates its frontmatter at build time, and renders it with a reusable layout. The production editor and publish workflow still use `content/site.json` for the live feature, listings, RSS, and sitemap. For the prototype, edit the Markdown entry and rebuild the preview.
+
+Use Node 22.23.4 or newer and run these commands from the repository root.
+
+```sh
+npm ci
+npm --prefix prototype ci
+node scripts/build-astro-preview.mjs
+npm run preview -- --outDir dist-astro --host 127.0.0.1 --port 4193
+```
+
+Open `http://127.0.0.1:4193/ai-component.html`. The build overlays one Astro page and its assets on a separate copy of the site. It uses the existing theme tokens, header controls, CodePen embed renderer, and metadata settings. The local preview stays out of search indexing and omits analytics by default.

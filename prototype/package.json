@@ -1,0 +1,8 @@
+{
+  "name": "nolawi-astro-prototype",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.23.4" },
+  "devDependencies": { "astro": "7.4.13" },
+  "scripts": { "build": "astro build" }
+}

@@ -4,7 +4,7 @@ import { escape, published, readContent, renderBody, renderList, tags, validate 
 import { projectArt } from './project-art.js';
 import { renderGitHubActivity } from './github-activity.js';
 
-function codePen(id, title, height) {
+export function codePen(id, title, height) {
   const profile = 'https://codepen.io/nolawi';
   return `<div class="codepen-demo">
 <p><a href="${profile}/full/${id}">Open ${escape(title)} on CodePen</a></p>
@@ -39,6 +39,15 @@ const analytics = analyticsToken && /^[a-zA-Z0-9_-]+$/.test(analyticsToken)
 const absolute = path => new URL(path, siteUrl).href;
 const at = path => new URL(path, root);
 const mediumStoryId = url => url?.match(/-([0-9a-f]{12})\/?(?:[?#]|$)/)?.[1];
+
+export function pageMetadata(path) {
+  return {
+    canonical: absolute(path),
+    authorUrl: absolute('about.html'),
+    robots: indexable ? 'index,follow' : 'noindex',
+    analytics
+  };
+}
 
 function readPublishingContent() {
   const data = readContent();

@@ -1,0 +1,52 @@
+---
+import { renderThemeCss } from '../../../src/themer.js';
+import { renderHeader } from '../../../src/header.js';
+import { pageMetadata } from '../../../scripts/publishing.js';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const { canonical, authorUrl, robots, analytics } = pageMetadata(path);
+const structuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  author: { '@type': 'Person', name: 'Nolawi Petros', url: authorUrl },
+  mainEntityOfPage: canonical
+}).replaceAll('<', '\\u003c');
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content={robots}>
+  <meta name="description" content={description}>
+  <title>{title} | Nolawi Petros</title>
+  <link rel="canonical" href={canonical}>
+  <link rel="alternate" type="application/rss+xml" title="Nolawi · Writing" href="./feed.xml">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" data-theme-icon>
+  <style is:inline set:html={renderThemeCss()}></style>
+  <Fragment set:html={analytics} />
+  <script is:inline type="application/ld+json" set:html={structuredData}></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <Fragment set:html={renderHeader(false)} />
+  <main id="main" class="subpage wrap section">
+    <h1>{title}</h1>
+    <slot />
+  </main>
+  <footer class="wrap footer">
+    <a href="./">Portfolio home</a><a href="writing.html">Writing</a><a href="about.html">About</a>
+  </footer>
+  <script>
+    import '../../../src/main.js';
+  </script>
+</body>
+</html>
