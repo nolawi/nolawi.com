@@ -9,13 +9,16 @@ const links = [
 
 export function renderHeader(home) {
   const nav = links.map(([label, href]) => {
-    const target = !home && href.startsWith('#') ? './' + href : href;
+    const target = home && href === 'writing.html' ? '#writing' : !home && href.startsWith('#') ? './' + href : href;
     return `<a href="${target}">${label}</a>`;
   }).join('');
   return `<div class="reading-progress" aria-hidden="true"><span></span></div>
-<header class="mast wrap" id="page-top" tabindex="-1">
+<div id="page-top" tabindex="-1"></div>
+<header class="site-header"><div class="mast wrap">
 <a class="brand" href="./" aria-label="Portfolio home"><span aria-hidden="true">n.</span></a>
 <nav aria-label="Main">${nav}<a class="direct-linkedin" href="https://www.linkedin.com/in/nolawi/"><span aria-hidden="true">in</span> LinkedIn</a></nav>
+</div></header>
+<div class="wrap theme-bar">
 <div class="display-toolbar" id="display-toolbar" role="group" aria-labelledby="theme-controls-title" hidden>
   <button class="theme-switch" id="theme-toggle" type="button" role="switch" aria-checked="false">
     <span>Dark mode</span><span class="switch-track" aria-hidden="true"><span>☼</span><span>☾</span></span>
@@ -34,7 +37,7 @@ export function renderHeader(home) {
   </div>
   <strong class="theme-controls-title" id="theme-controls-title">Theme</strong>
 </div>
-</header>
+</div>
 <a class="back-to-top" href="#page-top" hidden><span aria-hidden="true">↑</span> Back to top</a>`;
 }
 

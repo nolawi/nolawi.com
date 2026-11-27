@@ -1,5 +1,5 @@
 import { computed, createApp, h, nextTick, ref } from 'vue';
-import { answerQuestion, records } from './records.js';
+import { answerQuestion, parseRecordQuestion, records } from './records.js';
 
 export function mountRecordsExplorer(element) {
   const compact = Boolean(element.closest('.feature-demo'));
@@ -13,7 +13,12 @@ export function mountRecordsExplorer(element) {
       let sourceTrigger;
       const filtered = computed(() => records.filter(record =>
         (!matchedIds.value || matchedIds.value.includes(record.id)) && (!status.value || record.status === status.value)));
-      const examples = ['Show open records in North', 'What is SR-112?', 'How much will this cost?'];
+      const examples = [
+        ['By region and status', 'Show open records in North'],
+        ['By record ID', 'What is SR-112?'],
+        ['Zero matches', 'Show closed records in South'],
+        ['Beyond the records', 'How much will this cost?']
+      ];
       const statusCounts = ['Open', 'In review', 'Closed'].map(value => ({
         value,
         total: records.filter(record => record.status === value).length
@@ -25,12 +30,15 @@ export function mountRecordsExplorer(element) {
         selectedSource.value = null;
         matchedIds.value = null;
         const sources = answerQuestion(query);
+        const filters = parseRecordQuestion(query);
+        const criteria = filters && Object.entries(filters).filter(([, value]) => value)
+          .map(([key, value]) => `${key === 'id' ? 'ID' : key}: ${key === 'id' ? value.toUpperCase() : value}`);
         const response = sources === null
-          ? 'I can only look up sample records by ID, region, or status. This question needs information or a comparison the demo does not support.'
+          ? 'I can only look up sample records by ID, region, or status. Try a record ID, region, or status instead.'
           : sources.length
             ? `${sources.length} matching ${sources.length === 1 ? 'record' : 'records'}. Open a source row to verify the details.`
-            : 'No sample records matched those filters.';
-        const reply = { query, response, sources };
+            : 'No records matched. Try a different region or status.';
+        const reply = { query, response, sources, criteria };
         if (compact) messages.value = [reply];
         else messages.value.push(reply);
         question.value = '';
@@ -97,11 +105,11 @@ export function mountRecordsExplorer(element) {
       const chat = () => h('section', { class: 'system-card', 'aria-labelledby': 'chat-heading' }, [
           h('h3', { id: 'chat-heading' }, 'Ask the records'),
           h('p', compact ? 'Try a question, then open a source row.' : 'Try a question about these fictional records. Your questions stay in this browser.'),
-          h('div', { class: 'record-examples' }, (compact ? examples.slice(0, 1) : examples).map(example => h('button', {
+          h('div', { class: 'record-examples', role: 'group', 'aria-label': 'Example questions' }, (compact ? examples.slice(0, 1) : examples).map(([kind, example]) => h('button', {
             class: 'outline', type: 'button', onClick: () => {
               ask(example);
             }
-          }, example))),
+          }, compact ? example : [h('strong', kind), h('span', example)]))),
           h('form', {
             onSubmit: event => { event.preventDefault(); ask(); }
           }, [
@@ -128,6 +136,8 @@ export function mountRecordsExplorer(element) {
             messages.value.map((message, index) => h('article', { key: index }, [
               h('p', [h('strong', 'You: '), message.query]),
               h('p', message.response),
+              message.criteria ? h('p', { class: 'record-criteria' },
+                `Searched: ${message.criteria.join(' · ') || 'all records'}`) : null,
               message.sources?.length ? h('ul', message.sources.map(record => h('li', [sourceLink(record, message.sources)]))) : null
             ])))
         ]);

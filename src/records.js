@@ -5,7 +5,7 @@ export const records = Object.freeze([
   { id: 'SR-119', name: 'River path resurfacing', region: 'South', status: 'Open' }
 ]);
 
-export function answerQuestion(question) {
+export function parseRecordQuestion(question) {
   const text = question.toLowerCase().trim();
   if (/[^\s\w?-]|\b(?:not|except|before|after|latest|oldest|why|who|cost|budget|date|when|or)\b/.test(text)) return null;
   if (!/^[\w\s?-]+$/.test(text)) return null;
@@ -18,9 +18,15 @@ export function answerQuestion(question) {
     (status === 'in review' || words.includes(status)));
   if (ids.length > 1 || regions.length > 1 || statuses.length > 1) return null;
   if (!ids.length && !regions.length && !statuses.length && !words.some(word => /^(?:records?|requests?)$/.test(word))) return null;
+  return { id: ids[0], region: regions[0], status: statuses[0] };
+}
+
+export function answerQuestion(question) {
+  const filters = parseRecordQuestion(question);
+  if (!filters) return null;
   return records.filter(record =>
-    (!ids.length || record.id.toLowerCase() === ids[0]) &&
-    (!regions.length || record.region.toLowerCase() === regions[0]) &&
-    (!statuses.length || record.status.toLowerCase() === statuses[0])
+    (!filters.id || record.id.toLowerCase() === filters.id) &&
+    (!filters.region || record.region.toLowerCase() === filters.region) &&
+    (!filters.status || record.status.toLowerCase() === filters.status)
   );
 }

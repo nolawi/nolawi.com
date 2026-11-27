@@ -15,21 +15,21 @@
 - [x] Improve the atomic design demo so it is easier to see which pieces carry forward into the filter and directory. Keep Delano and the Slides.com talk close by.
 - [x] Review the demo enhancements on phone and desktop, including keyboard use, then publish that batch.
 
-## Next demo and homepage pass
+## Demo and homepage refinements
 
-- [ ] **Atomic Design first.** Make each assembly step visibly different while keeping reused parts recognizable. Show what gets added at each step, and connect the example to a real pattern in Delano.
-- [ ] **Text contrast.** Add a clearer before-and-after comparison with the ratio and regular-text pass threshold visible. Show how changing foreground and background colors affects the result.
-- [ ] **Typography.** Add a tracking control for spacing across all letters and a kerning comparison for individual letter pairs. Use the same sample to make the difference easy to see.
-- [ ] **Chat interface.** Keep one quick example on the homepage and add more paths to try in the full demo: find a record by ID, filter by region and status, see an empty result, and ask something the records cannot answer. Make the filters, source rows, and next action clear in each reply.
-- [ ] **Homepage accessibility.** Review the demo disclosures, skip link, keyboard order, focus visibility, and enlarged-text layout.
-- [ ] **Header on scroll.** Try a compact header that follows readers as they scroll. Check mobile, in-page jumps, and keyboard focus so the header does not cover them.
+- [x] **Atomic Design first.** Make each assembly step visibly different while keeping reused parts recognizable. Show what gets added at each step, and connect the example to a real pattern in Delano.
+- [x] **Text contrast.** Add a clearer before-and-after comparison with the ratio and regular-text pass threshold visible. Show how changing foreground and background colors affects the result.
+- [x] **Typography.** Add a tracking control for spacing across all letters and a kerning comparison for individual letter pairs. Use the same sample to make the difference easy to see.
+- [x] **Chat interface.** Keep one quick example on the homepage and add more paths to try in the full demo: find a record by ID, filter by region and status, see an empty result, and ask something the records cannot answer. Make the filters, source rows, and next action clear in each reply.
+- [x] **Homepage accessibility.** Review the demo disclosures, skip link, keyboard order, focus visibility, and enlarged-text layout.
+- [x] **Header on scroll.** Try a compact header that follows readers as they scroll. Check mobile, in-page jumps, and keyboard focus so the header does not cover them.
 
 ## Standalone follow-ups
 
-- [ ] Analytics. Use the existing Cloudflare dashboard to review the homepage, Writing, and each feature page by path. Decide whether we need to measure demo interactions separately.
-- [ ] Design tokens. Add a short walkthrough to the Design Systems post showing how type, spacing, colors, and states flow from shared tokens into real components. Use the existing theme playground as the example.
+- [x] Review Cloudflare page views by path. Keep page-level tracking while the baseline grows, then reconsider demo interaction tracking if there is a concrete question to answer.
+- [x] Design tokens. Add a short walkthrough to the Design Systems post showing how type, spacing, colors, and states flow from shared tokens into real components. Use the existing theme playground as the example.
 - [ ] Share the chat interfaces update on X. Draft for review: “I’ve been tinkering with my portfolio for years. There’s always something new I want to try. This time it’s chat interfaces. I added a small demo where you can ask a question and open the record behind the answer. https://nolawi.com/ai-component.html”
-- [ ] Reillustrate the original About portrait in the homepage’s cartoon cutout style. Use the original About photo as the likeness reference and give About its own image.
+- [x] Reillustrate the original About portrait in the homepage’s cartoon cutout style. Use the old LinkedIn photo as the likeness reference. Create a separate illustration in the homepage cutout style.
 
 ## Later
 

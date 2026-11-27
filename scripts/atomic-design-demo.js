@@ -1,5 +1,6 @@
 export const atomicDesignDemo = `<section class="system-card atomic-demo" id="atomic-demo" aria-labelledby="atomic-demo-title">
 <h2 id="atomic-demo-title">Build a component directory</h2>
+<p class="atomic-reference">The three assembly steps use <a href="https://atomicdesign.bradfrost.com/chapter-2/">Brad Frost’s Atomic Design</a> framework. <a href="https://github.com/nolawi/delano/blob/master/src/app/%40theme/components/search-input/search-input.component.ts">Delano’s search input</a> groups a search icon with a field and emits the query. The directory below uses that same idea of composing a reusable search control.</p>
 <fieldset data-atomic-stages hidden>
   <legend>Show assembly step</legend>
   <label><input type="radio" name="stage" value="atoms" checked> Atoms</label>
@@ -12,6 +13,7 @@ export const atomicDesignDemo = `<section class="system-card atomic-demo" id="at
 </div>
 <p data-atomic-description role="status">A label, text field, and button start as separate pieces.</p>
 <div class="atomic-preview" data-atomic-preview data-stage="atoms">
+  <p class="atomic-added" data-atomic-added>Separate pieces</p>
   <form class="atomic-filter" role="search" aria-label="Component directory">
     <label for="atomic-query"><span class="atomic-part" aria-hidden="true">1</span> Find a component</label>
     <div class="atomic-input"><span class="atomic-part" aria-hidden="true">2</span><input id="atomic-query" name="query" type="search" readonly></div>

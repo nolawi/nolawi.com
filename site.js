@@ -26,23 +26,31 @@ if (demo && dialog && openButton && focusOutput && dialogOutput) {
   });
 }
 
-const contrastLevel = document.querySelector('#contrast-level');
+const contrastControls = document.querySelector('#contrast-controls');
 const contrastSample = document.querySelector('#contrast-sample');
 const contrastResult = document.querySelector('#contrast-result');
 
-if (contrastLevel && contrastSample && contrastResult) {
-  function updateContrast() {
-    const channel = Math.round(255 * (1 - contrastLevel.valueAsNumber / 100));
-    const srgb = channel / 255;
-    const luminance = srgb <= 0.04045
-      ? srgb / 12.92
-      : ((srgb + 0.055) / 1.055) ** 2.4;
-    const ratio = 1.05 / (luminance + 0.05);
-    const displayedRatio = Math.floor(ratio * 100) / 100;
-    contrastSample.style.color = `rgb(${channel} ${channel} ${channel})`;
-    contrastResult.value = `${displayedRatio.toFixed(2)}:1 · ${ratio >= 4.5 ? 'Meets' : 'Below'} AA for regular text`;
+if (contrastControls) {
+  const { foreground, background } = contrastControls.elements;
+
+  function luminance(color) {
+    const channels = color.slice(1).match(/.{2}/g).map(hex => Number.parseInt(hex, 16) / 255);
+    const linear = channels.map(value => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
   }
 
-  contrastLevel.addEventListener('input', updateContrast);
+  function updateContrast() {
+    const light = luminance(foreground.value);
+    const dark = luminance(background.value);
+    const ratio = (Math.max(light, dark) + 0.05) / (Math.min(light, dark) + 0.05);
+    const displayedRatio = Math.floor(ratio * 100) / 100;
+    contrastSample.style.color = foreground.value;
+    contrastSample.style.backgroundColor = background.value;
+    contrastResult.value = `${displayedRatio.toFixed(2)}:1 · ${ratio >= 4.5 ? 'Meets' : 'Below'} 4.5:1 for regular text`;
+  }
+
+  contrastControls.addEventListener('input', updateContrast);
+  contrastControls.addEventListener('reset', () => requestAnimationFrame(updateContrast));
   updateContrast();
+  contrastControls.hidden = false;
 }

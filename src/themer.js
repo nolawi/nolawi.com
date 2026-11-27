@@ -7,7 +7,10 @@ const sharedTokens = {
   'heading-font': 'Georgia, serif',
   'title-color': 'inherit',
   'link-color': 'var(--focus)',
-  'feature-description': '#ffaea5'
+  'feature-description': '#ffaea5',
+  'button-pad-block': '.55rem',
+  'button-pad-inline': '1rem',
+  'button-radius': '.35rem'
 };
 
 export const themeSettings = {
@@ -64,6 +67,11 @@ export const themeSettings = {
     blue: { label: 'Denim', swatch: '#8cafd2', focus: '#294f7d', shadow: '#4b7097', dark: '#a7c5e6' },
     olive: { label: 'Olive', swatch: '#abb974', focus: '#47571b', shadow: '#626e33', dark: '#c2cf96' }
   }},
+  componentSpacing: { default: 'default', values: {
+    compact: { label: 'Compact', tokens: { 'button-pad-block': '.35rem', 'button-pad-inline': '.7rem' } },
+    default: { label: 'Default', tokens: { 'button-pad-block': '.55rem', 'button-pad-inline': '1rem' } },
+    roomy: { label: 'Roomy', tokens: { 'button-pad-block': '.8rem', 'button-pad-inline': '1.3rem' } }
+  }},
   background: { default: 'default', values: {
     default: { label: 'Default' },
     warm: { label: 'Warm', light: '#f3e9d9', dark: '#30241c' },
@@ -113,7 +121,7 @@ export function renderThemeCss() {
     if (id === textSize.default) continue;
     rules.push(cssRule(selector(`[data-text-size="${id}"]`), { 'text-scale': value.scale }, `font-size:${value.label};`));
   }
-  for (const [key, attribute] of [['titleFont', 'title-font'], ['font', 'font'], ['headingSize', 'heading-size'], ['titleColor', 'title-color']]) {
+  for (const [key, attribute] of [['titleFont', 'title-font'], ['font', 'font'], ['headingSize', 'heading-size'], ['titleColor', 'title-color'], ['componentSpacing', 'component-spacing']]) {
     for (const [id, value] of Object.entries(themeSettings[key].values)) {
       rules.push(cssRule(selector(`[data-${attribute}="${id}"]`), value.tokens));
     }

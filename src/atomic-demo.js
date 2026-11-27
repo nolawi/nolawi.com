@@ -1,6 +1,7 @@
 export function mountAtomicDemo(section) {
   const stages = section.querySelector('[data-atomic-stages]');
   const preview = section.querySelector('[data-atomic-preview]');
+  const stageLabel = section.querySelector('[data-atomic-added]');
   const description = section.querySelector('[data-atomic-description]');
   const filter = preview.querySelector('form');
   const query = filter.elements.query;
@@ -15,6 +16,7 @@ export function mountAtomicDemo(section) {
     organism: 'The same filter now sits above directory results. Try searching for alert.'
   };
 
+  const stageLabels = { atoms: 'Separate pieces', molecule: 'Added: one shared form', organism: 'Added: a results list' };
   const steps = [...stages.querySelectorAll('input[name=stage]')];
   const navigation = section.querySelector('[data-atomic-navigation]');
   const next = navigation.querySelector('[data-atomic-next]');
@@ -27,6 +29,7 @@ export function mountAtomicDemo(section) {
     step.checked = true;
     preview.dataset.stage = step.value;
     description.textContent = descriptions[step.value];
+    stageLabel.textContent = stageLabels[step.value];
     directory.hidden = step.value !== 'organism';
     query.readOnly = directory.hidden;
     filterButton.disabled = query.readOnly;

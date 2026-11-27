@@ -57,13 +57,19 @@ export const accessibilityDemo = `<section class="accessibility-playground" aria
 <p class="eyebrow">Interactive accessibility demo</p>
 <div class="contrast-art" aria-hidden="true"><span>Aa</span><span>Aa</span><span>Aa</span></div>
 <h3 id="contrast-title">Can you read this?</h3>
-<p>Try a muted color, then turn up the contrast. The sample stays the same. The ratio tells you whether it meets the WCAG AA threshold for regular-size text.</p>
+<p>Change the text and background colors. Compare the result with the original and check it against the <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">WCAG AA threshold of 4.5:1 for regular text</a>.</p>
 </div>
 <div class="lab-panel">
-<label for="contrast-level">Text darkness</label>
-<input id="contrast-level" type="range" min="0" max="100" value="42">
-<p class="contrast-sample" id="contrast-sample">Good design is for everyone.</p>
-<p class="focus-readout"><output id="contrast-result" for="contrast-level"></output></p>
+<form id="contrast-controls" class="demo-controls" hidden>
+<label>Text color <input type="color" name="foreground" value="#949494"></label>
+<label>Background color <input type="color" name="background" value="#ffffff"></label>
+<button class="outline" type="reset">Reset colors</button>
+</form>
+<div class="contrast-examples">
+<div><h4>Original</h4><p class="contrast-sample">Good design is for everyone.</p></div>
+<div><h4>Your colors</h4><p class="contrast-sample" id="contrast-sample">Good design is for everyone.</p></div>
+</div>
+<p class="focus-readout"><output id="contrast-result" aria-live="polite"></output></p>
 </div>
 </section>
 </div>
