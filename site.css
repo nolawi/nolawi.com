@@ -1102,3 +1102,77 @@ html { scroll-padding-top: calc(var(--sticky-header-height, 4rem) + .8rem); }
 @media (max-width: 36rem) {
   .profile-card .reading-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+.feature-figure {
+  margin: 1.4rem 0;
+}
+.feature-figure-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.25rem), 1fr));
+  gap: .5rem 1rem;
+}
+.feature-figure-step {
+  min-width: 0;
+  text-align: center;
+  font-size: .875rem;
+  line-height: 1.25;
+}
+.feature-figure svg {
+  display: block;
+  width: min(100%, 11rem);
+  margin: 0 auto .2rem;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.figure-frame { fill: color-mix(in srgb, var(--accent) 7%, transparent); stroke: none; }
+.figure-surface { fill: none; stroke: var(--line); }
+.figure-highlight { fill: color-mix(in srgb, var(--accent) 12%, transparent); stroke: var(--focus); }
+.feature-figure svg text {
+  fill: var(--ink);
+  stroke: none;
+  font-family: inherit;
+  font-size: 10px;
+}
+.feature-figure svg .figure-heading { font-weight: 700; }
+.feature-figure svg .figure-end { text-anchor: end; }
+.feature-figure svg .figure-large { font-size: 16px; }
+.feature-figure figcaption { margin-top: .6rem; font-size: .85rem; line-height: 1.45; }
+
+.atomic-result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.5rem), 1fr));
+  gap: .65rem;
+  margin-block: .65rem;
+  padding: 0;
+  list-style: none;
+}
+.atomic-result {
+  display: grid;
+  gap: .3rem;
+  min-width: 0;
+  padding: .6rem;
+  border: 1px solid var(--line);
+  border-radius: .4rem;
+}
+.atomic-result[hidden], [data-atomic-clear][hidden] { display: none; }
+.atomic-result > span { font-size: .85rem; }
+.atomic-result-sample {
+  display: grid;
+  place-items: center;
+  min-height: 3.5rem;
+  padding: .35rem;
+  border-radius: .3rem;
+  background: var(--wash);
+  font-size: .875rem;
+}
+.atomic-sample-field, .atomic-sample-alert {
+  padding: .18rem .45rem;
+  border: 1px solid var(--line);
+  border-radius: .3rem;
+  background: var(--paper);
+  overflow-wrap: anywhere;
+}
+.atomic-sample-alert { border-inline-start: .2rem solid var(--focus); }

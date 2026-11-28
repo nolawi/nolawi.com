@@ -18,6 +18,8 @@ Say I’m looking for open requests in North. If I know where the filters are, I
 
 In a real app, I’d have the model ask the app for those records. The server would check the filters and the user’s permissions, then fetch the rows through the same API the table uses. The reply can show its work in plain language. “I looked in North for open requests. Here are the two I found.” Then give me both links.
 
+[[illustration:chat-source]]
+
 ## What if the record doesn’t say?
 
 Say I open a request and ask why it’s still open. The row might only tell us the status. I’d show what the record says and say the reason isn’t recorded. Same thing if I ask what a repair costs and there’s no cost field.
@@ -27,6 +29,8 @@ I’d also try the whole thing with a keyboard. Can I submit a question, hear th
 ## Show me the change first
 
 If I ask to move record 104 to Under review, I want to see the record number, its current status, and the proposed change before I confirm. Cancel should leave the record where it was. If I do confirm, show the saved status on the record. With the Open filter still on, that row should drop out of the results.
+
+[[illustration:chat-confirm]]
 
 ## Try it here
 

@@ -1,3 +1,4 @@
+import { renderFeatureFigure } from './feature-figures.js';
 import { readFileSync } from 'node:fs';
 import MarkdownIt from 'markdown-it';
 import { markdownFeatures, readFeature } from './markdown-feature.js';
@@ -82,10 +83,37 @@ export function tags(article, topics) {
     labels.map(label => `<li><span>${escape(label)}</span></li>`).join('') +
     article.topics.map(id => `<li><span>${escape(topics.find(topic => topic.id === id).label)}</span></li>`).join('') + '</ul>';
 }
+const publishingDate = new Intl.DateTimeFormat('en-US', {
+  month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'
+});
+export const formatPublishingDate = value => publishingDate.format(new Date(value + 'T00:00:00Z'));
+
 export function renderList(articles, topics, { descriptions = false } = {}) {
   return '<div class="articles">' + articles.map(article =>
-    `<article>${article.date ? `<time datetime="${article.date}">${article.date}</time>` : ''}
+    `<article>${article.date ? `<time datetime="${article.date}">${formatPublishingDate(article.date)}</time>` : ''}
 <h3><a href="${escape(article.path || article.url)}">${escape(article.title)}</a></h3>
 ${descriptions && article.description ? `<p>${escape(article.description)}</p>` : ''}${tags(article, topics)}</article>`).join('\n') + '</div>';
 }
 export const renderBody = body => markdown.render(body || '');
+
+export function renderFeatureBody(body) {
+  const env = {};
+  const tokens = markdown.parse(body || '', env);
+  const rendered = [];
+  for (let i = 0; i < tokens.length; i++) {
+    const inline = tokens[i + 1];
+    const marker = tokens[i].type === 'paragraph_open' && inline?.type === 'inline' &&
+      /^\[\[illustration:([a-z0-9-]+)\]\]$/.exec(inline.content);
+    const figure = marker && renderFeatureFigure(marker[1]);
+    if (figure) {
+      const token = tokens[i];
+      token.type = 'html_block';
+      token.content = figure;
+      rendered.push(token);
+      i += 2;
+    } else {
+      rendered.push(tokens[i]);
+    }
+  }
+  return markdown.renderer.render(rendered, markdown.options, env);
+}

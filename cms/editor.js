@@ -81,7 +81,7 @@ articleForm.elements.title.addEventListener('input', event => {
 document.querySelector('#preview').addEventListener('click', async () => {
   try {
     const { html } = await request('preview', articlePayload());
-    preview.srcdoc = '<!doctype html><html lang="en"><meta charset="utf-8"><style>body { font: 1rem/1.6 system-ui; padding: 1rem; }</style><body>' + html;
+    preview.srcdoc = '<!doctype html><html lang="en"><meta charset="utf-8"><link rel="stylesheet" href="/tokens.css"><link rel="stylesheet" href="/components.css"><style>body { font: 1rem/1.6 system-ui; padding: 1rem; }</style><body>' + html;
     preview.hidden = false;
     articleStatus.textContent = 'Draft preview ready.';
   } catch (error) {

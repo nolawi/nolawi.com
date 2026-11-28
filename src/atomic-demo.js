@@ -9,6 +9,8 @@ export function mountAtomicDemo(section) {
   const results = [...directory.querySelectorAll('li')];
   const status = preview.querySelector('[role=status]');
   const filterButton = filter.querySelector('button');
+  const empty = directory.querySelector('[data-atomic-empty]');
+  const clear = directory.querySelector('[data-atomic-clear]');
 
   const descriptions = {
     atoms: '1 is the label, 2 is the text field, and 3 is the button. Follow those same pieces into the next step.',
@@ -43,15 +45,25 @@ export function mountAtomicDemo(section) {
   });
   next.addEventListener('click', () => showStage((stageIndex + 1) % steps.length));
 
-  filter.addEventListener('submit', event => {
-    event.preventDefault();
-    if (query.readOnly) return;
+  function filterDirectory() {
     const term = query.value.trim().toLowerCase();
     const matches = results.filter(item => {
       item.hidden = !item.textContent.toLowerCase().includes(term);
       return !item.hidden;
     });
+    empty.hidden = matches.length > 0;
+    clear.hidden = !term;
     status.textContent = `${matches.length} ${matches.length === 1 ? 'component' : 'components'} found.`;
+  }
+
+  filter.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!query.readOnly) filterDirectory();
+  });
+  clear.addEventListener('click', () => {
+    query.value = '';
+    filterDirectory();
+    query.focus();
   });
 
   showStage(steps.findIndex(step => step.checked));

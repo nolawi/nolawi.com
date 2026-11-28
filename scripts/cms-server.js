@@ -4,7 +4,7 @@ import { spawn } from 'node:child_process';
 import { extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderThemeCss } from '../src/themer.js';
-import { contentFile, readContent, escape, renderBody, safeId, validate } from './content.js';
+import { contentFile, readContent, escape, renderBody, renderFeatureBody, safeId, validate } from './content.js';
 
 import { markdownFeatures, isMarkdownFeature, featureFile, featureDraftFile, serializeFeature, validateDemos } from './markdown-feature.js';
 
@@ -110,7 +110,7 @@ async function update(req, res, action) {
     const links = demos.map(demo =>
       `<p><a href="https://codepen.io/nolawi/full/${demo.id}" target="_blank" rel="noopener">Open ${escape(demo.title)} on CodePen</a></p>`
     ).join('');
-    return send(res, 200, { html: renderBody(input.body) + links + renderBody(input.afterDemo) });
+    return send(res, 200, { html: renderFeatureBody(input.body) + links + renderBody(input.afterDemo) });
   }
   if (saving) return send(res, 409, { error: 'Another save is running. Try again shortly.' });
 

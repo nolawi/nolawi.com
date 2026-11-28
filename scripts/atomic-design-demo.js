@@ -22,7 +22,13 @@ export const atomicDesignDemo = `<section class="system-card atomic-demo" id="at
   <div data-atomic-results hidden>
     <h3>Directory results</h3>
     <p>Try “alert” or clear the field and filter again to see all components.</p>
-    <ul><li>Button</li><li>Search field</li><li>Alert</li></ul>
+    <ul class="atomic-result-grid">
+      <li class="atomic-result"><div class="atomic-result-sample" aria-hidden="true"><span class="button">Save</span></div><strong>Button</strong><span>Triggers an action</span></li>
+      <li class="atomic-result"><div class="atomic-result-sample" aria-hidden="true"><span class="atomic-sample-field">⌕ Search</span></div><strong>Search field</strong><span>Collects a query</span></li>
+      <li class="atomic-result"><div class="atomic-result-sample" aria-hidden="true"><span class="atomic-sample-alert">✓ Saved</span></div><strong>Alert</strong><span>Announces a result</span></li>
+    </ul>
+    <p data-atomic-empty hidden>Try another term or show all components.</p>
+    <button class="outline" type="button" data-atomic-clear hidden>Clear search</button>
     <p class="demo-status" role="status"></p>
   </div>
 </div>

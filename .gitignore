@@ -30,3 +30,5 @@ dist/
 /content/books.preview.json
 /content/goodreads-feed.json
 /content/goodreads-feed.tmp
+/content/gitlab-activity-latest.json
+/content/gitlab-activity-latest.tmp

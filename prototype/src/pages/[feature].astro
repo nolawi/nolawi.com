@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Feature from '../layouts/Feature.astro';
 import siteContent from '../../../content/site.json';
-import { renderBody, tags } from '../../../scripts/content.js';
+import { formatPublishingDate, renderBody, renderFeatureBody, tags } from '../../../scripts/content.js';
 import { featurePath } from '../../../scripts/markdown-feature.js';
 import { renderDesignProjects, renderFeatureDemos } from '../../../scripts/publishing.js';
 
@@ -19,8 +19,8 @@ const { title, description, demos, afterDemo, date } = entry.data;
 ---
 <Feature {title} {description} {path} {date}>
   <Fragment set:html={tags(entry.data, siteContent.topics)} />
-  {date && <p><time datetime={date}>{date}</time></p>}
-  <div class="prose" set:html={renderBody(entry.body)}></div>
+  {date && <p><time datetime={date}>{formatPublishingDate(date)}</time></p>}
+  <div class="prose" set:html={renderFeatureBody(entry.body)}></div>
   <Fragment set:html={renderFeatureDemos(entry.id, demos)} />
   {afterDemo?.trim() && <div class="prose post-close" set:html={renderBody(afterDemo)}></div>}
   {entry.id === 'atomic-design' && <Fragment set:html={renderDesignProjects(siteContent)} />}

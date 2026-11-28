@@ -36,3 +36,6 @@ if (heroAccent) {
 }
 
 document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+
+const atomicDemo = document.querySelector('#atomic-demo');
+if (atomicDemo) import('./atomic-demo.js').then(({ mountAtomicDemo }) => mountAtomicDemo(atomicDemo));

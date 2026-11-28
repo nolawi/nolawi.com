@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { published, readContent, renderBody, tags, validate } from './content.js';
+import { published, readContent, renderBody, renderFeatureBody, tags, validate } from './content.js';
 
 test('drafts stay out of published listings and the chat essay appears once', () => {
   const data = readContent();
@@ -31,4 +31,12 @@ test('invalid routes are rejected and raw HTML is escaped', () => {
   data.articles[0].path = '../index.html';
   assert.throws(() => validate(data), /article path/);
   assert.match(renderBody('<script>alert(1)</script>'), /&lt;script&gt;/);
+});
+
+test('registered feature figures render only as standalone Markdown markers', () => {
+  const html = renderFeatureBody('[[illustration:a11y-focus]]');
+  assert.match(html, /data-figure="a11y-focus"/);
+  assert.match(html, /<figcaption>/);
+  assert.doesNotMatch(renderFeatureBody('```text\n[[illustration:a11y-focus]]\n```'), /<figure/);
+  assert.doesNotMatch(renderFeatureBody('<script>alert(1)</script>'), /<script>/);
 });

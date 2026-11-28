@@ -21,8 +21,12 @@ afterDemo: When something gets in the way, I try to fix it where it starts. If
 
 I like to start by trying to do something on the page. Read a paragraph, fill out a form, or get to a button without a mouse. That’s usually where I find the things we missed.
 
+[[illustration:a11y-focus]]
+
 ## Start with one task
 
 At AbbVie, I helped make accessibility testing part of how we shipped. I like to pick a task and try it a few ways. Tab through it. Make the text bigger. Try it on a phone with one hand. A button that looks fine on my laptop can be surprisingly hard to hit when I’m holding a phone.
+
+[[illustration:a11y-scaling]]
 
 Try changing the reading sample below. Then try the keyboard and tap-target demos. Each one keeps the task small so you can see what a single design change does.

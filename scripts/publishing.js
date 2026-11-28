@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs';
-import { escape, published, readContent, renderBody, renderList, tags, validate } from './content.js';
+import { escape, formatPublishingDate, published, readContent, renderBody, renderFeatureBody, renderList, tags, validate } from './content.js';
 
+import { atomicDesignDemo } from './atomic-design-demo.js';
 import { projectArt } from './project-art.js';
 import { profileCard, renderGitHubActivity } from './github-activity.js';
 
@@ -29,7 +30,11 @@ ${renderDemo(switchback)}
 }
 
 export function renderFeatureDemos(id, demos) {
-  return id === 'accessibility' ? accessibilityPlayground(demos) : demos.map(renderDemo).join('\n');
+  if (id === 'accessibility') return accessibilityPlayground(demos);
+  if (id === 'atomic-design' && !indexable) {
+    return `${atomicDesignDemo}<p><a href="${codePenResult(demos[0].id)}">Open the existing playground on CodePen</a></p>`;
+  }
+  return demos.map(renderDemo).join('\n');
 }
 
 const root = new URL('../', import.meta.url);
@@ -171,8 +176,8 @@ export function generatePages(data = readPublishingContent()) {
     }).replaceAll('<', '\\u003c');
     pages.set(a.path, page(a.title, a.description,
       `<h1>${escape(a.title)}</h1>${tags(a, data.topics)}
-${a.date ? `<p><time datetime="${a.date}">${a.date}</time></p>` : ''}
-<div class="prose">${renderBody(a.body)}</div>
+${a.date ? `<p><time datetime="${a.date}">${formatPublishingDate(a.date)}</time></p>` : ''}
+<div class="prose">${renderFeatureBody(a.body)}</div>
 ${a.demos ? renderFeatureDemos(a.id, a.demos) : ''}
 ${closing}
 ${a.id === 'atomic-design' ? renderDesignProjects(data) : ''}
@@ -235,8 +240,8 @@ export function injectPublishing(html, filename) {
   const books = home ? readGoodreadsBooks() : [];
   const list = home ? entries.filter(article => article.publication === 'Medium').slice(0, 5) : entries;
   const social = '<ul class="social-highlights" aria-label="Selected posts">' +
-    [...data.socialPosts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 2).map(post =>
-      `<li><a href="${escape(post.url)}">${escape(post.title)}</a><time datetime="${post.date}">${post.date}</time></li>`).join('') + '</ul>';
+    [...data.socialPosts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 4).map(post =>
+      `<li><a href="${escape(post.url)}">${escape(post.title)}</a><time datetime="${post.date}">${formatPublishingDate(post.date)}</time></li>`).join('') + '</ul>';
   return html.replace('<!-- writing-list -->', () => renderList(list, data.topics))
     .replace('<!-- books-link -->', () => books.length ? '<a href="books.html">Books</a>' : '')
     .replace('<!-- records-demo -->', () => renderDemo(entries.find(article => article.id === 'ai-component').demos[0]))

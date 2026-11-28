@@ -25,11 +25,15 @@ I gave a talk on [building a design system the atomic design way](https://slides
 
 Start with a label, a field, and a button. Those are the atoms. Put them together and you have a filter with one job. That’s the molecule. Add a heading and results, and now the whole directory is an organism. A template gives that directory a place in the page. A page lets me check what happens when it has real content, including long names and zero results.
 
+[[illustration:atomic-assembly]]
+
 [Brad Frost’s atomic design chapter](https://atomicdesign.bradfrost.com/chapter-2/) goes through all five levels.
 
 ## Where this showed up in my work
 
 [Delano](delano.html) was my Angular UI kit. I wanted teams to have a place to start when they built another screen. Say two teams use the same text field. I want the label and focus behavior to feel familiar in both apps. One team can search a directory and the other can filter a table. The pieces are still doing the same jobs.
+
+[[illustration:atomic-reuse]]
 
 ## Try assembling it
 

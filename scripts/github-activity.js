@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 
-export function renderGitHubActivity() {
-  const activity = ['github-activity-latest.json', 'github-activity.json'].flatMap(file => {
+function readActivity(...files) {
+  return files.flatMap(file => {
     try {
       const data = JSON.parse(readFileSync(new URL('../content/' + file, import.meta.url), 'utf8'));
       if (/^\d{4}-\d{2}-\d{2}$/.test(data?.through) && Array.isArray(data.levels) &&
@@ -12,15 +12,19 @@ export function renderGitHubActivity() {
     }
     return [];
   })[0];
-  const activeDays = activity?.levels.filter(level => level > 0).length;
-  const calendar = activity ? renderCalendar(activity, activeDays) : '';
+}
+
+export function renderGitHubActivity() {
+  const activity = readActivity('github-activity-latest.json', 'github-activity.json');
+  const gitlab = readActivity('gitlab-activity-latest.json');
+  const calendar = activity ? renderCalendar(activity) : '';
   return profileCard('github-activity-title', '<a href="https://github.com/nolawi#js-contribution-activity">GitHub contributions</a>', `
 <p class="code-membership">Member since <time datetime="2012-05-16">2012</time></p>
 ${calendar}
 <p class="code-history"><a href="https://github.com/nolawi/anchor-target">anchor-target</a> <span>· 2015</span> <a href="delano.html">Delano project</a></p>`) +
     profileCard('gitlab-activity-title', '<a href="https://gitlab.com/nolawi">GitLab</a>', `
 <p class="code-membership">Member since <time datetime="2017-02-14">2017</time></p>
-<p class="code-history">No recent entries are visible on the public calendar.</p>`);
+${gitlab ? renderCalendar(gitlab) : '<p class="code-history">Public contribution data is unavailable.</p>'}`);
 }
 
 export function profileCard(id, title, body, action = '') {
@@ -30,7 +34,8 @@ ${body}
 </section>`;
 }
 
-function renderCalendar(activity, activeDays) {
+function renderCalendar(activity) {
+  const activeDays = activity.levels.filter(level => level > 0).length;
   const through = new Date(activity.through + 'T00:00:00Z');
   const endLabel = new Intl.DateTimeFormat('en-US', {
     month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'
